@@ -1,4 +1,4 @@
-module com.group47.canadadash {
+module com.group.canadadash {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
