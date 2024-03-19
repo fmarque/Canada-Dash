@@ -32,25 +32,23 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-
-<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <VBox alignment="CENTER" layoutY="39.0" prefHeight="514.0" prefWidth="879.0">
-        <children>
-            <ImageView fitHeight="123.0" fitWidth="602.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="85.0" fitWidth="276.0" pickOnBounds="true" preserveRatio="true" />
-            <Label prefHeight="46.0" prefWidth="240.0" text="Load Saved Game" />
-            <Label prefHeight="46.0" prefWidth="240.0" text="Start New Game " />
-            <Label prefHeight="46.0" prefWidth="240.0" text="View High Scores" />
-            <Label prefHeight="46.0" prefWidth="240.0" text="How to Play" />
-            <Label prefHeight="46.0" prefWidth="240.0" text="Exit Game" />
-        </children>
-      </VBox>
-      <Label prefHeight="25.0" prefWidth="900.0" text="Player Menu" />
-   </children>
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group47.canadadash.playerMenuController">
+    <children>
+        <VBox fx:id="menuVBox" alignment="CENTER_LEFT" layoutX="100.0" layoutY="39.0" prefHeight="514.0" prefWidth="879.0">
+            <children>
+                <ImageView fx:id="topImage" fitHeight="123.0" fitWidth="602.0" pickOnBounds="true" preserveRatio="true" />
+                <Label fx:id="loadGameLabel" prefHeight="46.0" prefWidth="240.0" text="Load Saved Game" />
+                <Label fx:id="startNewLabel" prefHeight="46.0" prefWidth="240.0" text="Start New Game " />
+                <Label fx:id="highScoresLabel" prefHeight="46.0" prefWidth="240.0" text="View High Scores" />
+                <Label fx:id="howToPlayLabel" prefHeight="46.0" prefWidth="240.0" text="How to Play" />
+                <Label fx:id="exitGameLabel" prefHeight="46.0" prefWidth="240.0" text="Exit Game" />
+            </children>
+        </VBox>
+        <Label fx:id="menuTitle" layoutX="50.0" layoutY="10.0" prefHeight="25.0" prefWidth="900.0" text="Player Menu" />
+        <Label fx:id="arrowLabel" layoutX="70.0" layoutY="253.0" text="-&gt;" /> <!-- This is the new arrow label -->
+    </children>
 </AnchorPane>
