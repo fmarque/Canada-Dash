@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="450.0" prefWidth="700.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group47.canadadash.loginSignupController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <SplitPane dividerPositions="0.39216281895504246" prefHeight="371.0" prefWidth="660.0">
+        <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="286.0" prefWidth="248.0">
+                <children>
+                    <Text fill="#c40c0c" layoutX="14.0" layoutY="100.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Canada Dash">
+                        <font>
+                            <Font name="Calibri Bold Italic" size="38.0" />
+                        </font>
+                    </Text>
+                    <Text layoutX="19.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Incorrect Player Info. Try again">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font></Text>
+                    <TextField layoutX="18.0" layoutY="153.0" maxWidth="200.0" prefHeight="26.0" prefWidth="174.0" text="Enter Player Username" />
+                    <TextField layoutX="18.0" layoutY="182.0" maxWidth="200.0" prefHeight="26.0" prefWidth="174.0" text="Enter Password" />
+                    <Hyperlink layoutX="19.0" layoutY="255.0" text="Sign-up for a new account" />
+                    <Hyperlink layoutX="19.0" layoutY="290.0" text="Switch to Instructor Login" />
+                    <Hyperlink layoutX="19.0" layoutY="308.0" text="Switch to Developer Login" />
+                    <Button layoutX="19.0" layoutY="213.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" text="-&gt;">
+                        <font>
+                            <Font name="System Bold" size="11.0" />
+                        </font></Button>
+                    <CheckBox layoutX="199.0" layoutY="188.0" mnemonicParsing="false">
+                        <font>
+                            <Font size="9.0" />
+                        </font>
+                    </CheckBox>
+                </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="239.0" prefWidth="482.0" xmlns:fx-background-image="C:\Users\egavi\OneDrive\Desktop\canada.jpg">
+                <children>
+
+                </children></AnchorPane>
+        </items>
+    </SplitPane>
+</VBox>
