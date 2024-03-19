@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.group47.canadadash.MainMenu"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group47.canadadash.MainMenu">
+   <children>
+      <BorderPane prefHeight="400.0" prefWidth="600.0" />
+      <ToggleButton layoutX="4.0" layoutY="352.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="176.0" text="ToggleButton" />
+      <ListView layoutX="5.0" layoutY="26.0" prefHeight="207.0" prefWidth="269.0" />
+   </children>
 </AnchorPane>
