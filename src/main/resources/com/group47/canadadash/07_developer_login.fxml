@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<!-- Author: Anne Zhang -->
+<!-- Date: Mar 18 2024 -->
+<!-- FXML content below -->
+<Pane maxHeight="400" maxWidth="361.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="214.0" prefWidth="341.0" style="-fx-border-style: solid; -fx-background-color: white; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 4;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Line endX="137.33560180664062" layoutX="200.0" layoutY="71.0" startX="-200.0" strokeWidth="3.0" style="fx-border-color: black; fx-border-width: 3px;" />
+        <Label layoutX="28.0" layoutY="3.0" prefHeight="61.0" prefWidth="453.0" style="-fx-background-color: transparent;" text="DEVELOPER LOGIN" textAlignment="RIGHT">
+            <font>
+                <Font name="Comic Sans MS" size="30.0" />
+            </font>
+        </Label>
+        <Label layoutX="38.0" layoutY="66.0" prefHeight="85.0" prefWidth="310.0" text="Enter the access code" textAlignment="CENTER" wrapText="true">
+            <font>
+                <Font name="Comic Sans MS" size="26.0" />
+            </font>
+        </Label>
+      <TextField layoutX="84.0" layoutY="145.0" prefHeight="38.0" prefWidth="172.0" promptText="Type here" style="-fx-border-color: black; -fx-border-width: 3;">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </TextField>
+    </children>
+</Pane>

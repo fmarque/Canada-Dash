@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<!-- Author: Anne Zhang -->
+<!-- Date: Mar 18 2024 -->
+<!-- FXML content below -->
+<Pane maxHeight="400" maxWidth="300" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="400.0" style="-fx-border-style: solid; -fx-background-color: white; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 4; " xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Line endX="197.73095703125" layoutX="200.0" layoutY="71.0" startX="-200.0" strokeWidth="3.0" />
+        <Label layoutX="11.0" layoutY="20.0" prefHeight="48.0" prefWidth="378.0" style="-fx-background-color: transparent;" text="INSUFFICIENT  POINTS" textAlignment="RIGHT">
+            <font>
+                <Font name="Comic Sans MS" size="30.0" />
+            </font>
+        </Label>
+        <Button blendMode="SRC_ATOP" depthTest="ENABLE" focusTraversable="false" layoutX="42.0" layoutY="225.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="125.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 3; -fx-background-radius: 20; -fx-text-fill: black; -fx-font-size: 15; -fx-font-family: Comic Sans MS;" text="Return to Map" textFill="#0d0d0d">
+            <font>
+                <Font name="Comic Sans MS" size="5.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <effect>
+                <Blend />
+            </effect>
+        </Button>
+        <Button blendMode="SRC_ATOP" depthTest="ENABLE" focusTraversable="false" layoutX="228.0" layoutY="225.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="125.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 3; -fx-background-radius: 20; -fx-text-fill: black; -fx-font-size: 15;" text="Try Again" textFill="#0d0d0d">
+            <font>
+                <Font name="Comic Sans MS" size="5.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <effect>
+                <Blend />
+            </effect>
+        </Button>
+      <Label layoutX="21.0" layoutY="101.0" prefHeight="98.0" prefWidth="351.0" text="You need xx more points to unlock the next level " textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Comic Sans MS Bold" size="24.0" />
+         </font>
+      </Label>
+    </children>
+</Pane>

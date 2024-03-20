@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<!-- Author: Anne Zhang -->
+<!-- Date: Mar 18 2024 -->
+<!-- FXML content below -->
+<ScrollPane focusTraversable="false" hbarPolicy="ALWAYS" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="546.0" prefWidth="1027.0" style="-fx-border-width: 4; -fx-border-style: solid;" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="990.0" prefWidth="1000.0" style="-fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 4;">
+            <children>
+                <BorderPane layoutY="130.0" prefHeight="214.0" prefWidth="284.0">
+               <top>
+                        <Label prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font size="50.0" />
+                            </font>
+                            <effect>
+                                <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                            </effect>
+                        </Label>
+               </top>
+               <center>
+                      <Label prefHeight="50.0" prefWidth="53.0" style="-fx-border-color: transaprent; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="BC" wrapText="true" BorderPane.alignment="CENTER">
+                          <font>
+                              <Font name="Comic Sans MS Bold Italic" size="27.0" />
+                          </font>
+                          <effect>
+                              <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                          </effect>
+                      </Label>
+               </center>
+                </BorderPane>
+                <Line endX="993.0" endY="97.0" startY="97.0" strokeWidth="4.0" />
+                <Label layoutX="333.0" layoutY="12.0" prefHeight="78.0" prefWidth="330.0" text="INVENTORY">
+                    <font>
+                        <Font name="Comic Sans MS" size="50.0" />
+                    </font>
+                    <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                    </effect>
+                </Label>
+            <Line endX="963.9600219726562" endY="98.0" layoutX="16.0" layoutY="420.0" startX="-13.99998664855957" startY="98.00003051757812" strokeWidth="4.0" />
+            <BorderPane layoutX="220.0" layoutY="130.0" prefHeight="214.0" prefWidth="284.0">
+               <top>
+                  <Label layoutX="20.0" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </top>
+               <center>
+                  <Label prefHeight="50.0" prefWidth="100.0" style="-fx-border-color: transaprent; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="Alberta" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Comic Sans MS Bold Italic" size="27.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </center>
+            </BorderPane>
+            <BorderPane layoutX="440.0" layoutY="130.0" prefHeight="214.0" prefWidth="284.0">
+               <top>
+                  <Label prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </top>
+               <center>
+                  <Label prefHeight="50.0" prefWidth="175.0" style="-fx-border-color: transaprent; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="Saskatchewan" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Comic Sans MS Bold Italic" size="27.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </center>
+            </BorderPane>
+            <BorderPane layoutX="660.0" layoutY="130.0" prefHeight="214.0" prefWidth="284.0">
+               <top>
+                  <Label prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </top>
+               <center>
+                  <Label prefHeight="50.0" prefWidth="114.0" style="-fx-border-color: transaprent; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="Manitoba" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Comic Sans MS Bold Italic" size="27.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </center>
+            </BorderPane>
+            <BorderPane layoutY="330.0" prefHeight="214.0" prefWidth="284.0">
+               <top>
+                  <Label prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </top>
+               <center>
+                  <Label prefHeight="50.0" prefWidth="100.0" style="-fx-border-color: transaprent; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="Ontario" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Comic Sans MS Bold Italic" size="27.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </center>
+            </BorderPane>
+            <BorderPane layoutX="220.0" layoutY="330.0" prefHeight="214.0" prefWidth="284.0">
+               <top>
+                  <Label prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </top>
+               <center>
+                  <Label prefHeight="50.0" prefWidth="100.0" style="-fx-border-color: transaprent; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="Quebec" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Comic Sans MS Bold Italic" size="27.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </center>
+            </BorderPane>
+            <BorderPane layoutX="440.0" layoutY="330.0" prefHeight="214.0" prefWidth="284.0">
+               <top>
+                  <Label prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </top>
+               <center>
+                  <Label prefHeight="50.0" prefWidth="152.0" style="-fx-border-color: transaprent; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="Nova Scotia" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Comic Sans MS Bold Italic" size="27.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </center>
+            </BorderPane>
+            <BorderPane layoutX="660.0" layoutY="330.0" prefHeight="214.0" prefWidth="284.0">
+               <top>
+                  <Label prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </top>
+               <center>
+                  <Label prefHeight="50.0" prefWidth="189.0" style="-fx-border-color: transaprent; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="New Brunswick" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Comic Sans MS Bold Italic" size="27.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </center>
+            </BorderPane>
+            <BorderPane layoutY="630.0" prefHeight="214.0" prefWidth="284.0">
+               <top>
+                  <Label prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </top>
+               <center>
+                  <Label prefHeight="50.0" prefWidth="78.0" style="-fx-border-color: transaprent; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="N.L" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Comic Sans MS Bold Italic" size="27.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </center>
+            </BorderPane>
+            <BorderPane layoutX="220.0" layoutY="630.0" prefHeight="214.0" prefWidth="284.0">
+               <top>
+                  <Label prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </top>
+               <center>
+                  <Label prefHeight="50.0" prefWidth="100.0" style="-fx-border-color: transaprent; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="PEI" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Comic Sans MS Bold Italic" size="27.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </center>
+            </BorderPane>
+            <Label layoutX="328.0" layoutY="507.0" prefHeight="78.0" prefWidth="405.0" text="02 / 10 Pieces Collected">
+               <font>
+                  <Font name="Comic Sans MS" size="30.0" />
+               </font>
+               <effect>
+                  <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+               </effect>
+            </Label>
+            </children>
+        </AnchorPane>
+    </content>
+    <cursor>
+        <Cursor fx:constant="HAND" />
+    </cursor>
+</ScrollPane>

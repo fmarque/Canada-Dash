@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<!-- Author: Anne Zhang -->
+<!-- Date: Mar 18 2024 -->
+<!-- FXML content below -->
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="877.0" style="-fx-border-image-width: 4; -fx-border-style: solid;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="945.0" prefWidth="840.0" style="-fx-border-color: black; -fx-border-width: 4; -fx-border-radius: 30;">
+         <children>
+            <Pane layoutX="57.0" layoutY="172.0" prefHeight="200.0" prefWidth="725.0" style="-fx-border-image-width: 2; -fx-border-width: 5; -fx-border-style: solid;">
+               <children>
+                  <ImageView fitHeight="79.0" fitWidth="85.0" layoutX="60.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@star.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="79.0" fitWidth="85.0" layoutX="431.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@fence.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="79.0" fitWidth="85.0" layoutX="61.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@leaf.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="79.0" fitWidth="85.0" layoutX="431.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@object.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="172.0" layoutY="42.0" text="= save checkpoint">
+                     <font>
+                        <Font name="Monaco" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="550.0" layoutY="137.0" text="= solid object">
+                     <font>
+                        <Font name="Monaco" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="553.0" layoutY="40.0" text="= obstacle">
+                     <font>
+                        <Font name="Monaco" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="171.0" layoutY="135.0" text="= question prompt">
+                     <font>
+                        <Font name="Monaco" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="57.0" layoutY="455.0" prefHeight="200.0" prefWidth="725.0" style="-fx-border-image-width: 2;">
+               <children>
+                  <Label layoutX="2.0" layoutY="13.0" prefHeight="146.0" prefWidth="713.0" style="-fx-border-width: 5; -fx-border-style: solid;" text="Lorem ipsum dolor sit amet,consectetur adipiscing elit,sed do eu">
+                     <font>
+                        <Font name="Monaco" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="57.0" layoutY="705.0" prefHeight="200.0" prefWidth="725.0" style="-fx-border-image-width: 2;">
+               <children>
+                  <Label layoutX="2.0" layoutY="30.0" prefHeight="146.0" prefWidth="713.0" style="-fx-border-width: 5; -fx-border-style: solid;" text="Lorem ipsum dolor sit amet,consectetur adipiscing elit,sed do eu">
+                     <font>
+                        <Font name="Monaco" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Line endX="735.4841918945312" layoutX="101.0" layoutY="85.0" startX="-100.0" strokeWidth="4.0" />
+            <Label layoutX="210.0" layoutY="14.0" prefHeight="54.0" prefWidth="420.0" text="GAME MECHANICS">
+               <font>
+                  <Font name="Monaco" size="43.0" />
+               </font>
+            </Label>
+            <Label layoutX="57.0" layoutY="108.0" prefHeight="54.0" prefWidth="420.0" text="Legend">
+               <font>
+                  <Font name="Monaco" size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="57.0" layoutY="391.0" prefHeight="54.0" prefWidth="600.0" text="Goal of the Game">
+               <font>
+                  <Font name="Monaco" size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="57.0" layoutY="650.0" prefHeight="54.0" prefWidth="600.0" text="How to score / Lose points">
+               <font>
+                  <Font name="Monaco" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+  </content>
+</ScrollPane>

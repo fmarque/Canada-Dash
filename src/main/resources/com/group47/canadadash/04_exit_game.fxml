@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<!-- Author: Anne Zhang -->
+<!-- Date: Mar 18 2024 -->
+<!-- FXML content below -->
+<Pane maxHeight="400" maxWidth="300" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="400.0" style="-fx-border-style: solid; -fx-background-color: white; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 4;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Line endX="200.0" layoutX="200.0" layoutY="71.0" startX="-200.0" />
+      <Line endX="200.0" layoutX="200.0" layoutY="252.0" startX="-200.0" />
+      <Label layoutX="90.0" prefHeight="61.0" prefWidth="221.0" style="-fx-background-color: transparent;" text="EXIT GAME" textAlignment="RIGHT">
+         <font>
+            <Font name="Comic Sans MS" size="37.0" />
+         </font>
+      </Label>
+      <Label layoutX="4.0" layoutY="72.0" prefHeight="178.0" prefWidth="393.0" text="Are You Sure You Want To Exit The Game?" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Comic Sans MS" size="32.0" />
+         </font>
+      </Label>
+      <Button blendMode="SRC_ATOP" depthTest="ENABLE" focusTraversable="false" layoutX="4.0" layoutY="254.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="190.0" style="-fx-background-color: transparent; -fx-background-radius: 20; -fx-text-fill: black; -fx-font-size: 30;" text="NO" textFill="#0d0d0d">
+         <font>
+            <Font name="Comic Sans MS Bold Italic" size="32.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <Blend />
+         </effect>
+      </Button>
+      <Button blendMode="SRC_ATOP" depthTest="ENABLE" layoutX="205.0" layoutY="254.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="190.0" style="-fx-background-color: transparent; -fx-background-radius: 20; -fx-text-fill: black; -fx-font-size: 30;" text="YES" textFill="#0d0d0d">
+         <font>
+            <Font name="Comic Sans MS" size="32.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
