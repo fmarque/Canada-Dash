@@ -37,7 +37,7 @@
             <artifactId>javafx-media</artifactId>
             <version>19.0.2</version>
         </dependency>
-      
+
       	<!-- ControlsFX and FormsFX -->
         <dependency>
             <groupId>org.controlsfx</groupId>
