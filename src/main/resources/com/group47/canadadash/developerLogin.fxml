@@ -2,14 +2,15 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="450.0" prefWidth="700.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group47.canadadash.loginSignupController">
+<VBox alignment="CENTER" prefHeight="450.0" prefWidth="700.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group47.canadadash.ScreenController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-    <SplitPane dividerPositions="0.39216281895504246" prefHeight="371.0" prefWidth="660.0">
+    <SplitPane dividerPositions="0.39216281895504246" prefHeight="435.0" prefWidth="660.0">
         <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="286.0" prefWidth="248.0">
                 <children>
@@ -23,9 +24,8 @@
                             <Font name="System Bold" size="12.0" />
                         </font></Text>
                     <TextField layoutX="18.0" layoutY="153.0" maxWidth="200.0" prefHeight="26.0" prefWidth="174.0" text="Enter Developer Code" />
-                    <Hyperlink layoutX="19.0" layoutY="255.0" text="Sign-up for a new account" />
-                    <Hyperlink layoutX="19.0" layoutY="290.0" text="Switch to Instructor Login" />
-                    <Hyperlink layoutX="19.0" layoutY="308.0" text="Switch to Player Login" />
+                    <Hyperlink layoutX="19.0" layoutY="290.0" onAction="#switchToILogin" text="Switch to Instructor Login" />
+                    <Hyperlink layoutX="19.0" layoutY="308.0" onAction="#switchToPLogin" text="Switch to Player Login" />
                     <Button layoutX="18.0" layoutY="183.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" text="-&gt;">
                         <font>
                             <Font name="System Bold" size="11.0" />
@@ -33,9 +33,13 @@
                 </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="239.0" prefWidth="482.0">
-                <children>
-
-                </children></AnchorPane>
+            <children>
+               <ImageView fitHeight="408.0" fitWidth="867.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@canLake.jpg" />
+                  </image>
+               </ImageView>
+            </children></AnchorPane>
         </items>
     </SplitPane>
 </VBox>
