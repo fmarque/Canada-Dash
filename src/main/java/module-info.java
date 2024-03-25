@@ -7,7 +7,6 @@ module com.group.canadadash {
     requires com.dlsc.formsfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
-    requires com.almasb.fxgl.all;
 
     opens com.group47.canadadash to javafx.fxml;
     exports com.group47.canadadash;
