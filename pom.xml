@@ -15,6 +15,8 @@
     </properties>
 
     <dependencies>
+      
+      	<!-- JavaFX Dependencies -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -35,6 +37,8 @@
             <artifactId>javafx-media</artifactId>
             <version>19.0.2</version>
         </dependency>
+      
+      	<!-- ControlsFX and FormsFX -->
         <dependency>
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
@@ -51,6 +55,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
+      
+      	<!-- Icon and UI Enhancements -->
         <dependency>
             <groupId>org.kordamp.ikonli</groupId>
             <artifactId>ikonli-javafx</artifactId>
@@ -61,6 +67,8 @@
             <artifactId>bootstrapfx-core</artifactId>
             <version>0.4.0</version>
         </dependency>
+      
+      	<!-- TilesFX for dashboard tiles -->
         <dependency>
             <groupId>eu.hansolo</groupId>
             <artifactId>tilesfx</artifactId>
@@ -72,6 +80,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
+      
+      	<!-- FXGL for game development -->
         <dependency>
             <groupId>com.github.almasb</groupId>
             <artifactId>fxgl</artifactId>
@@ -83,6 +93,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
+      
+      	<!-- JUnit for Testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -95,6 +107,34 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+      
+      	<!-- JSON Processing -->
+      	<dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.13.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.13.3</version>
+        </dependency>
+      	<dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.9</version>
+        </dependency>
+      	<dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version>
+        </dependency>
+      
     </dependencies>
 
     <build>
