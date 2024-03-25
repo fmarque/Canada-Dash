@@ -103,6 +103,8 @@ public class loginSignupController extends Application implements EventHandler<A
         }*/
     }
 
+
+
     // cases for when pw and proceed buttons are toggles
     // cases for when the diff signup login buttons are clicked
 }
