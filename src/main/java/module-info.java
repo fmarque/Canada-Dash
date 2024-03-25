@@ -5,7 +5,6 @@ module com.group.canadadash {
     requires org.json;
     requires com.google.gson;
 
-
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires org.kordamp.ikonli.javafx;
