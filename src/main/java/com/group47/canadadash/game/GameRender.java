@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 
@@ -27,6 +28,7 @@ public class GameRender extends Application {
     private double playerVelocityY = 0;
     private boolean onGround = true;
 
+    private Rectangle platform = new Rectangle(100, 350, 6000, 50); // x, y, width, height
 
     /*
     Moves Player X coordinate
@@ -42,7 +44,11 @@ public class GameRender extends Application {
 
     }
 
+    private boolean isColliding(Rectangle player, Rectangle obstacle) {
+        return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
+    }
     private void update() {
+        Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
         // Update game state
         if (movingLeft) playerX -= 5;
         if (movingRight) playerX += 5;
@@ -53,11 +59,12 @@ public class GameRender extends Application {
             playerY += playerVelocityY;
         }
 
-        // Implement a simple ground check
-        if (playerY >= 300) { // Assuming 300 is ground level
-            playerY = 300;
+        // Check collision with the platform
+        if (isColliding(playerRect, platform)) {
+            // Handle collision. For example, stop falling by adjusting Y position
             onGround = true;
             playerVelocityY = 0;
+            playerY = platform.getY() - playerHeight; // Adjust player position to stand on the platform
         } else {
             onGround = false;
         }
@@ -73,6 +80,8 @@ public class GameRender extends Application {
 
         // Draw the player
         gc.fillRect(playerX, playerY, playerWidth, playerHeight);
+
+        gc.fillRect(platform.getX(), platform.getY(), platform.getWidth(), platform.getHeight());
     }
 
     /**
