@@ -16,7 +16,7 @@ public class Box extends GameUnit {
         super(givenX, givenY);
         height = 40;
         width = 40;
-        imageAdd = "";     //TODO: write the address which points to the box image
+        imageAdd = "src/main/resources/com/group47/canadadash/object.png";
     }
 
 }
