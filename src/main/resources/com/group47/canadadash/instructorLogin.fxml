@@ -28,7 +28,7 @@
                     <Hyperlink layoutX="19.0" layoutY="255.0" onAction="#switchToISignup" text="Sign-up for a new account" />
                     <Hyperlink layoutX="19.0" layoutY="290.0" onAction="#switchToPLogin" text="Switch to Player Login" />
                     <Hyperlink layoutX="19.0" layoutY="308.0" onAction="#switchToDLogin" text="Switch to Developer Login" />
-                    <Button layoutX="19.0" layoutY="213.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" text="-&gt;">
+                    <Button layoutX="19.0" layoutY="213.0" mnemonicParsing="false" onAction="#switchToIMenu" prefHeight="26.0" prefWidth="27.0" text="-&gt;">
                         <font>
                             <Font name="System Bold" size="11.0" />
                         </font></Button>

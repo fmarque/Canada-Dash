@@ -26,7 +26,7 @@
                     <TextField layoutX="18.0" layoutY="153.0" maxWidth="200.0" prefHeight="26.0" prefWidth="174.0" text="Enter Developer Code" />
                     <Hyperlink layoutX="19.0" layoutY="290.0" onAction="#switchToILogin" text="Switch to Instructor Login" />
                     <Hyperlink layoutX="19.0" layoutY="308.0" onAction="#switchToPLogin" text="Switch to Player Login" />
-                    <Button layoutX="18.0" layoutY="183.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" text="-&gt;">
+                    <Button layoutX="18.0" layoutY="183.0" mnemonicParsing="false" onAction="#switchToDMenu" prefHeight="26.0" prefWidth="27.0" text="-&gt;">
                         <font>
                             <Font name="System Bold" size="11.0" />
                         </font></Button>
