@@ -21,6 +21,13 @@ public class GameRender extends Application {
     private boolean movingLeft = false;
     private boolean movingRight = false;
 
+    private boolean movingUp = false;
+    private boolean movingDown = false;
+
+    private double playerVelocityY = 0;
+    private boolean onGround = true;
+
+
     /*
     Moves Player X coordinate
      */
@@ -39,6 +46,22 @@ public class GameRender extends Application {
         // Update game state
         if (movingLeft) playerX -= 5;
         if (movingRight) playerX += 5;
+
+        // Apply gravity
+        if (!onGround) {
+            playerVelocityY += 1; // Adjust this value for gravity strength
+            playerY += playerVelocityY;
+        }
+
+        // Implement a simple ground check
+        if (playerY >= 300) { // Assuming 300 is ground level
+            playerY = 300;
+            onGround = true;
+            playerVelocityY = 0;
+        } else {
+            onGround = false;
+        }
+
 
     }
 
@@ -83,6 +106,7 @@ public class GameRender extends Application {
             switch (e.getCode()) {
                 case LEFT: movingLeft = true; break;
                 case RIGHT: movingRight = true; break;
+                case SPACE: if (onGround) jump(); break; // Jump on space press
             }
         });
 
@@ -90,9 +114,17 @@ public class GameRender extends Application {
             switch (e.getCode()) {
                 case LEFT: movingLeft = false; break;
                 case RIGHT: movingRight = false; break;
+               
             }
         });
 
+    }
+
+    private void jump() {
+        if (onGround) {
+            playerVelocityY = -15; // Adjust this value to change jump height
+            onGround = false;
+        }
     }
 
 
