@@ -1,0 +1,1104 @@
+{
+  "levels": {
+    "bc": {
+      "assessment": [
+        {
+          "question": "What is the capital city of British Columbia?",
+          "type": "multipleChoice",
+          "answer": "D) Victoria",
+          "options": [
+            "A) Vancouver",
+            "B) Kelowna",
+            "C) Surrey",
+            "D) Victoria"
+          ],
+          "hints": [
+            "This city is located on Vancouver Island.",
+            "It's named after a queen."
+          ]
+        },
+        {
+          "question": "Which famous national park in BC is known for its massive glaciers and rugged mountains?",
+          "type": "multipleChoice",
+          "answer": "D) Glacier National Park",
+          "options": [
+            "A) Yoho National Park",
+            "B) Jasper National Park",
+            "C) Kootenay National Park",
+            "D) Glacier National Park"
+          ],
+          "hints": [
+            "This park is part of the Columbia Mountains.",
+            "It's not the one in the United States."
+          ]
+        },
+        {
+          "question": "What is the name of the large public market located on an island in Vancouver?",
+          "type": "multipleChoice",
+          "answer": "D) Granville Island Public Market",
+          "options": [
+            "A) Lonsdale Quay Market",
+            "B) Public Market at Queensborough",
+            "C) Richmond Public Market",
+            "D) Granville Island Public Market"
+          ],
+          "hints": [
+            "The island is accessible by ferry or bridge from the city.",
+            "It's a hub for food, art, and culture."
+          ]
+        },
+        {
+          "question": "What significant trail stretches from the US border to Alaska through BC, known for its breathtaking views?",
+          "type": "multipleChoice",
+          "answer": "D) The Pacific Crest Trail",
+          "options": [
+            "A) The Appalachian Trail",
+            "B) The Continental Divide Trail",
+            "C) The Great Divide Trail",
+            "D) The Pacific Crest Trail"
+          ],
+          "hints": [
+            "This trail is famous among hikers and backpackers.",
+            "It was featured in a popular book and movie titled 'Wild.'"
+          ]
+        },
+        {
+          "question": "What is BC's largest and most populous city?",
+          "type": "multipleChoice",
+          "answer": "D) Vancouver",
+          "options": [
+            "A) Surrey",
+            "B) Victoria",
+            "C) Kelowna",
+            "D) Vancouver"
+          ],
+          "hints": [
+            "This city hosted the 2010 Winter Olympics.",
+            "It is known for its scenic beauty, surrounded by water and mountains."
+          ]
+        },
+        {
+          "question": "What unique feature is Vancouver Island known for, relating to its natural wildlife?",
+          "type": "multipleChoice",
+          "answer": "D) Black bears and cougars",
+          "options": [
+            "A) Grizzly bears",
+            "B) Moose populations",
+            "C) Bald eagles",
+            "D) Black bears and cougars"
+          ],
+          "hints": [
+            "These animals are part of the island's diverse ecosystem.",
+            "The island provides a habitat for the largest concentration of these predators in North America."
+          ]
+        },
+        {
+          "question": "What famous ski resort town in BC is known for its alpine skiing and mountain biking?",
+          "type": "multipleChoice",
+          "answer": "D) Whistler",
+          "options": [
+            "A) Fernie",
+            "B) Sun Peaks",
+            "C) Kimberley",
+            "D) Whistler"
+          ],
+          "hints": [
+            "It's located north of Vancouver.",
+            "This town co-hosted the 2010 Winter Olympics."
+          ]
+        },
+        {
+          "question": "What is the name of the large, scenic highway that connects Vancouver to Whistler?",
+          "type": "multipleChoice",
+          "answer": "D) The Sea-to-Sky Highway",
+          "options": [
+            "A) Trans-Canada Highway",
+            "B) Coquihalla Highway",
+            "C) Fraser Highway",
+            "D) The Sea-to-Sky Highway"
+          ],
+          "hints": [
+            "It offers stunning views of the ocean, mountains, and forests.",
+            "It's officially known as Highway 99."
+          ]
+        },
+        {
+          "question": "Which BC city is known as the 'Wine Capital of Canada'?",
+          "type": "multipleChoice",
+          "answer": "D) Oliver",
+          "options": [
+            "A) Penticton",
+            "B) Kelowna",
+            "C) Vernon",
+            "D) Oliver"
+          ],
+          "hints": [
+            "This city is located in the Okanagan Valley.",
+            "It's famous for its vineyards and wineries."
+          ]
+        },
+        {
+          "question": "What is the name of the desert located in the southern part of BC, known for its warm climate and unique ecosystem?",
+          "type": "multipleChoice",
+          "answer": "D) The Okanagan Desert",
+          "options": [
+            "A) The Gobi Desert",
+            "B) The Mojave Desert",
+            "C) The Sonoran Desert",
+            "D) The Okanagan Desert"
+          ],
+          "hints": [
+            "This area is part of the larger Great Basin Desert.",
+            "It's one of the few places in Canada where you can find sagebrush and prickly pear cacti."
+          ]
+        }
+      ]
+    },
+    "alberta": {
+      "assessment": [
+        {
+          "question": "What is the capital city of Alberta?",
+          "type": "multipleChoice",
+          "answer": "D) Edmonton",
+          "options": [
+            "A) Calgary",
+            "B) Red Deer",
+            "C) Lethbridge",
+            "D) Edmonton"
+          ],
+          "hints": [
+            "This city is known for one of the largest malls in North America.",
+            "It's located more to the north compared to Alberta's other major city, Calgary."
+          ]
+        },
+        {
+          "question": "Which famous national park in Alberta is known for its turquoise lakes and mountain scenery?",
+          "type": "multipleChoice",
+          "answer": "D) Banff National Park",
+          "options": [
+            "A) Elk Island National Park",
+            "B) Wood Buffalo National Park",
+            "C) Jasper National Park",
+            "D) Banff National Park"
+          ],
+          "hints": [
+            "This park is located in the Rocky Mountains.",
+            "Lake Louise is one of the popular attractions here."
+          ]
+        },
+        {
+          "question": "What is the name of the dinosaur museum located in the Badlands of Alberta?",
+          "type": "multipleChoice",
+          "answer": "D) Royal Tyrrell Museum",
+          "options": [
+            "A) Alberta Aviation Museum",
+            "B) Glenbow Museum",
+            "C) Edmonton Science Centre",
+            "D) Royal Tyrrell Museum"
+          ],
+          "hints": [
+            "This museum is in Drumheller.",
+            "It's a center for palaeontological research."
+          ]
+        },
+        {
+          "question": "What major annual event takes place in Calgary, known as 'The Greatest Outdoor Show on Earth'?",
+          "type": "multipleChoice",
+          "answer": "D) The Calgary Stampede",
+          "options": [
+            "A) Edmonton Folk Music Festival",
+            "B) Lethbridge Whoop-Up Days",
+            "C) Red Deer Westerner Days",
+            "D) The Calgary Stampede"
+          ],
+          "hints": [
+            "This event includes a rodeo, parade, and various other contests and exhibitions.",
+            "It takes place in July."
+          ]
+        },
+        {
+          "question": "What is Alberta's largest city by population?",
+          "type": "multipleChoice",
+          "answer": "D) Calgary",
+          "options": [
+            "A) Edmonton",
+            "B) Red Deer",
+            "C) Lethbridge",
+            "D) Calgary"
+          ],
+          "hints": [
+            "This city hosted the Winter Olympics in 1988.",
+            "It's known for its towering skyscrapers, including the Calgary Tower."
+          ]
+        },
+        {
+          "question": "What are the indigenous people of Alberta's plains known for, related to their traditional way of life?",
+          "type": "multipleChoice",
+          "answer": "D) Buffalo hunting",
+          "options": [
+            "A) Wheat farming",
+            "B) Horse breeding",
+            "C) Fishing",
+            "D) Buffalo hunting"
+          ],
+          "hints": [
+            "They relied on the buffalo for food, shelter, and clothing.",
+            "The buffalo was central to their culture and survival."
+          ]
+        },
+        {
+          "question": "What unique natural phenomenon can be observed in the northern part of Alberta?",
+          "type": "multipleChoice",
+          "answer": "D) The Northern Lights (Aurora Borealis)",
+          "options": [
+            "A) Hot springs",
+            "B) Sand dunes",
+            "C) Fossil beds",
+            "D) The Northern Lights (Aurora Borealis)"
+          ],
+          "hints": [
+            "This phenomenon is best seen in dark, clear skies away from city lights.",
+            "It produces spectacular green, purple, and pink colors in the sky."
+          ]
+        },
+        {
+          "question": "What is the name of the famous scenic drive that stretches from Banff to Jasper?",
+          "type": "multipleChoice",
+          "answer": "D) The Icefields Parkway",
+          "options": [
+            "A) The Trans-Canada Highway",
+            "B) The Cowboy Trail",
+            "C) The David Thompson Highway",
+            "D) The Icefields Parkway"
+          ],
+          "hints": [
+            "It offers stunning views of glaciers, lakes, and mountain peaks.",
+            "It passes by the Columbia Icefield."
+          ]
+        },
+        {
+          "question": "Which Alberta lake is known for its striking color and is a UNESCO World Heritage Site along with its surrounding national parks?",
+          "type": "multipleChoice",
+          "answer": "D) Lake Louise",
+          "options": [
+            "A) Moraine Lake",
+            "B) Peyto Lake",
+            "C) Maligne Lake",
+            "D) Lake Louise"
+          ],
+          "hints": [
+            "It's located in Banff National Park.",
+            "The lake is named after a princess."
+          ]
+        },
+        {
+          "question": "What is the name of the region in Alberta that is rich in oil sands, making it one of the world's largest reserves of crude oil?",
+          "type": "multipleChoice",
+          "answer": "D) The Athabasca Oil Sands",
+          "options": [
+            "A) Cold Lake Oil Sands",
+            "B) Peace River Oil Sands",
+            "C) Lloydminster Heavy Oil Region",
+            "D) The Athabasca Oil Sands"
+          ],
+          "hints": [
+            "This area is located in northeastern Alberta.",
+            "It's a major part of Alberta's economy."
+          ]
+        }
+      ]
+    },
+    "saskatchewan": {
+      "assessment": [
+        {
+          "question": "What is the flower found on the Saskatchewan Flag?",
+          "type": "multipleChoice",
+          "answer": "b. Western Red Lily",
+          "options": [
+            "a. Poppy",
+            "b. Western Red Lily",
+            "c. Daisy",
+            "d. Daffodil"
+          ],
+          "hints": [
+            "This flower is red.",
+            "It is not the poppy."
+          ]
+        },
+        {
+          "question": "What is the provincial sport of Saskatchewan?",
+          "type": "multipleChoice",
+          "answer": "a. Curling",
+          "options": [
+            "a. Curling",
+            "b. Hockey",
+            "c. Lacrosse",
+            "d. Basketball"
+          ],
+          "hints": [
+            "This game is played on the ice.",
+            "It involves a sweeping motion."
+          ]
+        },
+        {
+          "question": "What is the official animal of Saskatchewan?",
+          "type": "multipleChoice",
+          "answer": "d. White-tailed deer",
+          "options": [
+            "a. Goose",
+            "b. Beaver",
+            "c. Moose",
+            "d. White-tailed deer"
+          ],
+          "hints": [
+            "This animal has fur.",
+            "Its female counterpart is a doe."
+          ]
+        },
+        {
+          "question": "The Saskatchewan flag is horizontally split into two colours. These colours are yellow and ______.",
+          "type": "fillInTheBlank",
+          "answer": "green",
+          "hints": [
+            "this is a secondary colour",
+            "the colour is formed by mixing blue and yellow"
+          ]
+        },
+        {
+          "question": "The ___________ is named as the official tree of Saskatchewan",
+          "type": "fillInTheBlank",
+          "answer": "White Birch",
+          "hints": [
+            "The initials of this tree are WB",
+            "W_it_ B_r_h"
+          ]
+        },
+        {
+          "question": "The official grass of Saskatchewan, the needle-and-thread grass, can have its seed stalks grow up to _ feet.",
+          "type": "fillInTheBlank",
+          "answer": "4",
+          "hints": [
+            "It is less than 5 feet.",
+            "It is more than 3 feet."
+          ]
+        },
+        {
+          "question": "The world’s largest T-Rex fossil was discovered in Saskatchewan.",
+          "type": "trueOrFalse",
+          "answer": "True"
+        },
+        {
+          "question": "Saskatchewan has 50,000 lakes.",
+          "type": "trueOrFalse",
+          "answer": "False",
+          "hints": [
+            "Saskatchewan has nearly 100,000 lakes."
+          ]
+        },
+        {
+          "question": "Regina is the capital of Saskatchewan.",
+          "type": "trueOrFalse",
+          "answer": "True"
+        },
+        {
+          "question": "Saskatchewan is the only Canadian province with no bears.",
+          "type": "trueOrFalse",
+          "answer": "False",
+          "hints": [
+            "Saskatchewan is known as a black bear country."
+          ]
+        }
+      ]
+    },
+    "manitoba": {
+      "assessment": [
+        {
+          "question": "Manitoba was at one point colder than the planet ____.",
+          "type": "multipleChoice",
+          "answer": "a. Mars",
+          "options": [
+            "a. Mars",
+            "b. Venus",
+            "c. Neptune",
+            "d. Pluto"
+          ],
+          "hints": [
+            "This is the 4th planet from the sun.",
+            "This planet is known as the 'Red Planet'."
+          ]
+        },
+        {
+          "question": "The Canadian Museum of Human Rights is the _____ national museum to be built outside of Canada’s capital.",
+          "type": "multipleChoice",
+          "answer": "c. First",
+          "options": [
+            "a. Second",
+            "b. Third",
+            "c. First",
+            "d. Last"
+          ],
+          "hints": [
+            "The range is between first to third.",
+            "Takes gold medals in competitions."
+          ]
+        },
+        {
+          "question": "_____________ is Canada’s oldest outdoor theatre dating back to 1955.",
+          "type": "multipleChoice",
+          "answer": "d. Rainbow Stage",
+          "options": [
+            "a. Rainbow Theatre",
+            "b. Aurora Theatre",
+            "c. Winnipeg Stadium",
+            "d. Rainbow Stage"
+          ],
+          "hints": [
+            "The name involves a certain multicolored arc which appears after the rain.",
+            "The second word is a synonym for the word 'platform'."
+          ]
+        },
+        {
+          "question": "The provincial animal of Manitoba is the _____.",
+          "type": "fillInTheBlank",
+          "answer": "Bison",
+          "hints": [
+            "Large mammal typically with brown fur.",
+            "Also known as a 'wild ox'."
+          ]
+        },
+        {
+          "question": "The main background colour in the Manitoban flag is ___.",
+          "type": "fillInTheBlank",
+          "answer": "Red",
+          "hints": [
+            "It is a primary colour",
+            "The first colour of the rainbow"
+          ]
+        },
+        {
+          "question": "The Royal Canadian Mint produces all of Canada’s circulation _____.",
+          "type": "fillInTheBlank",
+          "answer": "Coins",
+          "hints": [
+            "This is a form of currency.",
+            "This includes the loonies and the toonies."
+          ]
+        },
+        {
+          "question": "Winnipeg, Manitoba has the sunniest winter in all of Canada with 358 hours of sunlight.",
+          "type": "trueOrFalse",
+          "answer": "True"
+        },
+        {
+          "question": "Manitoba was the first city in the world to use a central emergency number, 911.",
+          "type": "trueOrFalse",
+          "answer": "True"
+        },
+        {
+          "question": "Manitoba has more curling clubs than there are in Quebec.",
+          "type": "trueOrFalse",
+          "answer": "False",
+          "hints": [
+            "Manitoba has more curling clubs than Quebec and Ontario combined."
+          ]
+        },
+        {
+          "question": "The inspiration for James Bond was a famous Manitoban WWII spymaster, Jackson Adams.",
+          "type": "trueOrFalse",
+          "answer": "False",
+          "hints": [
+            "The inspiration for James Bond was WWII spymaster William Stephenson who was from Winnipeg."
+          ]
+        }
+      ]
+    },
+    "ontario": {
+      "assessment": [
+        {
+          "question": "Which Great Lake does not border Ontario?",
+          "type": "multipleChoice",
+          "answer": "d) Lake Michigan",
+          "options": [
+            "a) Lake Superior",
+            "b) Lake Huron",
+            "c) Lake Erie",
+            "d) Lake Michigan"
+          ],
+          "hints": [
+            "It's the only Great Lake that does not directly border Ontario.",
+            "It is mainly bordered by the US states of Michigan, Indiana, Illinois, and Wisconsin."
+          ]
+        },
+        {
+          "question": "Ontario is the smallest province in Canada by land area.",
+          "type": "trueOrFalse",
+          "answer": "False"
+        },
+        {
+          "question": "The capital city of Ontario is ________.",
+          "type": "fillInTheBlank",
+          "answer": "Toronto"
+        },
+        {
+          "question": "What is the name of the famous waterfall located in Ontario?",
+          "type": "multipleChoice",
+          "answer": "a) Niagara Falls",
+          "options": [
+            "a) Niagara Falls",
+            "b) Victoria Falls",
+            "c) Angel Falls",
+            "d) Iguazu Falls"
+          ],
+          "hints": [
+            "This waterfall is shared between the United States and Canada.",
+            "It is located between Lake Erie and Lake Ontario."
+          ]
+        },
+        {
+          "question": "Ontario is bordered by the US state of New York to the east.",
+          "type": "trueOrFalse",
+          "answer": "True"
+        },
+        {
+          "question": "The largest provincial park in Ontario is ________ Provincial Park.",
+          "type": "fillInTheBlank",
+          "answer": "Algonquin",
+          "hints": [
+            "The park's name begins with the letter 'A'.",
+            "It is located in Ontario, Canada."
+          ]
+        },
+        {
+          "question": "Which of the following cities is not located in Ontario?",
+          "type": "multipleChoice",
+          "answer": "c) Vancouver",
+          "options": [
+            "a) Ottawa",
+            "b) Hamilton",
+            "c) Vancouver",
+            "d) London"
+          ],
+          "hints": [
+            "This city is located in British Columbia.",
+            "It is known for its scenic beauty and cultural diversity."
+          ]
+        },
+        {
+          "question": "Ontario has more than 250,000 lakes, which contain about one-fifth of the world's fresh water.",
+          "type": "trueOrFalse",
+          "answer": "True"
+        },
+        {
+          "question": "The iconic tower in Toronto is called the ________ Tower.",
+          "type": "fillInTheBlank",
+          "answer": "CN Tower",
+          "hints": [
+            "The tower's initials are derived from the name of the railway company that built it.",
+            "It offers panoramic views of Toronto and its surroundings."
+          ]
+        },
+        {
+          "question": "Which of the following regions is not part of Ontario?",
+          "type": "multipleChoice",
+          "answer": "c) Okanagan Valley",
+          "options": [
+            "a) Niagara Peninsula",
+            "b) Muskoka",
+            "c) Okanagan Valley",
+            "d) Thousand Islands"
+          ],
+          "hints": [
+            "Consider the geographical locations and characteristics of each region mentioned.",
+            "Look into popular tourist destinations and attractions within Ontario to identify the regions listed."
+          ]
+        }
+      ]
+    },
+    "quebec": {
+      "assessment": [
+        {
+          "question": "Which river forms much of the southern border of Quebec?",
+          "type": "multipleChoice",
+          "answer": "a) St. Lawrence River",
+          "options": [
+            "a) St. Lawrence River",
+            "b) Ottawa River",
+            "c) Saguenay River",
+            "d) Richelieu River"
+          ],
+          "hints": [
+            "It's the river that connects the Great Lakes with the Atlantic Ocean.",
+            "It's named after the Christian martyr Saint Lawrence."
+          ]
+        },
+        {
+          "question": "Quebec is the largest province in Canada by area.",
+          "type": "trueOrFalse",
+          "answer": "True"
+        },
+        {
+          "question": "The highest mountain in Quebec is called Mount __________.",
+          "type": "fillInTheBlank",
+          "answer": "Caubvick",
+          "hints": [
+            "It's also known as Mont D'Iberville and is part of the Torngat Mountains.",
+            "Its summit marks the highest point in Eastern Canada."
+          ]
+        },
+        {
+          "question": "What is the official language of Quebec?",
+          "type": "multipleChoice",
+          "answer": "b) French",
+          "options": [
+            "a) English",
+            "b) French",
+            "c) Spanish",
+            "d) German"
+          ],
+          "hints": [
+            "Quebec is a province in which country?",
+            "Quebec has a distinct cultural and linguistic identity within this country."
+          ]
+        },
+        {
+          "question": "Quebec City is the capital of Quebec province.",
+          "type": "trueOrFalse",
+          "answer": "True",
+          "hints": [
+            "It's the second-largest city in Quebec and one of the oldest cities in North America.",
+            "The city's historic district is a UNESCO World Heritage Site."
+          ]
+        },
+        {
+          "question": "The largest island in Quebec is _________ Island.",
+          "type": "fillInTheBlank",
+          "answer": "Anticosti"
+        },
+        {
+          "question": "Which natural feature is found on the northernmost tip of Quebec?",
+          "type": "multipleChoice",
+          "answer": "a) Tundra",
+          "options": [
+            "a) Tundra",
+            "b) Desert",
+            "c) Rainforest",
+            "d) Grassland"
+          ],
+          "hints": [
+            "This natural feature is characterized by its cold temperatures and permafrost soil.",
+            "It's a biome commonly associated with polar regions and high altitudes."
+          ]
+        },
+        {
+          "question": "Quebec shares its western border with the province of Ontario.",
+          "type": "trueOrFalse",
+          "answer": "True"
+        },
+        {
+          "question": "The largest freshwater island in the world, _________, is located in Quebec.",
+          "type": "fillInTheBlank",
+          "answer": "Isle Royale",
+          "hints": [
+            "This island is located in Quebec, Canada.",
+            "It is known for being the largest freshwater island globally."
+          ]
+        },
+        {
+          "question": "Which region of Quebec is known for its vast forests and wilderness?",
+          "type": "multipleChoice",
+          "answer": "b) Gaspe Peninsula",
+          "options": [
+            "a) Laurentians",
+            "b) Gaspe Peninsula",
+            "c) Outaouais",
+            "d) Saguenay–Lac-Saint-Jean"
+          ],
+          "hints": [
+            "This region is located in the eastern part of Quebec.",
+            "It is bordered by the Gulf of St. Lawrence on one side."
+          ]
+        }
+      ]
+    },
+    "novaScotia": {
+      "assessment": [
+        {
+          "question": "The first European settlement in Nova Scotia was established at __________.",
+          "type": "fillInTheBlank",
+          "answer": "Port Royal",
+          "hints": [
+            "It's also a famous bay",
+            "It was founded by the French in 1605"
+          ]
+        },
+        {
+          "question": "Rose Fortune is famous for being Nova Scotia's first ____________ in Annapolis Royal.",
+          "type": "fillInTheBlank",
+          "answer": "Policewoman",
+          "hints": [
+            "She worked in law enforcement",
+            "Her last name is a synonym for wealth"
+          ]
+        },
+        {
+          "question": "The event that occurred at New Minas, Nova Scotia, on October 12, 1786, was the first documented ____________.",
+          "type": "fillInTheBlank",
+          "answer": "North American UFO sighting",
+          "hints": [
+            "It involves an unidentified flying object",
+            "This event is often associated with alien theories"
+          ]
+        },
+        {
+          "question": "Which town is known as 'The Little Switzerland of Nova Scotia'?",
+          "type": "multipleChoice",
+          "answer": "A (Bear River)",
+          "options": [
+            "A. Bear River",
+            "B. Dartmouth",
+            "C. Halifax",
+            "D. Truro"
+          ]
+        },
+        {
+          "question": "What is written on Nova Scotia license plates?",
+          "type": "multipleChoice",
+          "answer": "D (Canada’s Ocean Playground)",
+          "options": [
+            "A. Yours To Discover",
+            "B. Beautiful Nova Scotia",
+            "C. Birthplace of Confederation",
+            "D. Canada’s Ocean Playground"
+          ]
+        },
+        {
+          "question": "Which famous Nova Scotia NHL player is from Port Hood?",
+          "type": "multipleChoice",
+          "answer": "C (Al MacInnis)",
+          "options": [
+            "A. Sidney Crosby",
+            "B. Nathan MacKinnon",
+            "C. Al MacInnis",
+            "D. Brad Marchand"
+          ]
+        },
+        {
+          "question": "Nova Scotia was named by the Romans.",
+          "type": "trueOrFalse",
+          "answer": "False",
+          "hints": [
+            "Nova Scotia is Latin for 'New Scotland' and was named by James I of England, VI of Scotland, in 1621."
+          ]
+        },
+        {
+          "question": "Halifax's motto is 'The City of Spirits.'",
+          "type": "trueOrFalse",
+          "answer": "False",
+          "hints": [
+            "The correct motto is 'Riches from the Sea.'"
+          ]
+        },
+        {
+          "question": "Nova Scotia has ten national parks.",
+          "type": "trueOrFalse",
+          "answer": "False",
+          "hints": [
+            "It has two national parks."
+          ]
+        },
+        {
+          "question": "Name a town in Nova Scotia famous for being exactly halfway between the North Pole and the Equator.",
+          "type": "fillInTheBlank",
+          "answer": "Stewiacke",
+          "hints": [
+            "It is not Truro",
+            "It is known for a large statue of a prehistoric animal"
+          ]
+        }
+      ]
+    },
+    "newBrunswick": {
+      "assessment": [
+        {
+          "question": "The capital city of New Brunswick is __________.",
+          "type": "fillInTheBlank",
+          "answer": "Fredericton",
+          "hints": [
+            "It starts with 'F'",
+            "It has the same last three letters as 'Washington'"
+          ]
+        },
+        {
+          "question": "New Brunswick was originally part of this province until 1784: __________.",
+          "type": "fillInTheBlank",
+          "answer": "Nova Scotia",
+          "hints": [
+            "This province is also in the Maritimes",
+            "It shares its name with a certain 'Scotia' bank"
+          ]
+        },
+        {
+          "question": "The animal or object on the New Brunswick flag is a __________.",
+          "type": "fillInTheBlank",
+          "answer": "Lion / Ship",
+          "hints": [
+            "One is a symbol of strength and the other of exploration",
+            "One is an animal, and the other is a mode of transportation"
+          ]
+        },
+        {
+          "question": "Which city in New Brunswick is known as the 'Lobster Capital of the World'?",
+          "type": "multipleChoice",
+          "answer": "B (Shediac)",
+          "options": [
+            "A. Fredericton",
+            "B. Shediac",
+            "C. Moncton",
+            "D. Saint John"
+          ]
+        },
+        {
+          "question": "Which of the following mountains is in northwestern New Brunswick?",
+          "type": "multipleChoice",
+          "answer": "A (Appalachians)",
+          "options": [
+            "A. Appalachians",
+            "B. Rockies",
+            "C. Andes",
+            "D. Himalayas"
+          ]
+        },
+        {
+          "question": "New Brunswick is bordered by which U.S. state?",
+          "type": "multipleChoice",
+          "answer": "C (Maine)",
+          "options": [
+            "A. Washington",
+            "B. California",
+            "C. Maine",
+            "D. Alaska"
+          ]
+        },
+        {
+          "question": "New Brunswick has both English and French as its official languages.",
+          "type": "trueOrFalse",
+          "answer": "True"
+        },
+        {
+          "question": "The Bay of Fundy, known for the world's highest tides, is in New Brunswick.",
+          "type": "trueOrFalse",
+          "answer": "True"
+        },
+        {
+          "question": "The world's largest rolling pin is located in New Brunswick.",
+          "type": "trueOrFalse",
+          "answer": "False",
+          "hints": [
+            "The correct answer is the world's largest axe."
+          ]
+        },
+        {
+          "question": "What is the name of the bridge that links New Brunswick to Prince Edward Island?",
+          "type": "fillInTheBlank",
+          "answer": "Confederation Bridge",
+          "hints": [
+            "It's named after an important event in Canada's history",
+            "It connects two Maritime provinces"
+          ]
+        }
+      ]
+    },
+    "newFoundLand": {
+      "assessment": [
+        {
+          "question": "The capital city of New Brunswick is __________.",
+          "type": "fillInTheBlank",
+          "answer": "Fredericton",
+          "hints": [
+            "It starts with 'F'",
+            "It has the same last three letters as 'Washington'"
+          ]
+        },
+        {
+          "question": "New Brunswick was originally part of this province until 1784: __________.",
+          "type": "fillInTheBlank",
+          "answer": "Nova Scotia",
+          "hints": [
+            "This province is also in the Maritimes",
+            "It shares its name with a certain 'Scotia' bank"
+          ]
+        },
+        {
+          "question": "The animal or object on the New Brunswick flag is a __________.",
+          "type": "fillInTheBlank",
+          "answer": "Lion / Ship",
+          "hints": [
+            "One is a symbol of strength and the other of exploration",
+            "One is an animal, and the other is a mode of transportation"
+          ]
+        },
+        {
+          "question": "Which city in New Brunswick is known as the 'Lobster Capital of the World'?",
+          "type": "multipleChoice",
+          "answer": "B (Shediac)",
+          "options": [
+            "A. Fredericton",
+            "B. Shediac",
+            "C. Moncton",
+            "D. Saint John"
+          ]
+        },
+        {
+          "question": "Which of the following mountains is in northwestern New Brunswick?",
+          "type": "multipleChoice",
+          "answer": "A (Appalachians)",
+          "options": [
+            "A. Appalachians",
+            "B. Rockies",
+            "C. Andes",
+            "D. Himalayas"
+          ]
+        },
+        {
+          "question": "New Brunswick is bordered by which U.S. state?",
+          "type": "multipleChoice",
+          "answer": "C (Maine)",
+          "options": [
+            "A. Washington",
+            "B. California",
+            "C. Maine",
+            "D. Alaska"
+          ]
+        },
+        {
+          "question": "New Brunswick has both English and French as its official languages.",
+          "type": "trueOrFalse",
+          "answer": "True"
+        },
+        {
+          "question": "The Bay of Fundy, known for the world's highest tides, is in New Brunswick.",
+          "type": "trueOrFalse",
+          "answer": "True"
+        },
+        {
+          "question": "The world's largest rolling pin is located in New Brunswick.",
+          "type": "trueOrFalse",
+          "answer": "False"
+        },
+        {
+          "question": "What is the name of the bridge that links New Brunswick to Prince Edward Island?",
+          "type": "fillInTheBlank",
+          "answer": "Confederation Bridge",
+          "hints": [
+            "It's named after an important event in Canada's history",
+            "It connects two Maritime provinces"
+          ]
+        }
+      ]
+    },
+    "pei": {
+      "assessment": [
+        {
+          "question": "PEI is known as the '______ Province' due to its abundant agricultural produce.",
+          "type": "fillInTheBlank",
+          "answer": "Garden",
+          "hints": [
+            "It's a place typically associated with flowers and vegetables.",
+            "Think of a small, cultivated area near a house."
+          ]
+        },
+        {
+          "question": "The famous literary character Anne of Green Gables lived in the town of ________.",
+          "type": "fillInTheBlank",
+          "answer": "Avonlea",
+          "hints": [
+            "This town is fictional but closely associated with PEI's real landscapes.",
+            "It starts with an 'A'."
+          ]
+        },
+        {
+          "question": "PEI's Confederation Bridge connects the island to ________.",
+          "type": "fillInTheBlank",
+          "answer": "New Brunswick",
+          "hints": [
+            "This neighboring province starts with 'New'.",
+            "It's one of the three Maritime provinces."
+          ]
+        },
+        {
+          "question": "PEI's soil is famously ________ due to the high iron oxide content which gives it a distinctive color.",
+          "type": "fillInTheBlank",
+          "answer": "Red",
+          "hints": [
+            "This color is often associated with the planet Mars.",
+            "It's the color of the stripe on the Canadian flag."
+          ]
+        },
+        {
+          "question": "What is the capital city of PEI?",
+          "type": "multipleChoice",
+          "answer": "B",
+          "options": [
+            "A) Summerside",
+            "B) Charlottetown",
+            "C) Montague",
+            "D) Souris"
+          ],
+          "hints": [
+            "This city is often referred to as the 'Birthplace of Confederation' after the 1864 conference that led to the founding of Canada.",
+            "It is the largest city on the island and hosts the annual Charlottetown Festival, celebrating Canadian theatre."
+          ]
+        },
+        {
+          "question": "Which of these is a popular PEI seafood?",
+          "type": "multipleChoice",
+          "answer": "A",
+          "options": [
+            "A) Lobster",
+            "B) Salmon",
+            "C) Tuna",
+            "D) Cod"
+          ],
+          "hints": [
+            "This seafood is celebrated with its own annual festival on the island, where you can enjoy it fresh, boiled, or in a variety of dishes.",
+            "This crustacean is known for its hard shell and large claws, considered a delicacy and a significant export of PEI."
+          ]
+        },
+        {
+          "question": "PEI is Canada's smallest province by:",
+          "type": "multipleChoice",
+          "answer": "C",
+          "options": [
+            "A) Population",
+            "B) Size",
+            "C) Both A and B",
+            "D) None of the above"
+          ],
+          "hints": [
+            "This distinction considers both the physical area of the province and the number of people who live there.",
+            "Despite its small stature, this province boasts a big heart and is known for its vibrant culture, stunning landscapes, and the famous red sand beaches."
+          ]
+        },
+        {
+          "question": "PEI has the highest number of golf courses per capita in Canada.",
+          "type": "trueOrFalse",
+          "answer": "True"
+        },
+        {
+          "question": "The Confederation Bridge is the longest bridge in Canada.",
+          "type": "trueOrFalse",
+          "answer": "True"
+        },
+        {
+          "question": "PEI was the first province in Canada to be fully powered by wind energy.",
+          "type": "trueOrFalse",
+          "answer": "False",
+          "hints": [
+            "While PEI has significant wind energy infrastructure, it has not been fully powered by wind energy."
+          ]
+        }
+      ]
+    }
+  }
+}
+
