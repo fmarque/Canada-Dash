@@ -18,8 +18,9 @@ import java.nio.file.Paths;
  * Aimed at simplifying data persistence and retrieval in JSON format.
  *
  * @author : Muhammad Affan Yasir [myasir2@uwo.ca]
- * @version : 1.0
+ * @version : 1.1
  * @since : 1.0
+ * @modified : 2023-04-12
  */
 public class Util {
 
@@ -32,12 +33,12 @@ public class Util {
         /*
           Default temporary root path set to the current directory.
          */
-        String tmp = null;
+        String tmp = ".";
         /*
           Attempt to update 'tmp' with the canonical path of the application's directory.
          */
         try {
-            tmp = new File(".").getCanonicalPath();
+            tmp = new File("").getCanonicalPath();
         } catch (IOException e) {
             // Print stack trace and exit program if obtaining canonical path fails.
             e.printStackTrace();
@@ -119,12 +120,11 @@ public class Util {
      * Writes data to a specified file in JSON format.
      *
      * @param data The data object to be serialized to JSON and written to the file.
-     * @param relativePath The relative path within the application directory where the file should be written.
+     * @param fullPath The absolute path within the application directory where the file should be written.
      */
-    public static void writeToFile(Object data, String relativePath){
+    public static void writeToFile(Object data, String fullPath){
         Gson gson = new Gson();
-        // Combine the root path with the relative path to form the full file path.
-        String fullPath = Paths.get(rootPath, relativePath).toString();
+
         // Attempt to write the JSON representation of 'data' to the file.
         try (FileWriter file = new FileWriter(fullPath)) {
             gson.toJson(data, file);
