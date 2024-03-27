@@ -30,29 +30,19 @@ public class App{
     }
 
     public void loadData() {
-        String root = Util.getRootPath();
         String relativePath = "data/metaData/content.json";
-        String filePath = Paths.get(root, relativePath).toString();
 
-        try {
-            String jsonContent = new String(Files.readAllBytes(Paths.get(filePath)), StandardCharsets.UTF_8);
-            Gson gson = new Gson();
-            LevelsContainer levelsContainer = gson.fromJson(jsonContent, LevelsContainer.class);
+        LevelsContainer levelsContainer = Util.readJsonFromFile(Util.getRootPath() + relativePath, LevelsContainer.class);
 
-            if (levelsContainer != null && levelsContainer.getLevels() != null) {
+        if (levelsContainer != null && levelsContainer.getLevels() != null) {
 
-                System.out.println("Levels loaded: " + levelsContainer.getLevels().size());
+            System.out.println("Levels loaded: " + levelsContainer.getLevels().size());
+            this.levels = new ArrayList<>(levelsContainer.getLevels().values());
 
-
-                this.levels = new ArrayList<>(levelsContainer.getLevels().values());
-            } else {
-                System.out.println("No levels were loaded from JSON.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            System.out.println("No levels were loaded from JSON.");
         }
     }
-
 
     public static void main(String[] args) {
         App app = new App();
@@ -81,6 +71,5 @@ public class App{
             System.out.println("No levels loaded.");
         }
     }
-
 
 }

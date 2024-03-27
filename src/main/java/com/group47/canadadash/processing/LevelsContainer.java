@@ -2,7 +2,6 @@ package com.group47.canadadash.processing;
 
 import com.group47.canadadash.processing.Level;
 
-import java.util.HashMap;
 import java.util.Map;
 
 

@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Question {
 
-    private String question;
-    private QuestionType type;
+    private final String question;
+    private final QuestionType type;
     private  List<String> options;
-    private String answer;
+    private final String answer;
     private List<String> hints;
 
     public Question(String question, String type, String answer){
