@@ -741,9 +741,9 @@
           ]
         },
         {
-          "question": "The event that occurred at New Minas, Nova Scotia, on October 12, 1786, was the first documented ____________.",
+          "question": "The event that occurred at New Minas, Nova Scotia, on October 12, 1786, was the first documented ____________ sighting.",
           "type": "fillInTheBlank",
-          "answer": "North American UFO sighting",
+          "answer": "North American UFO",
           "hints": [
             "It involves an unidentified flying object",
             "This event is often associated with alien theories"
