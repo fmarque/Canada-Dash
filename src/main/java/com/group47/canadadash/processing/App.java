@@ -2,6 +2,7 @@ package com.group47.canadadash.processing;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class App{
@@ -43,7 +44,7 @@ public class App{
         }
     }
 
-    public Boolean createAccount(String username, String password) {
+    public Boolean createAccount(String username, String password, String type) {
 
         if (this.userContainer.getUsers().containsKey(username)) {
             return false;
@@ -52,6 +53,13 @@ public class App{
             User newUser = new User();
             newUser.setUserID(username);
             newUser.setPassword(password);
+            newUser.setType(type);
+
+            if ("instructor".equalsIgnoreCase(type)) {
+                String classCode = generateClassCode();
+                newUser.setClassCode(classCode);
+            }
+
             this.user = newUser;
             this.userContainer.addUser(newUser);
 
@@ -59,10 +67,29 @@ public class App{
         }
     }
 
-    public Boolean signIn(String username, String password){
+    private String generateClassCode() {
+
+        Random random = new Random();
+        int number = 1000 + random.nextInt(9000);
+        String numberString = String.valueOf(number);
+        char firstChar = (char) ('a' + random.nextInt(26));
+        StringBuilder classCode = new StringBuilder().append(firstChar);
+
+        for (int i = 0; i < numberString.length(); i++) {
+            classCode.append(numberString.charAt(i));
+            if (random.nextBoolean()) {
+                char randomChar = (char) ('a' + random.nextInt(26));
+                classCode.append(randomChar);
+            }
+        }
+
+        return classCode.length() > 6 ? classCode.substring(0, 6) : classCode.toString();
+    }
+
+    public Boolean signIn(String username, String password, String type){
 
         User existingUser = this.userContainer.getUser(username);
-        if (existingUser != null && existingUser.getPassword().equals(password)) {
+        if (existingUser != null && existingUser.getPassword().equals(password) && existingUser.getType().equalsIgnoreCase(type)) {
             this.user = existingUser;
             return true;
         }
