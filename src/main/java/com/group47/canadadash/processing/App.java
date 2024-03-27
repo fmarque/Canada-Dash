@@ -151,7 +151,7 @@ public class App{
             System.out.print("Create a password: ");
             String newPassword = scanner.nextLine();
 
-            boolean success = app.createAccount(newUsername, newPassword);
+            boolean success = app.createAccount(newUsername, newPassword, "student");
             System.out.println(success ? "Account created successfully." : "Account creation failed.");
             app.userSave();
         } else if ("2".equals(option)) {
@@ -161,7 +161,7 @@ public class App{
             System.out.print("Enter password: ");
             String password = scanner.nextLine();
 
-            boolean success = app.signIn(username, password);
+            boolean success = app.signIn(username, password, "student");
             System.out.println(success ? "Sign-in successful." : "Sign-in failed.");
             app.userSave();
         } else {
