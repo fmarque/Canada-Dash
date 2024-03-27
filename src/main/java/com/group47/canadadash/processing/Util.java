@@ -32,12 +32,12 @@ public class Util {
         /*
           Default temporary root path set to the current directory.
          */
-        String tmp = ".";
+        String tmp = null;
         /*
           Attempt to update 'tmp' with the canonical path of the application's directory.
          */
         try {
-            tmp = new File("").getCanonicalPath();
+            tmp = new File(".").getCanonicalPath();
         } catch (IOException e) {
             // Print stack trace and exit program if obtaining canonical path fails.
             e.printStackTrace();

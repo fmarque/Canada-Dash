@@ -1,28 +1,15 @@
 package com.group47.canadadash.processing;
 
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.File;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.charset.StandardCharsets;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.stream.Collectors;
 
 
 public class App{
 
     private List<Level> levels;
     User user;
+    private UserContainer userContainer;
 
     public App() {
         this.levels = new ArrayList<>();
@@ -30,9 +17,13 @@ public class App{
     }
 
     public void loadData() {
-        String relativePath = "data/metaData/content.json";
+        String relativePathContentFile = "/data/metaData/content.json";
+        String relativePathUserFIle = "/data/userData/user.json";
+        String rootPath = Util.getRootPath();
 
-        LevelsContainer levelsContainer = Util.readJsonFromFile(Util.getRootPath() + relativePath, LevelsContainer.class);
+
+        LevelsContainer levelsContainer = Util.readJsonFromFile(rootPath + relativePathContentFile, LevelsContainer.class);
+        UserContainer userContainer = Util.readJsonFromFile(rootPath + relativePathUserFIle, UserContainer.class);
 
         if (levelsContainer != null && levelsContainer.getLevels() != null) {
 
@@ -41,6 +32,15 @@ public class App{
 
         } else {
             System.out.println("No levels were loaded from JSON.");
+        }
+
+        if (userContainer != null && userContainer.getUsers() != null) {
+            System.out.println("Users loaded: " + userContainer.getUsers().size());
+
+            this.userContainer = userContainer;
+
+        } else {
+            System.out.println("No users were loaded from JSON.");
         }
     }
 
