@@ -838,9 +838,9 @@
           ]
         },
         {
-          "question": "The animal or object on the New Brunswick flag is a __________.",
+          "question": "The animal on the New Brunswick flag is a __________.",
           "type": "fillInTheBlank",
-          "answer": "Lion / Ship",
+          "answer": "Lion",
           "hints": [
             "One is a symbol of strength and the other of exploration",
             "One is an animal, and the other is a mode of transportation"
