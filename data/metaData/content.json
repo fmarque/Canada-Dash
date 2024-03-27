@@ -5,7 +5,7 @@
         {
           "question": "What is the capital city of British Columbia?",
           "type": "multipleChoice",
-          "answer": "D) Victoria",
+          "answer": "D",
           "options": [
             "A) Vancouver",
             "B) Kelowna",
@@ -20,7 +20,7 @@
         {
           "question": "Which famous national park in BC is known for its massive glaciers and rugged mountains?",
           "type": "multipleChoice",
-          "answer": "D) Glacier National Park",
+          "answer": "D",
           "options": [
             "A) Yoho National Park",
             "B) Jasper National Park",
@@ -35,7 +35,7 @@
         {
           "question": "What is the name of the large public market located on an island in Vancouver?",
           "type": "multipleChoice",
-          "answer": "D) Granville Island Public Market",
+          "answer": "D",
           "options": [
             "A) Lonsdale Quay Market",
             "B) Public Market at Queensborough",
@@ -50,7 +50,7 @@
         {
           "question": "What significant trail stretches from the US border to Alaska through BC, known for its breathtaking views?",
           "type": "multipleChoice",
-          "answer": "D) The Pacific Crest Trail",
+          "answer": "D",
           "options": [
             "A) The Appalachian Trail",
             "B) The Continental Divide Trail",
@@ -65,7 +65,7 @@
         {
           "question": "What is BC's largest and most populous city?",
           "type": "multipleChoice",
-          "answer": "D) Vancouver",
+          "answer": "D",
           "options": [
             "A) Surrey",
             "B) Victoria",
@@ -80,7 +80,7 @@
         {
           "question": "What unique feature is Vancouver Island known for, relating to its natural wildlife?",
           "type": "multipleChoice",
-          "answer": "D) Black bears and cougars",
+          "answer": "D",
           "options": [
             "A) Grizzly bears",
             "B) Moose populations",
@@ -95,7 +95,7 @@
         {
           "question": "What famous ski resort town in BC is known for its alpine skiing and mountain biking?",
           "type": "multipleChoice",
-          "answer": "D) Whistler",
+          "answer": "D",
           "options": [
             "A) Fernie",
             "B) Sun Peaks",
@@ -110,7 +110,7 @@
         {
           "question": "What is the name of the large, scenic highway that connects Vancouver to Whistler?",
           "type": "multipleChoice",
-          "answer": "D) The Sea-to-Sky Highway",
+          "answer": "D",
           "options": [
             "A) Trans-Canada Highway",
             "B) Coquihalla Highway",
@@ -125,7 +125,7 @@
         {
           "question": "Which BC city is known as the 'Wine Capital of Canada'?",
           "type": "multipleChoice",
-          "answer": "D) Oliver",
+          "answer": "D",
           "options": [
             "A) Penticton",
             "B) Kelowna",
@@ -140,7 +140,7 @@
         {
           "question": "What is the name of the desert located in the southern part of BC, known for its warm climate and unique ecosystem?",
           "type": "multipleChoice",
-          "answer": "D) The Okanagan Desert",
+          "answer": "D",
           "options": [
             "A) The Gobi Desert",
             "B) The Mojave Desert",
@@ -159,7 +159,7 @@
         {
           "question": "What is the capital city of Alberta?",
           "type": "multipleChoice",
-          "answer": "D) Edmonton",
+          "answer": "D",
           "options": [
             "A) Calgary",
             "B) Red Deer",
@@ -174,7 +174,7 @@
         {
           "question": "Which famous national park in Alberta is known for its turquoise lakes and mountain scenery?",
           "type": "multipleChoice",
-          "answer": "D) Banff National Park",
+          "answer": "D",
           "options": [
             "A) Elk Island National Park",
             "B) Wood Buffalo National Park",
@@ -189,7 +189,7 @@
         {
           "question": "What is the name of the dinosaur museum located in the Badlands of Alberta?",
           "type": "multipleChoice",
-          "answer": "D) Royal Tyrrell Museum",
+          "answer": "D",
           "options": [
             "A) Alberta Aviation Museum",
             "B) Glenbow Museum",
@@ -204,7 +204,7 @@
         {
           "question": "What major annual event takes place in Calgary, known as 'The Greatest Outdoor Show on Earth'?",
           "type": "multipleChoice",
-          "answer": "D) The Calgary Stampede",
+          "answer": "D",
           "options": [
             "A) Edmonton Folk Music Festival",
             "B) Lethbridge Whoop-Up Days",
@@ -219,7 +219,7 @@
         {
           "question": "What is Alberta's largest city by population?",
           "type": "multipleChoice",
-          "answer": "D) Calgary",
+          "answer": "D",
           "options": [
             "A) Edmonton",
             "B) Red Deer",
@@ -234,7 +234,7 @@
         {
           "question": "What are the indigenous people of Alberta's plains known for, related to their traditional way of life?",
           "type": "multipleChoice",
-          "answer": "D) Buffalo hunting",
+          "answer": "D",
           "options": [
             "A) Wheat farming",
             "B) Horse breeding",
@@ -249,7 +249,7 @@
         {
           "question": "What unique natural phenomenon can be observed in the northern part of Alberta?",
           "type": "multipleChoice",
-          "answer": "D) The Northern Lights (Aurora Borealis)",
+          "answer": "D",
           "options": [
             "A) Hot springs",
             "B) Sand dunes",
@@ -264,7 +264,7 @@
         {
           "question": "What is the name of the famous scenic drive that stretches from Banff to Jasper?",
           "type": "multipleChoice",
-          "answer": "D) The Icefields Parkway",
+          "answer": "D",
           "options": [
             "A) The Trans-Canada Highway",
             "B) The Cowboy Trail",
@@ -279,7 +279,7 @@
         {
           "question": "Which Alberta lake is known for its striking color and is a UNESCO World Heritage Site along with its surrounding national parks?",
           "type": "multipleChoice",
-          "answer": "D) Lake Louise",
+          "answer": "D",
           "options": [
             "A) Moraine Lake",
             "B) Peyto Lake",
@@ -294,7 +294,7 @@
         {
           "question": "What is the name of the region in Alberta that is rich in oil sands, making it one of the world's largest reserves of crude oil?",
           "type": "multipleChoice",
-          "answer": "D) The Athabasca Oil Sands",
+          "answer": "D",
           "options": [
             "A) Cold Lake Oil Sands",
             "B) Peace River Oil Sands",
@@ -313,12 +313,12 @@
         {
           "question": "What is the flower found on the Saskatchewan Flag?",
           "type": "multipleChoice",
-          "answer": "b. Western Red Lily",
+          "answer": "B",
           "options": [
-            "a. Poppy",
-            "b. Western Red Lily",
-            "c. Daisy",
-            "d. Daffodil"
+            "A) Poppy",
+            "B) Western Red Lily",
+            "C) Daisy",
+            "D) Daffodil"
           ],
           "hints": [
             "This flower is red.",
@@ -328,12 +328,12 @@
         {
           "question": "What is the provincial sport of Saskatchewan?",
           "type": "multipleChoice",
-          "answer": "a. Curling",
+          "answer": "A",
           "options": [
-            "a. Curling",
-            "b. Hockey",
-            "c. Lacrosse",
-            "d. Basketball"
+            "A) Curling",
+            "B) Hockey",
+            "C) Lacrosse",
+            "D) Basketball"
           ],
           "hints": [
             "This game is played on the ice.",
@@ -343,12 +343,12 @@
         {
           "question": "What is the official animal of Saskatchewan?",
           "type": "multipleChoice",
-          "answer": "d. White-tailed deer",
+          "answer": "D",
           "options": [
-            "a. Goose",
-            "b. Beaver",
-            "c. Moose",
-            "d. White-tailed deer"
+            "A) Goose",
+            "B) Beaver",
+            "C) Moose",
+            "D) White-tailed deer"
           ],
           "hints": [
             "This animal has fur.",
@@ -415,12 +415,12 @@
         {
           "question": "Manitoba was at one point colder than the planet ____.",
           "type": "multipleChoice",
-          "answer": "a. Mars",
+          "answer": "A",
           "options": [
-            "a. Mars",
-            "b. Venus",
-            "c. Neptune",
-            "d. Pluto"
+            "A) Mars",
+            "B) Venus",
+            "C) Neptune",
+            "D) Pluto"
           ],
           "hints": [
             "This is the 4th planet from the sun.",
@@ -430,12 +430,12 @@
         {
           "question": "The Canadian Museum of Human Rights is the _____ national museum to be built outside of Canada’s capital.",
           "type": "multipleChoice",
-          "answer": "c. First",
+          "answer": "C",
           "options": [
-            "a. Second",
-            "b. Third",
-            "c. First",
-            "d. Last"
+            "A) Second",
+            "B) Third",
+            "C) First",
+            "D) Last"
           ],
           "hints": [
             "The range is between first to third.",
@@ -445,12 +445,12 @@
         {
           "question": "_____________ is Canada’s oldest outdoor theatre dating back to 1955.",
           "type": "multipleChoice",
-          "answer": "d. Rainbow Stage",
+          "answer": "D",
           "options": [
-            "a. Rainbow Theatre",
-            "b. Aurora Theatre",
-            "c. Winnipeg Stadium",
-            "d. Rainbow Stage"
+            "A) Rainbow Theatre",
+            "B) Aurora Theatre",
+            "C) Winnipeg Stadium",
+            "D) Rainbow Stage"
           ],
           "hints": [
             "The name involves a certain multicolored arc which appears after the rain.",
@@ -517,12 +517,12 @@
         {
           "question": "Which Great Lake does not border Ontario?",
           "type": "multipleChoice",
-          "answer": "d) Lake Michigan",
+          "answer": "D",
           "options": [
-            "a) Lake Superior",
-            "b) Lake Huron",
-            "c) Lake Erie",
-            "d) Lake Michigan"
+            "A) Lake Superior",
+            "B) Lake Huron",
+            "C) Lake Erie",
+            "D) Lake Michigan"
           ],
           "hints": [
             "It's the only Great Lake that does not directly border Ontario.",
@@ -542,12 +542,12 @@
         {
           "question": "What is the name of the famous waterfall located in Ontario?",
           "type": "multipleChoice",
-          "answer": "a) Niagara Falls",
+          "answer": "A",
           "options": [
-            "a) Niagara Falls",
-            "b) Victoria Falls",
-            "c) Angel Falls",
-            "d) Iguazu Falls"
+            "A) Niagara Falls",
+            "B) Victoria Falls",
+            "C) Angel Falls",
+            "D) Iguazu Falls"
           ],
           "hints": [
             "This waterfall is shared between the United States and Canada.",
@@ -571,12 +571,12 @@
         {
           "question": "Which of the following cities is not located in Ontario?",
           "type": "multipleChoice",
-          "answer": "c) Vancouver",
+          "answer": "C",
           "options": [
-            "a) Ottawa",
-            "b) Hamilton",
-            "c) Vancouver",
-            "d) London"
+            "A) Ottawa",
+            "B) Hamilton",
+            "C) Vancouver",
+            "D) London"
           ],
           "hints": [
             "This city is located in British Columbia.",
@@ -600,12 +600,12 @@
         {
           "question": "Which of the following regions is not part of Ontario?",
           "type": "multipleChoice",
-          "answer": "c) Okanagan Valley",
+          "answer": "C",
           "options": [
-            "a) Niagara Peninsula",
-            "b) Muskoka",
-            "c) Okanagan Valley",
-            "d) Thousand Islands"
+            "A) Niagara Peninsula",
+            "B) Muskoka",
+            "C) Okanagan Valley",
+            "D) Thousand Islands"
           ],
           "hints": [
             "Consider the geographical locations and characteristics of each region mentioned.",
@@ -619,12 +619,12 @@
         {
           "question": "Which river forms much of the southern border of Quebec?",
           "type": "multipleChoice",
-          "answer": "a) St. Lawrence River",
+          "answer": "A",
           "options": [
-            "a) St. Lawrence River",
-            "b) Ottawa River",
-            "c) Saguenay River",
-            "d) Richelieu River"
+            "A) St. Lawrence River",
+            "B) Ottawa River",
+            "C) Saguenay River",
+            "D) Richelieu River"
           ],
           "hints": [
             "It's the river that connects the Great Lakes with the Atlantic Ocean.",
@@ -648,12 +648,12 @@
         {
           "question": "What is the official language of Quebec?",
           "type": "multipleChoice",
-          "answer": "b) French",
+          "answer": "B",
           "options": [
-            "a) English",
-            "b) French",
-            "c) Spanish",
-            "d) German"
+            "A) English",
+            "B) French",
+            "C) Spanish",
+            "D) German"
           ],
           "hints": [
             "Quebec is a province in which country?",
@@ -677,12 +677,12 @@
         {
           "question": "Which natural feature is found on the northernmost tip of Quebec?",
           "type": "multipleChoice",
-          "answer": "a) Tundra",
+          "answer": "A",
           "options": [
-            "a) Tundra",
-            "b) Desert",
-            "c) Rainforest",
-            "d) Grassland"
+            "A) Tundra",
+            "B) Desert",
+            "C) Rainforest",
+            "D) Grassland"
           ],
           "hints": [
             "This natural feature is characterized by its cold temperatures and permafrost soil.",
@@ -706,12 +706,12 @@
         {
           "question": "Which region of Quebec is known for its vast forests and wilderness?",
           "type": "multipleChoice",
-          "answer": "b) Gaspe Peninsula",
+          "answer": "B",
           "options": [
-            "a) Laurentians",
-            "b) Gaspe Peninsula",
-            "c) Outaouais",
-            "d) Saguenay–Lac-Saint-Jean"
+            "A) Laurentians",
+            "B) Gaspe Peninsula",
+            "C) Outaouais",
+            "D) Saguenay–Lac-Saint-Jean"
           ],
           "hints": [
             "This region is located in the eastern part of Quebec.",
@@ -752,34 +752,34 @@
         {
           "question": "Which town is known as 'The Little Switzerland of Nova Scotia'?",
           "type": "multipleChoice",
-          "answer": "A (Bear River)",
+          "answer": "A",
           "options": [
-            "A. Bear River",
-            "B. Dartmouth",
-            "C. Halifax",
-            "D. Truro"
+            "A) Bear River",
+            "B) Dartmouth",
+            "C) Halifax",
+            "D) Truro"
           ]
         },
         {
           "question": "What is written on Nova Scotia license plates?",
           "type": "multipleChoice",
-          "answer": "D (Canada’s Ocean Playground)",
+          "answer": "D",
           "options": [
-            "A. Yours To Discover",
-            "B. Beautiful Nova Scotia",
-            "C. Birthplace of Confederation",
-            "D. Canada’s Ocean Playground"
+            "A) Yours To Discover",
+            "B) Beautiful Nova Scotia",
+            "C) Birthplace of Confederation",
+            "D) Canada’s Ocean Playground"
           ]
         },
         {
           "question": "Which famous Nova Scotia NHL player is from Port Hood?",
           "type": "multipleChoice",
-          "answer": "C (Al MacInnis)",
+          "answer": "C",
           "options": [
-            "A. Sidney Crosby",
-            "B. Nathan MacKinnon",
-            "C. Al MacInnis",
-            "D. Brad Marchand"
+            "A) Sidney Crosby",
+            "B) Nathan MacKinnon",
+            "C) Al MacInnis",
+            "D) Brad Marchand"
           ]
         },
         {
@@ -849,34 +849,34 @@
         {
           "question": "Which city in New Brunswick is known as the 'Lobster Capital of the World'?",
           "type": "multipleChoice",
-          "answer": "B (Shediac)",
+          "answer": "B",
           "options": [
-            "A. Fredericton",
-            "B. Shediac",
-            "C. Moncton",
-            "D. Saint John"
+            "A) Fredericton",
+            "B) Shediac",
+            "C) Moncton",
+            "D) Saint John"
           ]
         },
         {
           "question": "Which of the following mountains is in northwestern New Brunswick?",
           "type": "multipleChoice",
-          "answer": "A (Appalachians)",
+          "answer": "A",
           "options": [
-            "A. Appalachians",
-            "B. Rockies",
-            "C. Andes",
-            "D. Himalayas"
+            "A) Appalachians",
+            "B) Rockies",
+            "C) Andes",
+            "D) Himalayas"
           ]
         },
         {
           "question": "New Brunswick is bordered by which U.S. state?",
           "type": "multipleChoice",
-          "answer": "C (Maine)",
+          "answer": "C",
           "options": [
-            "A. Washington",
-            "B. California",
-            "C. Maine",
-            "D. Alaska"
+            "A) Washington",
+            "B) California",
+            "C) Maine",
+            "D) Alaska"
           ]
         },
         {
@@ -940,34 +940,34 @@
         {
           "question": "Which city in New Brunswick is known as the 'Lobster Capital of the World'?",
           "type": "multipleChoice",
-          "answer": "B (Shediac)",
+          "answer": "B",
           "options": [
-            "A. Fredericton",
-            "B. Shediac",
-            "C. Moncton",
-            "D. Saint John"
+            "A) Fredericton",
+            "B) Shediac",
+            "C) Moncton",
+            "D) Saint John"
           ]
         },
         {
           "question": "Which of the following mountains is in northwestern New Brunswick?",
           "type": "multipleChoice",
-          "answer": "A (Appalachians)",
+          "answer": "A",
           "options": [
-            "A. Appalachians",
-            "B. Rockies",
-            "C. Andes",
-            "D. Himalayas"
+            "A) Appalachians",
+            "B) Rockies",
+            "C) Andes",
+            "D) Himalayas"
           ]
         },
         {
           "question": "New Brunswick is bordered by which U.S. state?",
           "type": "multipleChoice",
-          "answer": "C (Maine)",
+          "answer": "C",
           "options": [
-            "A. Washington",
-            "B. California",
-            "C. Maine",
-            "D. Alaska"
+            "A) Washington",
+            "B) California",
+            "C) Maine",
+            "D) Alaska"
           ]
         },
         {
