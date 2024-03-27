@@ -908,91 +908,106 @@
         }
       ]
     },
-    "newFoundLand": {
+    "newfoundlandAndLabrador": {
       "assessment": [
         {
-          "question": "The capital city of New Brunswick is __________.",
+          "question": "The capital city of Newfoundland and Labrador is ________.",
           "type": "fillInTheBlank",
-          "answer": "Fredericton",
+          "answer": "St. John's",
           "hints": [
-            "It starts with 'F'",
-            "It has the same last three letters as 'Washington'"
+            "It starts with 'St.'",
+            "It's known for its colorful row houses and Signal Hill."
           ]
         },
         {
-          "question": "New Brunswick was originally part of this province until 1784: __________.",
+          "question": "Newfoundland and Labrador was the last province to join Canada in ________.",
           "type": "fillInTheBlank",
-          "answer": "Nova Scotia",
+          "answer": "1949",
           "hints": [
-            "This province is also in the Maritimes",
-            "It shares its name with a certain 'Scotia' bank"
+            "It was the year after the Universal Declaration of Human Rights was adopted.",
+            "It's the same year George Orwell's '1984' was published."
           ]
         },
         {
-          "question": "The animal or object on the New Brunswick flag is a __________.",
+          "question": "The unique dog breed, known as the ________ dog, originated from this province.",
           "type": "fillInTheBlank",
-          "answer": "Lion / Ship",
+          "answer": "Labrador",
           "hints": [
-            "One is a symbol of strength and the other of exploration",
-            "One is an animal, and the other is a mode of transportation"
+            "This dog breed shares its name with part of the province.",
+            "Known for its friendly nature and often used as a guide dog."
           ]
         },
         {
-          "question": "Which city in New Brunswick is known as the 'Lobster Capital of the World'?",
-          "type": "multipleChoice",
-          "answer": "B",
-          "options": [
-            "A) Fredericton",
-            "B) Shediac",
-            "C) Moncton",
-            "D) Saint John"
+          "question": "The large, annual music and cultural festival held in St. John's is called the ________ Festival.",
+          "type": "fillInTheBlank",
+          "answer": "George Street",
+          "hints": [
+            "This festival is named after a famous street known for its bars and pubs in the capital city.",
+            "The name of this street is also a common male first name."
           ]
         },
         {
-          "question": "Which of the following mountains is in northwestern New Brunswick?",
-          "type": "multipleChoice",
-          "answer": "A",
-          "options": [
-            "A) Appalachians",
-            "B) Rockies",
-            "C) Andes",
-            "D) Himalayas"
-          ]
-        },
-        {
-          "question": "New Brunswick is bordered by which U.S. state?",
+          "question": "Which of these is a traditional Newfoundland and Labrador dish?",
           "type": "multipleChoice",
           "answer": "C",
           "options": [
-            "A) Washington",
-            "B) California",
-            "C) Maine",
-            "D) Alaska"
-          ]
-        },
-        {
-          "question": "New Brunswick has both English and French as its official languages.",
-          "type": "trueOrFalse",
-          "answer": "True"
-        },
-        {
-          "question": "The Bay of Fundy, known for the world's highest tides, is in New Brunswick.",
-          "type": "trueOrFalse",
-          "answer": "True"
-        },
-        {
-          "question": "The world's largest rolling pin is located in New Brunswick.",
-          "type": "trueOrFalse",
-          "answer": "False"
-        },
-        {
-          "question": "What is the name of the bridge that links New Brunswick to Prince Edward Island?",
-          "type": "fillInTheBlank",
-          "answer": "Confederation Bridge",
+            "A) Poutine",
+            "B) Butter Tart",
+            "C) Jiggs Dinner",
+            "D) Maple Syrup"
+          ],
           "hints": [
-            "It's named after an important event in Canada's history",
-            "It connects two Maritime provinces"
+            "Look for a dish that features a combination of meat and vegetables, traditionally cooked in a single pot.",
+            "This meal is named after a character from an early 20th-century comic strip, reflecting its cultural significance in Newfoundland and Labrador."
           ]
+        },
+        {
+          "question": "What is the name of the famous hiking trail that spans the East Coast of Newfoundland?",
+          "type": "multipleChoice",
+          "answer": "B",
+          "options": [
+            "A) Appalachian Trail",
+            "B) East Coast Trail",
+            "C) Pacific Crest Trail",
+            "D) Trans Canada Trail"
+          ],
+          "hints": [
+            "This trail is named after the geographical location it showcases, offering breathtaking views of the Atlantic Ocean.",
+            "It is not part of a national trail system but a specific regional attraction, famous for its rugged coastline and access to historical sites."
+          ]
+        },
+        {
+          "question": "The historical Viking site, L'Anse aux Meadows, is located on which part of Newfoundland?",
+          "type": "multipleChoice",
+          "answer": "C",
+          "options": [
+            "A) East",
+            "B) West",
+            "C) North",
+            "D) South"
+          ],
+          "hints": [
+            "This site's location is key to understanding Viking exploration in North America, situated where the Vikings could have made landfall.",
+            "The correct answer is the direction that would be most logical for Norse explorers traveling from Greenland to reach the New World."
+          ]
+        },
+        {
+          "question": "Newfoundland and Labrador has its own time zone.",
+          "type": "trueOrFalse",
+          "answer": "True"
+        },
+        {
+          "question": "The province is named only after its mainland portion, Newfoundland.",
+          "type": "trueOrFalse",
+          "answer": "False",
+          "hints": [
+            "While PEI has significant wind energy infrastructure, it has not been fully powered by wind energy."
+          ]
+        },
+        {
+          "question": "The official bird of Newfoundland and Labrador is the puffin.",
+          "type": "trueOrFalse",
+          "answer": "True"
         }
       ]
     },

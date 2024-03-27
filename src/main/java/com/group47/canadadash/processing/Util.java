@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * Utility class leveraging Gson for JSON operations and file I/O.
