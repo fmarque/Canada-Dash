@@ -2,6 +2,8 @@ package com.group47.canadadash.processing;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -14,10 +16,12 @@ public class App{
     private List<Level> levels;
     User user;
     private UserContainer userContainer;
+    private Set<String> instructorClassCodes;
 
     public App() {
         this.levels = new ArrayList<>();
         this.user = null;
+        this.instructorClassCodes = new HashSet<>();
     }
 
     public void loadData() {
@@ -42,6 +46,15 @@ public class App{
         } else {
             System.out.println("No users were loaded from JSON.");
         }
+
+        if (userContainer != null && userContainer.getUsers() != null) {
+            this.instructorClassCodes.clear();
+            userContainer.getUsers().values().forEach(user -> {
+                if ("instructor".equalsIgnoreCase(user.getType()) && user.getClassCode() != null && !user.getClassCode().isEmpty()) {
+                    this.instructorClassCodes.add(user.getClassCode());
+                }
+            });
+        }
     }
 
     public Boolean createAccount(String username, String password, String type) {
@@ -58,6 +71,7 @@ public class App{
             if ("instructor".equalsIgnoreCase(type)) {
                 String classCode = generateClassCode();
                 newUser.setClassCode(classCode);
+                this.instructorClassCodes.add(newUser.getClassCode());
             }
 
             this.user = newUser;
@@ -109,6 +123,11 @@ public class App{
 
    }
 
+    public boolean isValidClassCode(String classCode) {
+        return instructorClassCodes.contains(classCode);
+    }
+
+
     public static void main(String[] args) {
         //testing purposes for now, formal testing files will be developed later
         Scanner scanner = new Scanner(System.in);
@@ -150,10 +169,32 @@ public class App{
             String newUsername = scanner.nextLine();
             System.out.print("Create a password: ");
             String newPassword = scanner.nextLine();
+            System.out.print("Are you an instructor or a student? (instructor/student): ");
+            String type = scanner.nextLine().toLowerCase();
 
-            boolean success = app.createAccount(newUsername, newPassword, "student");
-            System.out.println(success ? "Account created successfully." : "Account creation failed.");
-            app.userSave();
+            boolean accountCreated = false;
+            if ("instructor".equals(type)) {
+                accountCreated = app.createAccount(newUsername, newPassword, type);
+                System.out.println(accountCreated ? "Instructor account created successfully. Your class code is: " + app.user.getClassCode() : "Account creation failed.");
+            } else if ("student".equals(type)) {
+                System.out.print("Enter class code (if you have one): ");
+                String classCode = scanner.nextLine();
+
+                // Check if the class code is valid or if the student doesn't have one
+                if (classCode.isEmpty() || app.isValidClassCode(classCode)) {
+                    accountCreated = app.createAccount(newUsername, newPassword, type);
+                    app.user.setClassCode((classCode));
+                    System.out.println(accountCreated ? "Student account created successfully." : "Account creation failed.");
+                } else {
+                    System.out.println("Invalid class code. Account creation failed.");
+                }
+            } else {
+                System.out.println("Invalid type selected. Account creation failed.");
+            }
+
+            if (accountCreated) {
+                app.userSave();
+            }
         } else if ("2".equals(option)) {
 
             System.out.print("Enter username: ");
