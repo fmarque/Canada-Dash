@@ -131,8 +131,8 @@ public class App{
         int newTotalPoints = user.getPreviousTotalPoints() + currentPoints;
 
         if (newTotalPoints > user.getTotalPoints()) {
+            user.setPreviousTotalPoints(user.getTotalPoints());
             user.setTotalPoints(newTotalPoints);
-            user.setPreviousTotalPoints(newTotalPoints);
         }
     }
 
