@@ -50,7 +50,7 @@ public class App{
         if (userContainer != null && userContainer.getUsers() != null) {
             this.instructorClassCodes.clear();
             userContainer.getUsers().values().forEach(user -> {
-                if ("instructor".equalsIgnoreCase(user.getType()) && user.getClassCode() != null && !user.getClassCode().isEmpty()) {
+                if (user != null && "instructor".equalsIgnoreCase(user.getType()) && user.getClassCode() != null && !user.getClassCode().isEmpty()) {
                     this.instructorClassCodes.add(user.getClassCode());
                 }
             });
@@ -183,7 +183,7 @@ public class App{
                 // Check if the class code is valid or if the student doesn't have one
                 if (classCode.isEmpty() || app.isValidClassCode(classCode)) {
                     accountCreated = app.createAccount(newUsername, newPassword, type);
-                    app.user.setClassCode((classCode));
+                    app.user.setClassCode(classCode);
                     System.out.println(accountCreated ? "Student account created successfully." : "Account creation failed.");
                 } else {
                     System.out.println("Invalid class code. Account creation failed.");
