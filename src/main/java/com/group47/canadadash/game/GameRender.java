@@ -1,5 +1,6 @@
 package com.group47.canadadash.game;
 
+import com.group47.canadadash.GameState;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -20,7 +21,7 @@ public class GameRender extends Application {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
 
-
+    private GameState internalGameState;
     private GraphicsContext gc;
     private Image backgroundImage;
     private double scrollSpeed = 2;
@@ -36,18 +37,17 @@ public class GameRender extends Application {
     private final double playerHeight = 60;
     private boolean movingLeft = false;
     private boolean movingRight = false;
-
-
+    private final double GRAVITY = 1;
     private double playerVelocityY = 0;
-    private boolean onGround = true;
+    private boolean onGround = false;
 
-    private Rectangle platform = new Rectangle(100, 350, 6000, 50); // x, y, width, height
+    private Rectangle platform = new Rectangle(100, 450, 6000, 50); // x, y, width, height
 
     private boolean isColliding(Rectangle player, Rectangle obstacle) {
         return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
     }
     private void update() {
-        Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
+
         // Update game state
         if (movingLeft) {
             scrollBackgroundRight();
@@ -56,21 +56,33 @@ public class GameRender extends Application {
             scrollBackgroundLeft();
         }
 
-        // Apply gravity
-        if (!onGround) {
-            playerVelocityY += 1; // Adjust this value for gravity strength
+        // Update player's vertical position and velocity
+        if (!onGround)
+        {
+            // Apply gravity
+
+            playerVelocityY += GRAVITY; // Make sure you have a gravity variable defined, e.g., 0.5 or 1
             playerY += playerVelocityY;
+
+            // Prevent player from falling through the platform due to high velocity
+            if (playerVelocityY > 0)
+            { // Only check when coming down
+                Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
+                if (isColliding(playerRect, platform))
+                {
+                    onGround = true;
+                    playerVelocityY = 0;
+                    playerY = platform.getY() - playerHeight; // Adjust player to stand on top of the platform
+                }
+            }
         }
 
-        // Check collision with the platform
-        if (isColliding(playerRect, platform)) {
-            // Handle collision. For example, stop falling by adjusting Y position
+        if (playerY >= HEIGHT - playerHeight) {
+            playerY = HEIGHT - playerHeight;
             onGround = true;
             playerVelocityY = 0;
-            playerY = platform.getY() - playerHeight; // Adjust player position to stand on the platform
-        } else {
-            onGround = false;
         }
+
     }
 
     private void scrollBackgroundLeft() {
@@ -123,6 +135,7 @@ public class GameRender extends Application {
 
         stage.setTitle("2D Platformer");
 
+        internalGameState = new GameState();
         Group root = new Group();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -160,7 +173,7 @@ public class GameRender extends Application {
 
     private void jump() {
         if (onGround) {
-            playerVelocityY = -15; // Adjust this value to change jump height
+            playerVelocityY = -20; // Adjust this value to change jump height
             onGround = false;
         }
     }
