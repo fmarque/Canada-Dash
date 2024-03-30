@@ -3,17 +3,28 @@ package com.group47.canadadash.game;
 import com.group47.canadadash.GameState;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.Group;
 import javafx.scene.control.Alert;
 import javafx.scene.paint.Color;
+
+import java.io.IOException;
 import java.util.Objects;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 
 public class GameRender extends Application {
@@ -40,7 +51,7 @@ public class GameRender extends Application {
     private final double GRAVITY = 1;
     private double playerVelocityY = 0;
     private boolean onGround = false;
-
+    private AnimationTimer gameLoop;
     private Rectangle platform = new Rectangle(100, 450, 6000, 50); // x, y, width, height
     private Rectangle obstacle = new Rectangle(WIDTH / 2 - 20, HEIGHT / 2, 100, 100);
     private boolean isColliding(Rectangle player, Rectangle obstacle) {
@@ -169,6 +180,13 @@ public class GameRender extends Application {
             if (e.getCode() == KeyCode.LEFT) movingLeft = true;
             if (e.getCode() == KeyCode.RIGHT) movingRight = true;
             if (e.getCode() == KeyCode.SPACE) if (onGround) jump();
+            if (e.getCode() == KeyCode.ESCAPE) {
+                try {
+                    showPauseMenu();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
         });
 
         scene.setOnKeyReleased(e -> {
@@ -176,15 +194,37 @@ public class GameRender extends Application {
             if (e.getCode() == KeyCode.RIGHT) movingRight = false;
         });
 
-        new AnimationTimer() {
+        gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 update();
                 render(gc);
             }
-        }.start();
+        };
 
+        gameLoop.start();
         stage.show();
+    }
+
+    private void showPauseMenu() throws IOException {
+        // Pause the game loop
+        gameLoop.stop();
+
+        // Load the pause menu FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/01_settings.fxml"));
+        Parent pauseMenuRoot = loader.load();
+
+        // Setup the new stage for the pause menu
+        Stage pauseStage = new Stage();
+        pauseStage.initModality(Modality.APPLICATION_MODAL); // Block input events to other windows
+        pauseStage.setTitle("Pause Menu");
+        Scene scene = new Scene(pauseMenuRoot);
+        pauseStage.setScene(scene);
+        // Show and wait - returns when the pause stage is closed
+        pauseStage.showAndWait();
+
+        // Optionally resume the game loop here if not handled by the FXML controller
+        gameLoop.start();
     }
 
     private void jump() {
