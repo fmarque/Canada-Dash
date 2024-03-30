@@ -7,12 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.Group;
-
+import javafx.scene.control.Alert;
+import javafx.scene.paint.Color;
 import java.util.Objects;
 
 
@@ -42,11 +42,20 @@ public class GameRender extends Application {
     private boolean onGround = false;
 
     private Rectangle platform = new Rectangle(100, 450, 6000, 50); // x, y, width, height
-
+    private Rectangle obstacle = new Rectangle(WIDTH / 2 - 20, HEIGHT / 2, 100, 100);
     private boolean isColliding(Rectangle player, Rectangle obstacle) {
         return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
     }
     private void update() {
+
+        Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
+
+        if (isColliding(playerRect, obstacle)) {
+            System.out.println("Player has touched the obstacle!"); // Placeholder action
+        }
+
+
+
 
         // Update game state
         if (movingLeft) {
@@ -67,7 +76,6 @@ public class GameRender extends Application {
             // Prevent player from falling through the platform due to high velocity
             if (playerVelocityY > 0)
             { // Only check when coming down
-                Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
                 if (isColliding(playerRect, platform))
                 {
                     onGround = true;
@@ -121,10 +129,18 @@ public class GameRender extends Application {
         gc.drawImage(backgroundImage, backgroundX2, 0);
 
         // Draw the player
+        gc.setFill(Color.RED); // Set the obstacle color
         gc.fillRect(playerX, playerY, playerWidth, playerHeight);
 
+        gc.setFill(Color.GREEN); // Set the obstacle color
         gc.fillRect(platform.getX(), platform.getY(), platform.getWidth(), platform.getHeight());
+
+        // Draw the obstacle
+        gc.setFill(Color.BLUE); // Set the obstacle color
+        gc.fillRect(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getHeight());
+
     }
+
 
     /**
      * @param stage
@@ -139,7 +155,7 @@ public class GameRender extends Application {
         Group root = new Group();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-
+        playerY = platform.getY() - playerHeight;//puts player on the ground
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         root.getChildren().add(canvas);
 
