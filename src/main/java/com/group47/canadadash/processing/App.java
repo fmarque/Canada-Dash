@@ -132,9 +132,8 @@ public class App{
 
         if (newTotalPoints > user.getTotalPoints()) {
             user.setTotalPoints(newTotalPoints);
+            user.setPreviousTotalPoints(newTotalPoints);
         }
-
-        user.setPreviousTotalPoints(newTotalPoints);
     }
 
     public boolean isValidClassCode(String classCode) {
