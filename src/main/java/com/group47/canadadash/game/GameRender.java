@@ -54,6 +54,15 @@ public class GameRender extends Application {
     private AnimationTimer gameLoop;
     private Rectangle platform = new Rectangle(100, 450, 6000, 50); // x, y, width, height
     private Rectangle obstacle = new Rectangle(WIDTH / 2 - 20, HEIGHT / 2, 100, 100);
+
+
+    Image fullHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/path/to/full_heart.png")));
+    Image halfHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/path/to/half_heart.png")));
+    Image emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/path/to/empty_heart.png")));
+
+
+
+
     private boolean isColliding(Rectangle player, Rectangle obstacle) {
         return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
     }
@@ -65,15 +74,16 @@ public class GameRender extends Application {
             System.out.println("Player has touched the obstacle!"); // Placeholder action
         }
 
+        scrollBackgroundLeft();//background scrolls to left
 
 
-
-        // Update game state
-        if (movingLeft) {
-            scrollBackgroundRight();
+        double leftBoundary = (double) WIDTH / 2 - 200;
+        if (movingLeft && playerX > leftBoundary) {
+            playerX -= 5;
         }
-        if (movingRight) {
-            scrollBackgroundLeft();
+        double rightBoundary = (double) WIDTH / 2 + 200;
+        if (movingRight && playerX < rightBoundary) {
+            playerX += 5;
         }
 
         // Update player's vertical position and velocity
