@@ -123,6 +123,20 @@ public class App{
 
    }
 
+    public void updatePoints(int currentPoints) {
+        if (user == null) {
+            return;
+        }
+
+        int newTotalPoints = user.getPreviousTotalPoints() + currentPoints;
+
+        if (newTotalPoints > user.getTotalPoints()) {
+            user.setTotalPoints(newTotalPoints);
+        }
+
+        user.setPreviousTotalPoints(newTotalPoints);
+    }
+
     public boolean isValidClassCode(String classCode) {
         return instructorClassCodes.contains(classCode);
     }
