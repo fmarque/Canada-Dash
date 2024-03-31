@@ -1,1 +1,1 @@
-{"users":{"poppp":{"userID":"poppp","password":"dsds","type":"instructor","classCode":"y16u2f"},"dsds":{"userID":"dsds","password":"sds","type":"student","classCode":"y16u2f"}}}
+{"users":{"poppp":{"userID":"poppp","password":"dsds","type":"instructor","classCode":"y16u2f"},"dsds":{"userID":"dsds","password":"sds","type":"student","classCode":"y16u2f"}, "dev":{"userID":"dev","password":"FAAJS","type":"developer"}}}
