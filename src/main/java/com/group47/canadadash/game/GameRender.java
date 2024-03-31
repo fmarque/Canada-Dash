@@ -22,6 +22,7 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import javafx.stage.Modality;
@@ -53,7 +54,7 @@ public class GameRender {
     private final double GRAVITY = 1;
     private double playerVelocityY = 0;
     private boolean onGround = true;
-    private AnimationTimer gameLoop;
+    public AnimationTimer gameLoop;
     private Rectangle platform = new Rectangle(300, 450, 6000, 50); // x, y, width, height
     private Rectangle obstacle = new Rectangle(WIDTH / 2 - 20, HEIGHT / 2, 100, 100);
 
@@ -61,6 +62,8 @@ public class GameRender {
 
     //UI elements
     private Text scoreText;
+
+    private ArrayList<Rectangle> platforms;
 
     //Heart Image handling
     private final Image fullHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/fullHeart.png")));
@@ -86,12 +89,13 @@ public class GameRender {
             showNotifcation();
         }
 
-        if (isColliding(playerRect, platform)) {
-            // If colliding, adjust player position and set onGround to true
-            playerVelocityY = 0; // Stop falling due to gravity
-            playerY = platform.getY() - playerHeight; // Position player on top of the platform
-            collisionDetected = true;
-        }
+//        if (isColliding(playerRect, platform)) {
+//            // If colliding, adjust player position and set onGround to true
+//            System.out.println(playerVelocityY);
+//            playerVelocityY = 0; // Stop falling due to gravity
+//            playerY = platform.getY() - playerHeight; // Position player on top of the platform
+//            collisionDetected = true;
+//        }
 
         onGround = collisionDetected;
 
@@ -136,7 +140,31 @@ public class GameRender {
             }
         }
 
+        checkPlatformCollision();
+
     }
+
+    private void checkPlatformCollision() {
+        boolean collisionDetected = false;
+        Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
+        for (Rectangle platform : platforms) { // multiple platforms
+            if (playerRect.intersects(platform.getBoundsInLocal())) {
+                collisionDetected = true;
+                playerY = platform.getY() - playerHeight; // Adjust position to stand on platform
+                playerVelocityY = 0; // Reset falling velocity
+                break; // Exit the loop once a collision is detected
+            }
+        }
+
+        onGround = collisionDetected;
+
+        if (!collisionDetected && playerY + playerHeight < HEIGHT) {
+            onGround = false; // The player is in the air and should be affected by gravity
+        }
+    }
+
+
+
 
     private void scrollBackgroundLeft() {
         backgroundX -= scrollSpeed;
@@ -278,7 +306,7 @@ public class GameRender {
             }
         };
 
-        gameLoop.start();
+      //  gameLoop.start();
         return scene;
     }
 
@@ -329,8 +357,9 @@ public class GameRender {
 
     private void jump() {
         if (onGround) {
-            playerVelocityY = -20; // Adjust this value to change jump height
+            playerVelocityY = -15; // Adjust this value to change jump height
             onGround = false;
+            System.out.println(playerVelocityY);
         }
     }
 
@@ -352,8 +381,9 @@ public class GameRender {
 
     public void loadLevel(Level level) {
         this.currentLevel = level;
-
+        platforms = new ArrayList<Rectangle>();
         internalGameState = new GameController(level);
+        platforms.add(platform);
     }
 
 

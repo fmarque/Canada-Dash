@@ -13,8 +13,9 @@ public class GameLauncher extends Application {
         gameRender.loadLevel(level);
         Scene gameScene = gameRender.createGameScene(); // Adjust `createGameScene` method to accept a Stage if necessary
         primaryStage.setScene(gameScene);
-        primaryStage.setTitle("Game Title Here"); // Set the window title here
+        primaryStage.setTitle("Canada Dash"); // Set the window title here
         primaryStage.show();
+        gameRender.gameLoop.start();
     }
 
     public static void main(String[] args) {
