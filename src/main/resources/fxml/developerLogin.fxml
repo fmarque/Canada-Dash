@@ -19,24 +19,38 @@
                             <Font name="Calibri Bold Italic" size="38.0" />
                         </font>
                     </Text>
-                    <Text layoutX="19.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login as Developer">
+                    <Text fx:id="instruction" layoutX="19.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login as Developer">
                         <font>
                             <Font name="System Bold" size="12.0" />
                         </font></Text>
-                    <TextField layoutX="18.0" layoutY="153.0" maxWidth="200.0" prefHeight="26.0" prefWidth="174.0" text="Enter Developer Code" />
+                    <StackPane layoutX="18.0" layoutY="153.0" prefHeight="26.0" prefWidth="174.0">
+                        <children>
+                            <PasswordField fx:id="passHidden" onMousePressed="#clearField" prefHeight="18.0" prefWidth="153.0" text="Enter Developer Code" />
+                            <TextField fx:id="password" onMousePressed="#clearPassword" prefHeight="18.0" prefWidth="153.0" text="Enter Developer Code" />
+                        </children></StackPane>
                     <Hyperlink layoutX="19.0" layoutY="290.0" onAction="#switchToILogin" text="Switch to Instructor Login" />
                     <Hyperlink layoutX="19.0" layoutY="308.0" onAction="#switchToPLogin" text="Switch to Player Login" />
-                    <Button layoutX="18.0" layoutY="183.0" mnemonicParsing="false" onAction="#switchToDMenu" prefHeight="26.0" prefWidth="27.0" text="-&gt;">
+                    <CheckBox fx:id="togglePassword" layoutX="199.0" layoutY="161.0" mnemonicParsing="false" onAction="#showPassword">
+                        <font>
+                            <Font size="9.0" />
+                        </font>
+                    </CheckBox>
+                    <Button layoutX="18.0" layoutY="183.0" mnemonicParsing="false" onAction="#checkDLoginInfo" prefHeight="26.0" prefWidth="27.0" text="-&gt;">
                         <font>
                             <Font name="System Bold" size="11.0" />
                         </font></Button>
+                    <Text fill="#a19a9a" layoutX="19.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developer">
+                        <font>
+                            <Font name="System Italic" size="12.0" />
+                        </font>
+                    </Text>
                 </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="239.0" prefWidth="482.0">
             <children>
                <ImageView fitHeight="408.0" fitWidth="867.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                     <Image url="@canLake.jpg" />
+                     <Image url="@../images/canLake.jpg" />
                   </image>
                </ImageView>
             </children></AnchorPane>

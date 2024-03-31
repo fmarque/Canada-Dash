@@ -20,8 +20,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         launch(args);
     }
 
-    // MAIN ISSUE: how to connect the fxml buttons to the ones here
-
     /**
      * Sets the stage and initialized necessary objects and variables for the controller
      *
@@ -29,11 +27,10 @@ public class Main extends Application implements EventHandler<ActionEvent> {
      * @throws Exception
      */
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("playerLogin.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/playerLogin.fxml")));
         primaryStage.setTitle("Player Login");
         primaryStage.setScene(new Scene(root, 800, 500));
 
-        // insert the rest of the setOnAction things
         primaryStage.show();
     }
 

@@ -1,10 +1,11 @@
 package com.group47.canadadash.game;
 
 import com.group47.canadadash.GameState;
+import com.group47.canadadash.processing.Level;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -18,30 +19,30 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.Group;
-import javafx.scene.control.Alert;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.stage.Modality;
 import javafx.scene.control.Button;
 
-public class GameRender extends Application {
+//import javax.swing.*;
+
+public class GameRender {
 
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
 
-    private GameState internalGameState;
+    private GameController internalGameState;
     private GraphicsContext gc;
     private Image backgroundImage;
     private double scrollSpeed = 2;
     private double backgroundX = 0;
     private double backgroundX2;
 
-
+    private boolean hasTakenFallDamage = false;
 
     // Player properties
     private double playerX = WIDTH / 2 - 20; // Center the player horizontally
@@ -52,31 +53,61 @@ public class GameRender extends Application {
     private boolean movingRight = false;
     private final double GRAVITY = 1;
     private double playerVelocityY = 0;
-    private boolean onGround = false;
-    private AnimationTimer gameLoop;
-    private Rectangle platform = new Rectangle(100, 450, 6000, 50); // x, y, width, height
+    private boolean onGround = true;
+    public AnimationTimer gameLoop;
+    private Rectangle platform = new Rectangle(300, 450, 6000, 50); // x, y, width, height
     private Rectangle obstacle = new Rectangle(WIDTH / 2 - 20, HEIGHT / 2, 100, 100);
 
+    private Rectangle leaf = new Rectangle(WIDTH / 2 + 50, HEIGHT / 2 + 50, 100, 100);
 
     //UI elements
     private Text scoreText;
 
+    private ArrayList<Rectangle> platforms;
+
     //Heart Image handling
-    private final Image fullHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/heart.png")));
-    private final Image emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/emptyHeart.png")));
+    private final Image fullHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/fullHeart.png")));
+    private final Image emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/emptyHeartIcon.png")));
     private HBox heartsContainer;
+
+    private Level currentLevel;
 
     private boolean isColliding(Rectangle player, Rectangle obstacle) {
         return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
     }
-    private void update() {
+    private void update() throws IOException {
 
         Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
-
+        boolean collisionDetected = false;
         if (isColliding(playerRect, obstacle)) {
             System.out.println("Player has touched the obstacle!");
             updateScore(5);// Placeholder action
         }
+
+        if (isColliding(playerRect, leaf)) {
+            System.out.println("Player has touched the leaf!");
+            showNotifcation();
+        }
+
+//        if (isColliding(playerRect, platform)) {
+//            // If colliding, adjust player position and set onGround to true
+//            System.out.println(playerVelocityY);
+//            playerVelocityY = 0; // Stop falling due to gravity
+//            playerY = platform.getY() - playerHeight; // Position player on top of the platform
+//            collisionDetected = true;
+//        }
+
+        onGround = collisionDetected;
+
+        if (playerY + playerHeight >= HEIGHT && !hasTakenFallDamage) {
+            applyDamageToPlayer();
+            hasTakenFallDamage = true; // Prevent further damage until reset
+            resetPlayerPosition();
+        } else if (playerY + playerHeight < HEIGHT) {
+            hasTakenFallDamage = false; // Reset the flag when the player is back in the safe zone
+        }
+
+
 
         scrollBackgroundLeft();//background scrolls to left
 
@@ -94,7 +125,6 @@ public class GameRender extends Application {
         if (!onGround)
         {
             // Apply gravity
-
             playerVelocityY += GRAVITY; // Make sure you have a gravity variable defined, e.g., 0.5 or 1
             playerY += playerVelocityY;
 
@@ -110,13 +140,31 @@ public class GameRender extends Application {
             }
         }
 
-        if (playerY >= HEIGHT - playerHeight) {
-            playerY = HEIGHT - playerHeight;
-            onGround = true;
-            playerVelocityY = 0;
-        }
+        checkPlatformCollision();
 
     }
+
+    private void checkPlatformCollision() {
+        boolean collisionDetected = false;
+        Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
+        for (Rectangle platform : platforms) { // multiple platforms
+            if (playerRect.intersects(platform.getBoundsInLocal())) {
+                collisionDetected = true;
+                playerY = platform.getY() - playerHeight; // Adjust position to stand on platform
+                playerVelocityY = 0; // Reset falling velocity
+                break; // Exit the loop once a collision is detected
+            }
+        }
+
+        onGround = collisionDetected;
+
+        if (!collisionDetected && playerY + playerHeight < HEIGHT) {
+            onGround = false; // The player is in the air and should be affected by gravity
+        }
+    }
+
+
+
 
     private void scrollBackgroundLeft() {
         backgroundX -= scrollSpeed;
@@ -130,17 +178,6 @@ public class GameRender extends Application {
         }
     }
 
-    private void scrollBackgroundRight() {
-        backgroundX += scrollSpeed;
-        backgroundX2 += scrollSpeed;
-
-        if (backgroundX >= backgroundImage.getWidth()) {
-            backgroundX = -backgroundImage.getWidth();
-        }
-        if (backgroundX2 >= backgroundImage.getWidth()) {
-            backgroundX2 = -backgroundImage.getWidth();
-        }
-    }
 
 
     private void render(GraphicsContext gc) {
@@ -164,6 +201,9 @@ public class GameRender extends Application {
         gc.setFill(Color.BLUE); // Set the obstacle color
         gc.fillRect(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getHeight());
 
+        gc.setFill(Color.GOLD);
+        gc.fillRect(leaf.getX(), leaf.getY(), leaf.getWidth(), leaf.getHeight());
+
     }
 
 
@@ -176,28 +216,26 @@ public class GameRender extends Application {
             } else {
                 heartView.setImage(emptyHeart);
             }
-            // todo half heart
         }
     }
 
     private void updateScore(int score) {
-        internalGameState.increasePoints(score);
-        scoreText.setText("Score: " + internalGameState.getTotalPoints());
+        internalGameState.IncreasePoints();
+        scoreText.setText("Score: " + internalGameState.getPoints());
     }
 
     /**
-     * @param stage
+     *
      * @throws Exception
      */
-    @Override
-    public void start(Stage stage) throws Exception {
+    public Scene createGameScene() {
 
         scoreText = new Text("Score: 0");
         scoreText.setFont(Font.font("Verdana", 20));
         scoreText.setFill(Color.BLACK); // Choose a color that fits your game's theme
 
         heartsContainer = new HBox(5); // Horizontal box with spacing of 5 pixels
-        for (int i = 0; i < 3; i++) {//todo link wiht heart state
+        for (int i = 0; i < internalGameState.getCurrentLives(); i++) {//todo link wiht heart state
             ImageView heartView = new ImageView(fullHeart);
             heartsContainer.getChildren().add(heartView);
         }
@@ -223,15 +261,9 @@ public class GameRender extends Application {
 
         uiLayer.getChildren().add(pauseButton);
 
-     //   AnchorPane.setBottomAnchor(pauseButton, 10.0);
-      //  AnchorPane.setRightAnchor(pauseButton, 10.0);
-
-        stage.setTitle("Canada Dash");
-
-        internalGameState = new GameState();
         Group root = new Group();
         Scene scene = new Scene(root);
-        stage.setScene(scene);
+
         playerY = platform.getY() - playerHeight;//puts player on the ground
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         root.getChildren().add(canvas);
@@ -265,13 +297,17 @@ public class GameRender extends Application {
         gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                update();
+                try {
+                    update();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 render(gc);
             }
         };
 
-        gameLoop.start();
-        stage.show();
+      //  gameLoop.start();
+        return scene;
     }
 
     private void showPauseMenu() throws IOException {
@@ -295,18 +331,60 @@ public class GameRender extends Application {
         gameLoop.start();
     }
 
+
+    private void showNotifcation() throws IOException {
+        // Pause the game loop
+        //gameLoop.stop();
+
+        // Load the pause menu FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/01_settings.fxml"));
+        Parent pauseMenuRoot = loader.load();
+
+        // Setup the new stage for the pause menu
+        Stage pauseStage = new Stage();
+        pauseStage.initModality(Modality.APPLICATION_MODAL); // Block input events to other windows
+        pauseStage.setTitle("Pause Menu");
+        Scene scene = new Scene(pauseMenuRoot);
+        pauseStage.setScene(scene);
+        // Show and wait - returns when the pause stage is closed
+        // Your code to show the dialog
+        Platform.runLater(pauseStage::showAndWait);
+        gameLoop.stop();
+        // Optionally resume the game loop here if not handled by the FXML controller
+      //  gameLoop.start();
+    }
+
+
     private void jump() {
         if (onGround) {
-            playerVelocityY = -20; // Adjust this value to change jump height
+            playerVelocityY = -15; // Adjust this value to change jump height
             onGround = false;
+            System.out.println(playerVelocityY);
         }
     }
 
 
-    public static void main(String[] args) {
-        launch(args);
+    /*
+    Resets the player's position in game
+     */
+    private void resetPlayerPosition() {
+        playerX =  (double) WIDTH / 2 - 20;; // Ensure startingX is defined and holds the correct initial X position
+        playerY = (double) HEIGHT / 2; // Ensure startingY is defined and holds the correct initial Y position
+        playerVelocityY = 0; // Reset any vertical movement
+        onGround = false; // Assuming the player is not on the ground when reset
     }
 
+    private void applyDamageToPlayer() {
+        internalGameState.playerDamage();
+        updateLives(internalGameState.getCurrentLives());
+    }
+
+    public void loadLevel(Level level) {
+        this.currentLevel = level;
+        platforms = new ArrayList<Rectangle>();
+        internalGameState = new GameController(level);
+        platforms.add(platform);
+    }
 
 
 }

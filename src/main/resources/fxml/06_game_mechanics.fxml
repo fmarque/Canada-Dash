@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -13,7 +14,7 @@
 <!-- Date: Mar 18 2024 -->
 <!-- FXML content below -->
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="877.0" style="-fx-border-image-width: 4; -fx-border-style: solid;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="877.0" style="-fx-border-image-width: 4; -fx-border-style: solid;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group47.canadadash.game.PauseMenuController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="945.0" prefWidth="840.0" style="-fx-border-color: black; -fx-border-width: 4; -fx-border-radius: 30;">
          <children>
@@ -21,22 +22,22 @@
                <children>
                   <ImageView fitHeight="79.0" fitWidth="85.0" layoutX="60.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../images/star.png" />
+                        <Image url="@star.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="79.0" fitWidth="85.0" layoutX="431.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../images/fence.png" />
+                        <Image url="@fence.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="79.0" fitWidth="85.0" layoutX="61.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../images/leaf.png" />
+                        <Image url="@leaf.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="79.0" fitWidth="85.0" layoutX="431.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../images/object.png" />
+                        <Image url="@object.png" />
                      </image>
                   </ImageView>
                   <Label layoutX="172.0" layoutY="42.0" text="= save checkpoint">
@@ -100,6 +101,7 @@
                   <Font name="Monaco" size="30.0" />
                </font>
             </Label>
+            <Button onAction="#handelCancelBtn" layoutX="40.0" layoutY="23.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="86.0" text="&lt;-Back" />
          </children>
       </AnchorPane>
   </content>

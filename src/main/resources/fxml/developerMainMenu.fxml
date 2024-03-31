@@ -13,7 +13,7 @@
             <children>
                 <ImageView fitHeight="720.0" fitWidth="977.0" layoutX="306.0" layoutY="3.0" opacity="0.93" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@menuBg.jpg" />
+                        <Image url="@../images/menuBg.jpg" />
                     </image>
                     <effect>
                         <GaussianBlur radius="38.16" />
@@ -21,7 +21,7 @@
                 </ImageView>
                 <ImageView fitHeight="720.0" fitWidth="961.0" layoutX="-101.0" layoutY="4.0" opacity="0.88" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@menuBg.jpg" />
+                        <Image url="@../images/menuBg.jpg" />
                     </image>
                     <effect>
                         <GaussianBlur radius="38.16" />
@@ -29,7 +29,7 @@
                 </ImageView>
                 <ImageView fitHeight="720.0" fitWidth="961.0" layoutX="160.0" layoutY="-7.0" opacity="0.59" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@menuBg.jpg" />
+                        <Image url="@../images/menuBg.jpg" />
                     </image>
                     <effect>
                         <GaussianBlur radius="38.16" />
@@ -48,21 +48,26 @@
                         <Font name="Comic Sans MS Bold Italic" size="71.0" />
                     </font>
                 </Label>
-                <Button layoutX="483.0" layoutY="230.0" mnemonicParsing="false" onAction="#loadPlayerAnalytics" prefHeight="40.0" prefWidth="311.0" text="Load Player Analytics" textFill="#a40b0b">
+                <Button layoutX="494.0" layoutY="230.0" mnemonicParsing="false" onAction="#loadSavedGame" prefHeight="40.0" prefWidth="293.0" text="Load Saved Game" textFill="#a40b0b">
                     <font>
                         <Font name="Comic Sans MS Bold" size="26.0" />
                     </font></Button>
-                <Button layoutX="483.0" layoutY="289.0" mnemonicParsing="false" onAction="#viewSHighscores" prefHeight="55.0" prefWidth="311.0" text="View Highscores" textFill="#a40b0b">
+                <Button layoutX="494.0" layoutY="289.0" mnemonicParsing="false" onAction="#startNewGame" prefHeight="40.0" prefWidth="293.0" text="Start New Game" textFill="#a40b0b">
                     <font>
                         <Font name="Comic Sans MS Bold" size="26.0" />
                     </font>
                 </Button>
-                <Button layoutX="483.0" layoutY="348.0" mnemonicParsing="false" onAction="#switchToDLogin" prefHeight="55.0" prefWidth="311.0" text="Switch to Dev Mode" textFill="#a40b0b">
+                <Button layoutX="494.0" layoutY="407.0" mnemonicParsing="false" onAction="#playerViewScores" prefHeight="40.0" prefWidth="293.0" text="View Highscores" textFill="#a40b0b">
                     <font>
                         <Font name="Comic Sans MS Bold" size="26.0" />
                     </font>
                 </Button>
-                <Button layoutX="483.0" layoutY="407.0" mnemonicParsing="false" onAction="#switchToILogin" prefHeight="55.0" prefWidth="311.0" text="Exit Game" textFill="#a40b0b">
+                <Button layoutX="494.0" layoutY="348.0" mnemonicParsing="false" onAction="#switchToTutPage" prefHeight="40.0" prefWidth="293.0" text="How to Play" textFill="#a40b0b">
+                    <font>
+                        <Font name="Comic Sans MS Bold" size="26.0" />
+                    </font>
+                </Button>
+                <Button layoutX="494.0" layoutY="467.0" mnemonicParsing="false" onAction="#switchToDLogin" prefHeight="45.0" prefWidth="293.0" text="Exit Game" textFill="#a40b0b">
                     <font>
                         <Font name="Comic Sans MS Bold" size="26.0" />
                     </font>
@@ -77,6 +82,16 @@
                         <Font name="Comic Sans MS Italic" size="14.0" />
                     </font>
                 </Label>
+            <CheckBox layoutX="34.0" layoutY="640.0" mnemonicParsing="false" text="Invincible Mode" textFill="WHITE">
+               <font>
+                  <Font name="Comic Sans MS" size="16.0" />
+               </font>
+            </CheckBox>
+            <Button layoutX="34.0" layoutY="596.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="148.0" text="Inspect Code">
+               <font>
+                  <Font name="Comic Sans MS" size="16.0" />
+               </font>
+            </Button>
             </children></AnchorPane>
     </children>
 </AnchorPane>

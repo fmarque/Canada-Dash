@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group47.canadadash.TutorialController">
+    <children>
+        <Button layoutX="45.0" layoutY="44.0" mnemonicParsing="false" onAction="#backToMainMenu" text="&lt;- BACK TO MAIN MENU">
+            <font>
+                <Font name="Comic Sans MS Bold" size="12.0" />
+            </font>
+        </Button>
+        <Label layoutX="479.0" layoutY="104.0" prefHeight="61.0" prefWidth="323.0" text="HOW TO PLAY" textFill="#070d65">
+            <font>
+                <Font name="Comic Sans MS Bold" size="43.0" />
+            </font>
+        </Label>
+        <ScrollPane layoutX="37.0" layoutY="195.0" prefHeight="1599.0" prefWidth="1209.0">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1568.0" prefWidth="1210.0">
+               <children>
+                   <ImageView fitHeight="39.0" fitWidth="46.0" layoutX="631.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@../images/star.png" />
+                       </image>
+                   </ImageView>
+                   <ImageView fitHeight="47.0" fitWidth="50.0" layoutX="65.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@../images/fence.png" />
+                       </image>
+                   </ImageView>
+                   <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="627.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@../images/leaf.png" />
+                       </image>
+                   </ImageView>
+                   <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="69.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@../images/object.png" />
+                       </image>
+                   </ImageView>
+                   <Label layoutX="65.0" layoutY="198.0" prefHeight="61.0" prefWidth="162.0" text="Legend:">
+                       <font>
+                           <Font name="Comic Sans MS Bold" size="24.0" />
+                       </font>
+                   </Label>
+                   <ImageView fitHeight="285.0" fitWidth="488.0" layoutX="670.0" layoutY="576.0" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@../images/In-Game Screen.png" />
+                       </image>
+                   </ImageView>
+                   <Text layoutX="65.0" layoutY="454.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Embark on an epic journey across the diverse landscapes of Canada's provinces! Explore each region, test your knowledge, and collect relics to unlock bonus points. Are you ready to discover the wonders of Canada while mastering your skills in this thrilling game?" wrappingWidth="1011.8828125">
+                       <font>
+                           <Font name="Comic Sans MS" size="16.0" />
+                       </font>
+                   </Text>
+                   <Text layoutX="127.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="= a solid block you can jump on, be blocked by, and stand on" wrappingWidth="445.8972473144531">
+                       <font>
+                           <Font name="Comic Sans MS" size="16.0" />
+                       </font>
+                   </Text>
+                   <Text layoutX="127.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="= an obstacle that takes away 1 heart if you touch it" wrappingWidth="445.8972473144531">
+                       <font>
+                           <Font name="Comic Sans MS" size="16.0" />
+                       </font>
+                   </Text>
+                   <Text layoutX="694.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="= a quiz block that gives you a question upon touching it" wrappingWidth="445.8972473144531">
+                       <font>
+                           <Font name="Comic Sans MS" size="16.0" />
+                       </font>
+                   </Text>
+                   <Text layoutX="694.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="= a checkpoint that saves your position upon touching it" wrappingWidth="445.8972473144531">
+                       <font>
+                           <Font name="Comic Sans MS" size="16.0" />
+                       </font>
+                   </Text>
+                   <Label layoutX="65.0" layoutY="512.0" prefHeight="61.0" prefWidth="225.0" text="Game Mechanics:">
+                       <font>
+                           <Font name="Comic Sans MS Bold" size="24.0" />
+                       </font>
+                   </Label>
+                   <Text fill="#0a1270" layoutX="112.0" layoutY="898.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Use WASD or the arrow keys on your keyboard to navigate your character through the landscapes. Be cautious of touching the fence or falling into gaps, as it will cost you a heart. Remember, you have multiple hearts to keep you going!" wrappingWidth="376.8972473144531">
+                       <font>
+                           <Font name="Comic Sans MS" size="16.0" />
+                       </font>
+                   </Text>
+                   <Text fill="#0a1270" layoutX="723.0" layoutY="901.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If you spot a shimmering star, be sure to touch it! This will save your checkpoint position, allowing you to resume your journey from where you left off if needed." wrappingWidth="362.8972473144531">
+                       <font>
+                           <Font name="Comic Sans MS" size="16.0" />
+                       </font>
+                   </Text>
+                   <Label layoutX="76.0" layoutY="873.0" prefHeight="39.0" prefWidth="28.0" text="1.">
+                       <font>
+                           <Font name="Comic Sans MS Bold" size="24.0" />
+                       </font>
+                   </Label>
+                   <Label layoutX="682.0" layoutY="875.0" prefHeight="39.0" prefWidth="28.0" text="2.">
+                       <font>
+                           <Font name="Comic Sans MS Bold" size="24.0" />
+                       </font>
+                   </Label>
+                   <ImageView fitHeight="315.0" fitWidth="425.0" layoutX="65.0" layoutY="1044.0" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@../images/Question Prompt (In-Game).png" />
+                       </image>
+                   </ImageView>
+                   <Label layoutX="78.0" layoutY="1345.0" prefHeight="39.0" prefWidth="28.0" text="3.">
+                       <font>
+                           <Font name="Comic Sans MS Bold" size="24.0" />
+                       </font>
+                   </Label>
+                   <Text fill="#0a1270" layoutX="117.0" layoutY="1368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Upon touching the leaf, a question will appear on your screen. You must answer correctly to earn points. But don't worry! You have two hints available for help. Once you've entered your answer, the answer box will light up either green or red, indicating whether your answer is correct or not." wrappingWidth="376.8972473144531">
+                       <font>
+                           <Font name="Comic Sans MS" size="16.0" />
+                       </font>
+                   </Text>
+                   <Label layoutX="688.0" layoutY="1349.0" prefHeight="39.0" prefWidth="28.0" text="4.">
+                       <font>
+                           <Font name="Comic Sans MS Bold" size="24.0" />
+                       </font>
+                   </Label>
+                   <Text fill="#0a1270" layoutX="720.0" layoutY="1371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Answer all 10 questions from all the provinces to take 1st place in the leaderboard! Make sure to have fun an" wrappingWidth="376.8972473144531">
+                       <font>
+                           <Font name="Comic Sans MS" size="16.0" />
+                       </font>
+                   </Text>
+                    <ImageView fitHeight="285.0" fitWidth="488.0" layoutX="69.0" layoutY="576.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../images/In-Game Screen.png" />
+                        </image>
+                    </ImageView>
+                    <Label prefHeight="61.0" prefWidth="162.0" text="Objective: ">
+                        <font>
+                            <Font name="Comic Sans MS Bold" size="24.0" />
+                        </font>
+                    </Label>
+               </children></AnchorPane>
+            </content>
+        </ScrollPane>
+        <ScrollBar layoutX="1269.0" layoutY="20.0" orientation="VERTICAL" prefHeight="701.0" prefWidth="14.0" />
+
+    </children>
+</AnchorPane>
