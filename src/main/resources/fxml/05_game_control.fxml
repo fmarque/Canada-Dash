@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<!-- Author: Anne Zhang -->
+<!-- Date: Mar 18 2024 -->
+<!-- FXML content below -->
+
+<ScrollPane focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="995.0" style="-fx-border-width: 4; -fx-border-style: solid;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group47.canadadash.game.PauseMenuController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1380.0" prefWidth="1001.0" style="-fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 4;">
+         <children>
+            <Label layoutX="557.0" layoutY="160.0" prefHeight="70.0" prefWidth="144.0" style="-fx-border-color: transaprent; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="W = Up">
+               <font>
+                  <Font name="Comic Sans MS Bold Italic" size="27.0" />
+               </font>
+               <effect>
+                  <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+               </effect>
+            </Label>
+            <Label layoutX="557.0" layoutY="248.0" prefHeight="70.0" prefWidth="145.0" style="-fx-border-color: transaprent; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="S = Down">
+               <font>
+                  <Font name="Comic Sans MS Bold Italic" size="27.0" />
+               </font>
+               <effect>
+                  <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+               </effect>
+            </Label>
+            <Label layoutX="720.0" layoutY="160.0" prefHeight="70.0" prefWidth="146.0" style="-fx-border-color: transaprent; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="A = Left">
+               <font>
+                  <Font name="Comic Sans MS Bold Italic" size="27.0" />
+               </font>
+               <effect>
+                  <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+               </effect>
+            </Label>
+            <Label layoutX="727.0" layoutY="248.0" prefHeight="70.0" prefWidth="148.0" style="-fx-border-color: transaprent; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="D = Right">
+               <font>
+                  <Font name="Comic Sans MS Bold Italic" size="27.0" />
+               </font>
+               <effect>
+                  <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+               </effect>
+            </Label>
+            <BorderPane layoutX="49.0" layoutY="130.0" prefHeight="214.0" prefWidth="284.0">
+               <top>
+                  <Label prefHeight="70.0" prefWidth="70.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="W" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </top>
+               <left>
+                  <Label prefHeight="70.0" prefWidth="70.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3; -fx-background-color: transparent;" text="A" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Comic Sans MS" size="50.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </left>
+               <center>
+                  <Label prefHeight="70.0" prefWidth="70.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3; -fx-background-color: transparent;" text="S" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Comic Sans MS Bold Italic" size="50.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </center>
+               <right>
+                  <Label prefHeight="70.0" prefWidth="70.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3; -fx-background-color: transparent;" text="D" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+                     </effect>
+                  </Label>
+               </right>
+            </BorderPane>
+            <Line endX="993.0" endY="97.0" startY="97.0" strokeWidth="4.0" />
+            <Label layoutX="273.0" layoutY="14.0" prefHeight="70.0" prefWidth="422.0" text="GAME CONTROL">
+               <font>
+                  <Font name="Comic Sans MS" size="50.0" />
+               </font>
+               <effect>
+                  <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+               </effect>
+            </Label>
+            <Label layoutX="40.0" layoutY="409.0" prefHeight="70.0" prefWidth="420.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="        SPACE" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Comic Sans MS" size="50.0" />
+               </font>
+               <effect>
+                  <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+               </effect>
+            </Label>
+            <Label layoutX="40.0" layoutY="523.0" prefHeight="70.0" prefWidth="146.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="   ESC">
+               <font>
+                  <Font size="50.0" />
+               </font>
+               <effect>
+                  <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+               </effect>
+            </Label>
+            <Label layoutX="250.0" layoutY="523.0" prefHeight="70.0" prefWidth="69.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="  P">
+               <font>
+                  <Font size="50.0" />
+               </font>
+               <effect>
+                  <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+               </effect>
+            </Label>
+            <Label layoutX="557.0" layoutY="409.0" prefHeight="70.0" prefWidth="278.0" style="-fx-border-color: transparent; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="SPACE FOR  JUMP">
+               <font>
+                  <Font name="Comic Sans MS Bold Italic" size="27.0" />
+               </font>
+               <effect>
+                  <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+               </effect>
+            </Label>
+            <Label layoutX="557.0" layoutY="523.0" prefHeight="70.0" prefWidth="395.0" style="-fx-border-color: transparent; -fx-border-radius: 8; -fx-border-width: 3; -fx-background-color: transparent;" text="ESC / P FOR PAUSE">
+               <font>
+                  <Font name="Comic Sans MS Bold Italic" size="27.0" />
+               </font>
+               <effect>
+                  <DropShadow height="9.28" offsetX="1.0" radius="1.8199999999999998" width="0.0" />
+               </effect>
+            </Label>
+            <Button depthTest="ENABLE" layoutX="40.0" layoutY="29.0" mnemonicParsing="false" onAction="#handelCancelBtn" prefHeight="40.0" prefWidth="85.0" text="&lt;- BACK ">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+         </children>
+      </AnchorPane>
+  </content>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
+</ScrollPane>
