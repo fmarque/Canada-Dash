@@ -81,6 +81,13 @@ public class GameRender {
         }
         return false;
     }
+
+    private boolean isCollidingR(Rectangle player, Rectangle obstacle) {
+            return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
+    }
+
+
+
     private void update() throws IOException {
 
         Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
@@ -95,13 +102,11 @@ public class GameRender {
             hasTakenFallDamage = false; // Reset the flag when the player is back in the safe zone
         }
 
-<<<<<<< HEAD
-        if (isColliding(playerRect, leaf)) {
+
+        if (isCollidingR(playerRect, leaf)) {
             System.out.println("Player has touched the leaf!");
             showNotification();
         }
-=======
->>>>>>> b1f2baa79a6e57b06915ba00f22c3fa9f2efe055
 
 
         scrollBackgroundLeft();//background scrolls to left
