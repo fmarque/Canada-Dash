@@ -124,7 +124,7 @@ public class ScreenController implements Initializable {
     }
 
     public void checkILoginInfo(ActionEvent event) throws IOException {
-        //app = new App();
+        app = new App();
         app.loadData();
         if (app.signIn(username.getText(), passHidden.getText(), "instructor")) {
             switchToIMenu(event);
@@ -162,8 +162,7 @@ public class ScreenController implements Initializable {
                     app.userSave();
                     switchToPLogin(event);
                 }
-
-                // if valid class code and username, make an account and make them login
+                // if valid class code and username, make an account and lead user to login
             } else {
                 instruction.setText("Invalid Class Code. Try again");
             }
@@ -172,11 +171,21 @@ public class ScreenController implements Initializable {
 
     public void makeIAccount(ActionEvent event) throws IOException {
         app = new App();
+        user = new User();
         app.loadData();
-        if (app.signIn("dev", passHidden.getText(), "developer")) {
-            switchToDMenu(event);
+
+        // if username is already taken, let user know
+        if (app.signIn(username.getText(), passHidden.getText(), "instructor")) {
+            instruction.setText("Username Already Taken. Try again");
+            System.out.println("hello i reach here");
         } else {
-            instruction.setText("Invalid Developer Code. Try again");
+            // if valid username, then generate class code and create user
+            boolean accountCreated = app.createAccount(username.getText(), password.getText(), "instructor");
+            if (accountCreated) {
+            app.userSave();
+            switchToILogin(event);
+
+            }
         }
     }
 
