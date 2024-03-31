@@ -62,8 +62,8 @@ public class GameRender extends Application {
     private Text scoreText;
 
     //Heart Image handling
-    private final Image fullHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/heart.png")));
-    private final Image emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/emptyHeart.png")));
+    private final Image fullHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/fullHeart.png")));
+    private final Image emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/emptyHeartIcon.png")));
     private HBox heartsContainer;
 
     private boolean isColliding(Rectangle player, Rectangle obstacle) {
