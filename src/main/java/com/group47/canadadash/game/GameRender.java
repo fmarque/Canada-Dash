@@ -11,8 +11,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -28,8 +27,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
-import javafx.scene.layout.StackPane;
-
+import javafx.scene.control.Button;
 
 public class GameRender extends Application {
 
@@ -76,7 +74,8 @@ public class GameRender extends Application {
         Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
 
         if (isColliding(playerRect, obstacle)) {
-            System.out.println("Player has touched the obstacle!"); // Placeholder action
+            System.out.println("Player has touched the obstacle!");
+            updateScore(5);// Placeholder action
         }
 
         scrollBackgroundLeft();//background scrolls to left
@@ -182,7 +181,8 @@ public class GameRender extends Application {
     }
 
     private void updateScore(int score) {
-        scoreText.setText("Score: " + score);
+        internalGameState.increasePoints(score);
+        scoreText.setText("Score: " + internalGameState.getTotalPoints());
     }
 
     /**
@@ -202,10 +202,29 @@ public class GameRender extends Application {
             heartsContainer.getChildren().add(heartView);
         }
 
+
+        Button pauseButton = new Button("Pause");
+        pauseButton.setLayoutX(10); // Position the button; adjust as needed
+        pauseButton.setLayoutY(10);
+        pauseButton.setFocusTraversable(false);
+        pauseButton.setOnAction(event -> {
+            try {
+                showPauseMenu();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+
         //UI elements INI
         StackPane uiLayer = new StackPane();
         uiLayer.getChildren().add(heartsContainer);
         uiLayer.getChildren().add(scoreText);
+
+        uiLayer.getChildren().add(pauseButton);
+
+     //   AnchorPane.setBottomAnchor(pauseButton, 10.0);
+      //  AnchorPane.setRightAnchor(pauseButton, 10.0);
 
         stage.setTitle("Canada Dash");
 
