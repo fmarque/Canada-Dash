@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 public class GameState {
 
+    private int maxLives = 5;
     private ArrayList<Heart> lives;
     private ArrayList<Star> checkpoints;
     private ArrayList<Leaf> leaves;
@@ -28,7 +29,7 @@ public class GameState {
         // initializing the (x,y) location of hearts
         int space = 15;
         lives = new ArrayList<Heart>(5);
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < maxLives; i++) {
             lives.add(new Heart(30 + i*space, 30));
         }
         // initializing an empty arraylist for checkpoints, leaves, fences, and boxes
@@ -77,14 +78,11 @@ public class GameState {
     /**
      * decrease a life by one,
      */
-    public void looseLife(){
-        for (int i = 0; i < lives.size(); i++) {
-            if (lives.get(i).isFullHeart()){
-                lives.get(i).setHeart(false);
-                break;
-            }
+    public void loseLife(){
+        if(!lives.isEmpty())
+        {
+            lives.removeFirst();
         }
-
     }
 
     /**

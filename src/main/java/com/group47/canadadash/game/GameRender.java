@@ -1,11 +1,11 @@
 package com.group47.canadadash.game;
 
 import com.group47.canadadash.GameState;
+import com.group47.canadadash.processing.Level;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -19,14 +19,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.Group;
-import javafx.scene.control.Alert;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.util.Objects;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.stage.Modality;
 import javafx.scene.control.Button;
 
@@ -37,14 +34,14 @@ public class GameRender extends Application {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
 
-    private GameState internalGameState;
+    private GameController internalGameState;
     private GraphicsContext gc;
     private Image backgroundImage;
     private double scrollSpeed = 2;
     private double backgroundX = 0;
     private double backgroundX2;
 
-
+    private boolean hasTakenFallDamage = false;
 
     // Player properties
     private double playerX = WIDTH / 2 - 20; // Center the player horizontally
@@ -55,9 +52,9 @@ public class GameRender extends Application {
     private boolean movingRight = false;
     private final double GRAVITY = 1;
     private double playerVelocityY = 0;
-    private boolean onGround = false;
+    private boolean onGround = true;
     private AnimationTimer gameLoop;
-    private Rectangle platform = new Rectangle(100, 450, 6000, 50); // x, y, width, height
+    private Rectangle platform = new Rectangle(300, 450, 6000, 50); // x, y, width, height
     private Rectangle obstacle = new Rectangle(WIDTH / 2 - 20, HEIGHT / 2, 100, 100);
 
     private Rectangle leaf = new Rectangle(WIDTH / 2 + 50, HEIGHT / 2 + 50, 100, 100);
@@ -69,6 +66,8 @@ public class GameRender extends Application {
     private final Image fullHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/fullHeart.png")));
     private final Image emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/emptyHeartIcon.png")));
     private HBox heartsContainer;
+
+    private Level currentLevel;
 
     private boolean isColliding(Rectangle player, Rectangle obstacle) {
         return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
@@ -86,6 +85,15 @@ public class GameRender extends Application {
             System.out.println("Player has touched the leaf!");
             showNotifcation();
         }
+
+
+        if (playerY + playerHeight >= HEIGHT && !hasTakenFallDamage) {
+            applyDamageToPlayer();
+            hasTakenFallDamage = true; // Prevent further damage until reset
+        } else if (playerY + playerHeight < HEIGHT) {
+            hasTakenFallDamage = false; // Reset the flag when the player is back in the safe zone
+        }
+
 
 
         scrollBackgroundLeft();//background scrolls to left
@@ -140,17 +148,6 @@ public class GameRender extends Application {
         }
     }
 
-    private void scrollBackgroundRight() {
-        backgroundX += scrollSpeed;
-        backgroundX2 += scrollSpeed;
-
-        if (backgroundX >= backgroundImage.getWidth()) {
-            backgroundX = -backgroundImage.getWidth();
-        }
-        if (backgroundX2 >= backgroundImage.getWidth()) {
-            backgroundX2 = -backgroundImage.getWidth();
-        }
-    }
 
 
     private void render(GraphicsContext gc) {
@@ -189,13 +186,12 @@ public class GameRender extends Application {
             } else {
                 heartView.setImage(emptyHeart);
             }
-            // todo half heart
         }
     }
 
     private void updateScore(int score) {
-        internalGameState.increasePoints(score);
-        scoreText.setText("Score: " + internalGameState.getTotalPoints());
+        internalGameState.IncreasePoints();
+        scoreText.setText("Score: " + internalGameState.getPoints());
     }
 
     /**
@@ -205,12 +201,13 @@ public class GameRender extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
+        internalGameState = new GameController();
         scoreText = new Text("Score: 0");
         scoreText.setFont(Font.font("Verdana", 20));
         scoreText.setFill(Color.BLACK); // Choose a color that fits your game's theme
 
         heartsContainer = new HBox(5); // Horizontal box with spacing of 5 pixels
-        for (int i = 0; i < 3; i++) {//todo link wiht heart state
+        for (int i = 0; i < internalGameState.getCurrentLives(); i++) {//todo link wiht heart state
             ImageView heartView = new ImageView(fullHeart);
             heartsContainer.getChildren().add(heartView);
         }
@@ -236,12 +233,8 @@ public class GameRender extends Application {
 
         uiLayer.getChildren().add(pauseButton);
 
-     //   AnchorPane.setBottomAnchor(pauseButton, 10.0);
-      //  AnchorPane.setRightAnchor(pauseButton, 10.0);
-
         stage.setTitle("Canada Dash");
 
-        internalGameState = new GameState();
         Group root = new Group();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -342,6 +335,20 @@ public class GameRender extends Application {
             onGround = false;
         }
     }
+
+
+
+    private void applyDamageToPlayer() {
+        internalGameState.playerDamage();
+        updateLives(internalGameState.getCurrentLives());
+    }
+
+    private void loadLevel(Level level) {
+        this.currentLevel = level;
+        // Initialize game entities based on level data
+        // For example:
+    }
+
 
 
     public static void main(String[] args) {
