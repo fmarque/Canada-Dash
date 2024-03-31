@@ -16,6 +16,7 @@ public class Boulder{
         this.y = y;
         this.height = height;
         this.width = width;
+        this.type = type;
         this.imagePath = type.getImagePath();
 
     }
