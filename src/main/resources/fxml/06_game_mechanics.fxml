@@ -101,7 +101,7 @@
                   <Font name="Monaco" size="30.0" />
                </font>
             </Label>
-            <Button onAction="#handelCancelBtn" layoutX="40.0" layoutY="23.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="86.0" text="&lt;-Back" />
+            <Button layoutX="40.0" layoutY="23.0" mnemonicParsing="false" onAction="#handelCancelBtn" prefHeight="37.0" prefWidth="86.0" text="&lt;-Back" />
          </children>
       </AnchorPane>
   </content>

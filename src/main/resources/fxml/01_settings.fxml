@@ -50,7 +50,7 @@
             <DropShadow height="18.07" offsetX="1.0" offsetY="1.0" radius="4.0175" spread="0.21" width="0.0" />
          </effect>
       </Button>
-      <Button onAction="#handelExitGameBtn" alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="CENTER" depthTest="ENABLE" focusTraversable="false" layoutX="90.0" layoutY="225.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-background-insets: 0; -fx-border-width: 3; -fx-border-style: solid; -fx-text-fill: black; -fx-font-size: 15;" text="Enter Developer Mode" textOverrun="LEADING_ELLIPSIS">
+      <Button onAction="#handelDeveloperLogin" alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="CENTER" depthTest="ENABLE" focusTraversable="false" layoutX="90.0" layoutY="225.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-background-insets: 0; -fx-border-width: 3; -fx-border-style: solid; -fx-text-fill: black; -fx-font-size: 15;" text="Enter Developer Mode" textOverrun="LEADING_ELLIPSIS">
          <font>
             <Font name="Comic Sans MS Bold Italic" size="38.0" />
          </font>
