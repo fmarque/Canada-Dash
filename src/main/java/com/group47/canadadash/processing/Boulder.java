@@ -10,7 +10,7 @@ public class Boulder{
     public String imagePath;
 
 
-    public Boulder(int x, int y , int height, int width){
+    public Boulder(int x, int y , int height, int width, BoulderType type){
 
         this.x = x;
         this.y = y;
