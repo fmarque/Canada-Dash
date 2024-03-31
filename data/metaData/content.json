@@ -152,6 +152,51 @@
             "It's one of the few places in Canada where you can find sagebrush and prickly pear cacti."
           ]
         }
+      ],
+
+      "boulders": [
+        {
+          "x": 150,
+          "y": 580,
+          "height": 100,
+          "width": 100,
+          "type": "BOX"
+        },
+        {
+          "x": 300,
+          "y": 620,
+          "height": 100,
+          "width": 100,
+          "type": "FENCE"
+        },
+        {
+          "x": 450,
+          "y": 600,
+          "height": 100,
+          "width": 100,
+          "type": "BOX"
+        },
+        {
+          "x": 600,
+          "y": 580,
+          "height": 100,
+          "width": 100,
+          "type": "FENCE"
+        },
+        {
+          "x": 750,
+          "y": 620,
+          "height": 100,
+          "width": 100,
+          "type": "BOX"
+        },
+        {
+          "x": 900,
+          "y": 600,
+          "height": 100,
+          "width": 100,
+          "type": "FENCE"
+        }
       ]
     },
     "alberta": {
