@@ -5,7 +5,6 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -19,14 +18,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.Group;
-import javafx.scene.control.Alert;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.util.Objects;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.stage.Modality;
 import javafx.scene.control.Button;
 
@@ -64,6 +60,7 @@ public class GameRender extends Application {
 
     //UI elements
     private Text scoreText;
+    public static Stage pauseStage;
 
     //Heart Image handling
     private final Image fullHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/fullHeart.png")));
@@ -84,7 +81,7 @@ public class GameRender extends Application {
 
         if (isColliding(playerRect, leaf)) {
             System.out.println("Player has touched the leaf!");
-            showNotifcation();
+            showNotification();
         }
 
 
@@ -268,6 +265,13 @@ public class GameRender extends Application {
                     throw new RuntimeException(ex);
                 }
             }
+            if (e.getCode() == KeyCode.M) {
+                try {
+                    showMap();
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
         });
 
         scene.setOnKeyReleased(e -> {
@@ -300,7 +304,7 @@ public class GameRender extends Application {
         Parent pauseMenuRoot = loader.load();
 
         // Setup the new stage for the pause menu
-        Stage pauseStage = new Stage();
+        pauseStage = new Stage();
         pauseStage.initModality(Modality.APPLICATION_MODAL); // Block input events to other windows
         pauseStage.setTitle("Pause Menu");
         Scene scene = new Scene(pauseMenuRoot);
@@ -313,7 +317,7 @@ public class GameRender extends Application {
     }
 
 
-    private void showNotifcation() throws IOException {
+    private void showNotification() throws IOException {
         // Pause the game loop
         //gameLoop.stop();
 
@@ -343,6 +347,25 @@ public class GameRender extends Application {
         }
     }
 
+    private void showMap() throws IOException {
+        gameLoop.stop();
+
+        // Load the pause menu FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/game_map.fxml"));
+        Parent pauseMenuRoot = loader.load();
+
+        // Setup the new stage for the pause menu
+        pauseStage = new Stage();
+        pauseStage.initModality(Modality.APPLICATION_MODAL); // Block input events to other windows
+        pauseStage.setTitle("Map Menu");
+        Scene scene = new Scene(pauseMenuRoot);
+        pauseStage.setScene(scene);
+        // Show and wait - returns when the pause stage is closed
+        pauseStage.showAndWait();
+
+        // Optionally resume the game loop here if not handled by the FXML controller
+        gameLoop.start();
+    }
 
     public static void main(String[] args) {
         launch(args);
