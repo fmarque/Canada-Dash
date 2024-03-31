@@ -22,6 +22,7 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -65,8 +66,8 @@ public class GameRender {
     private Text scoreText;
     public static Stage pauseStage;
 
-    private ArrayList<Rectangle> platforms;
-    private ArrayList<Rectangle> boxes;
+    private ArrayList<ImageView> platforms;
+    private ArrayList<ImageView> boxes;
     //Heart Image handling
     private final Image fullHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/fullHeart.png")));
     private final Image emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/emptyHeartIcon.png")));
@@ -74,8 +75,8 @@ public class GameRender {
 
     private Level currentLevel;
 
-    private boolean isColliding(Rectangle player, ArrayList<Rectangle> obstacle) {
-        for (Rectangle rectangle : obstacle) {
+    private boolean isColliding(Rectangle player, ArrayList<ImageView> obstacle) {
+        for (ImageView rectangle : obstacle) {
             return player.getBoundsInParent().intersects(rectangle.getBoundsInParent());
         }
         return false;
@@ -84,16 +85,6 @@ public class GameRender {
 
         Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
         boolean collisionDetected = false;
-//        if (isColliding(playerRect, obstacle)) {
-//            System.out.println("Player has touched the obstacle!");
-//            updateScore(5);// Placeholder action
-//        }
-
-//        if (isColliding(playerRect, leaf)) {
-//            System.out.println("Player has touched the leaf!");
-//            showNotifcation();
-//        }
-
         onGround = collisionDetected;
 
         if (playerY + playerHeight >= HEIGHT && !hasTakenFallDamage) {
@@ -151,7 +142,7 @@ public class GameRender {
     private void checkPlatformCollision() {
         boolean collisionDetected = false;
         Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
-        for (Rectangle platform : platforms) { // multiple platforms
+        for (ImageView platform : platforms) { // multiple platforms
             if (playerRect.intersects(platform.getBoundsInLocal())) {
                 collisionDetected = true;
                 playerY = platform.getY() - playerHeight; // Adjust position to stand on platform
@@ -184,10 +175,10 @@ public class GameRender {
 
     private void scrollBackgroundPlateForms() {
 
-        for (Rectangle rectangle : platforms) {
+        for (ImageView rectangle : platforms) {
             rectangle.setX(rectangle.getX() - 1);
 
-            if (rectangle.getX() + rectangle.getWidth() < 0) {
+            if (rectangle.getX() + rectangle.getFitWidth() < 0) {
                 // If it moved off the left edge, loop it back to the right
                 rectangle.setX(WIDTH);
             }
@@ -210,15 +201,13 @@ public class GameRender {
         gc.setFill(Color.RED); // Set the obstacle color
         gc.fillRect(playerX, playerY, playerWidth, playerHeight);
 
-        for (Rectangle box : boxes) {
-            gc.setFill(Color.GREEN); // Set the obstacle color
-            gc.fillRect(box.getX(), box.getY(), box.getWidth(), box.getHeight());
+        for (ImageView box : boxes) {
+            gc.fillRect(box.getX(), box.getY(), box.getFitWidth(), box.getFitHeight());
         }
 
 
-        for (Rectangle platform : platforms) {
-            gc.setFill(Color.BLUE); // Set the obstacle color
-            gc.fillRect(platform.getX(), platform.getY(), platform.getWidth(), platform.getHeight());
+        for (ImageView platform : platforms) {
+            gc.fillRect(platform.getX(), platform.getY(), platform.getFitWidth(), platform.getFitHeight());
         }
 
 //        gc.setFill(Color.GOLD);
@@ -427,24 +416,34 @@ public class GameRender {
 
     public void loadLevel(List<Level> level) {
         this.currentLevel = level.getFirst();//first level only for now
-        platforms = new ArrayList<Rectangle>();
-        boxes = new ArrayList<Rectangle>();
+        platforms = new ArrayList<ImageView>();
+        boxes = new ArrayList<ImageView>();
         internalGameState = new GameController(this.currentLevel);
         List<Boulder> x = this.currentLevel.getBoulders();
         for (Boulder boulder : x) {
+            URL resourceUrl = getClass().getResource("/images/object.png");
             if (boulder.type == BoulderType.FENCE) {
-                platforms.add(createPlatform(boulder.x, HEIGHT-boulder.y + 450, boulder.width, boulder.height));
+                assert resourceUrl != null;
+                platforms.add(createPlatform(boulder.x, HEIGHT-boulder.y + 450, boulder.width, boulder.height, resourceUrl));
             }
 
             if (boulder.type == BoulderType.BOX) {
-                platforms.add(createPlatform( boulder.x, HEIGHT-boulder.y + 450, boulder.width, boulder.height));
+                assert resourceUrl != null;
+                platforms.add(createPlatform( boulder.x, HEIGHT-boulder.y + 450, boulder.width, boulder.height, resourceUrl));
             }
         }
 
     }
 
-    private Rectangle createPlatform(int x, int y, int width, int height) {
-        return new Rectangle(x, y, width, height);
+    private ImageView createPlatform(int x, int y, int width, int height, URL imagePath) {
+        Image image = new Image(imagePath.toExternalForm());
+        ImageView imageView = new ImageView(image);
+        imageView.setX(x);
+        imageView.setY(y);
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
+        imageView.setPreserveRatio(true);
+        return imageView;
     }
 
 

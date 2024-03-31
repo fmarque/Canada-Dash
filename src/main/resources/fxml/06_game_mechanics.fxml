@@ -37,7 +37,7 @@
                   </ImageView>
                   <ImageView fitHeight="79.0" fitWidth="85.0" layoutX="431.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@object.png" />
+                        <Image url="@../images/object.png" />
                      </image>
                   </ImageView>
                   <Label layoutX="172.0" layoutY="42.0" text="= save checkpoint">
