@@ -9,9 +9,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.Group;
@@ -24,8 +27,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
-import javafx.stage.Stage;
-
+import javafx.scene.control.Button;
 
 public class GameRender extends Application {
 
@@ -54,6 +56,16 @@ public class GameRender extends Application {
     private AnimationTimer gameLoop;
     private Rectangle platform = new Rectangle(100, 450, 6000, 50); // x, y, width, height
     private Rectangle obstacle = new Rectangle(WIDTH / 2 - 20, HEIGHT / 2, 100, 100);
+
+
+    //UI elements
+    private Text scoreText;
+
+    //Heart Image handling
+    private final Image fullHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/fullHeart.png")));
+    private final Image emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/emptyHeartIcon.png")));
+    private HBox heartsContainer;
+
     private boolean isColliding(Rectangle player, Rectangle obstacle) {
         return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
     }
@@ -62,18 +74,20 @@ public class GameRender extends Application {
         Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
 
         if (isColliding(playerRect, obstacle)) {
-            System.out.println("Player has touched the obstacle!"); // Placeholder action
+            System.out.println("Player has touched the obstacle!");
+            updateScore(5);// Placeholder action
         }
 
+        scrollBackgroundLeft();//background scrolls to left
 
 
-
-        // Update game state
-        if (movingLeft) {
-            scrollBackgroundRight();
+        double leftBoundary = (double) WIDTH / 2 - 200;
+        if (movingLeft && playerX > leftBoundary) {
+            playerX -= 5;
         }
-        if (movingRight) {
-            scrollBackgroundLeft();
+        double rightBoundary = (double) WIDTH / 2 + 200;
+        if (movingRight && playerX < rightBoundary) {
+            playerX += 5;
         }
 
         // Update player's vertical position and velocity
@@ -153,6 +167,24 @@ public class GameRender extends Application {
     }
 
 
+
+    private void updateLives(int currentLives) {
+        for (int i = 0; i < heartsContainer.getChildren().size(); i++) {
+            ImageView heartView = (ImageView) heartsContainer.getChildren().get(i);
+            if (i < currentLives) {
+                heartView.setImage(fullHeart);
+            } else {
+                heartView.setImage(emptyHeart);
+            }
+            // todo half heart
+        }
+    }
+
+    private void updateScore(int score) {
+        internalGameState.increasePoints(score);
+        scoreText.setText("Score: " + internalGameState.getTotalPoints());
+    }
+
     /**
      * @param stage
      * @throws Exception
@@ -160,7 +192,41 @@ public class GameRender extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        stage.setTitle("2D Platformer");
+        scoreText = new Text("Score: 0");
+        scoreText.setFont(Font.font("Verdana", 20));
+        scoreText.setFill(Color.BLACK); // Choose a color that fits your game's theme
+
+        heartsContainer = new HBox(5); // Horizontal box with spacing of 5 pixels
+        for (int i = 0; i < 3; i++) {//todo link wiht heart state
+            ImageView heartView = new ImageView(fullHeart);
+            heartsContainer.getChildren().add(heartView);
+        }
+
+
+        Button pauseButton = new Button("Pause");
+        pauseButton.setLayoutX(10); // Position the button; adjust as needed
+        pauseButton.setLayoutY(10);
+        pauseButton.setFocusTraversable(false);
+        pauseButton.setOnAction(event -> {
+            try {
+                showPauseMenu();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+
+        //UI elements INI
+        StackPane uiLayer = new StackPane();
+        uiLayer.getChildren().add(heartsContainer);
+        uiLayer.getChildren().add(scoreText);
+
+        uiLayer.getChildren().add(pauseButton);
+
+     //   AnchorPane.setBottomAnchor(pauseButton, 10.0);
+      //  AnchorPane.setRightAnchor(pauseButton, 10.0);
+
+        stage.setTitle("Canada Dash");
 
         internalGameState = new GameState();
         Group root = new Group();
@@ -169,6 +235,8 @@ public class GameRender extends Application {
         playerY = platform.getY() - playerHeight;//puts player on the ground
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         root.getChildren().add(canvas);
+
+        root.getChildren().add(uiLayer);
 
         gc = canvas.getGraphicsContext2D();
         backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/background.png")));

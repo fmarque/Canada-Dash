@@ -68,10 +68,10 @@ public class GameState {
 
     /**
      * getter of the attribute lives
-     * @return lives how many of them are full, and empty
+     * @return the current number of lives
      */
-    public ArrayList<Heart> getLives() {
-        return lives;
+    public int getLives() {
+        return lives.size();
     }
 
     /**
