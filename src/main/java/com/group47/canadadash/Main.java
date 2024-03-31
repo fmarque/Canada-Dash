@@ -29,7 +29,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
      * @throws Exception
      */
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("playerLogin.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/playerLogin.fxml")));
         primaryStage.setTitle("Player Login");
         primaryStage.setScene(new Scene(root, 800, 500));
 

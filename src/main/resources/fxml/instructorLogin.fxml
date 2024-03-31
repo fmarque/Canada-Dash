@@ -28,22 +28,27 @@
                     <Hyperlink layoutX="19.0" layoutY="255.0" onAction="#switchToISignup" text="Sign-up for a new account" />
                     <Hyperlink layoutX="19.0" layoutY="290.0" onAction="#switchToPLogin" text="Switch to Player Login" />
                     <Hyperlink layoutX="19.0" layoutY="308.0" onAction="#switchToDLogin" text="Switch to Developer Login" />
-                    <Button layoutX="19.0" layoutY="213.0" mnemonicParsing="false" onAction="#switchToIMenu" prefHeight="26.0" prefWidth="27.0" text="-&gt;">
+                    <Button layoutX="19.0" layoutY="213.0" mnemonicParsing="false" onAction="#checkILoginInfo" prefHeight="26.0" prefWidth="27.0" text="-&gt;">
                         <font>
                             <Font name="System Bold" size="11.0" />
                         </font></Button>
-               <CheckBox layoutX="199.0" layoutY="188.0" mnemonicParsing="false" onAction="#togglePassword">
+               <CheckBox layoutX="199.0" layoutY="188.0" mnemonicParsing="false" onAction="#showPassword">
                   <font>
                      <Font size="9.0" />
                   </font>
                </CheckBox>
+                    <Text fill="#a19a9a" layoutX="19.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Instructor">
+                        <font>
+                            <Font name="System Italic" size="12.0" />
+                        </font>
+                    </Text>
                 </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="239.0" prefWidth="482.0">
             <children>
                <ImageView fitHeight="408.0" fitWidth="867.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                     <Image url="@canLake.jpg" />
+                     <Image url="@../images/canLake.jpg" />
                   </image>
                </ImageView>
             </children></AnchorPane>

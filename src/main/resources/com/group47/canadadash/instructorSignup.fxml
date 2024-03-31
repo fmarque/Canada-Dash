@@ -35,7 +35,7 @@
                   <font>
                      <Font size="10.0" />
                   </font></Button>
-               <CheckBox layoutX="199.0" layoutY="188.0" mnemonicParsing="false" onAction="#togglePassword">
+               <CheckBox layoutX="199.0" layoutY="188.0" mnemonicParsing="false" onAction="#showPassword">
                   <font>
                      <Font size="9.0" />
                   </font>
@@ -46,7 +46,7 @@
             <children>
                <ImageView fitHeight="408.0" fitWidth="867.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                     <Image url="@canLake.jpg" />
+                     <Image url="@../../../images/canLake.jpg" />
                   </image></ImageView>
             </children></AnchorPane>
         </items>

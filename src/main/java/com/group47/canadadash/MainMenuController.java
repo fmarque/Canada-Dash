@@ -18,7 +18,7 @@ public class MainMenuController {
 
    //TODO: load player's last saved progress (must be dynamic, NOT just fxml)
    public void loadSavedGame(ActionEvent event) throws IOException {
-      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("existingMap.fxml")));
+      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/existingMap.fxml")));
       stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
       scene = new Scene(root);
       stage.setScene(scene);
@@ -27,7 +27,7 @@ public class MainMenuController {
 
    //TODO: open up a new map with default score and level etc
    public void startNewGame(ActionEvent event) throws IOException {
-      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("newMap.fxml")));
+      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/newMap.fxml")));
       stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
       scene = new Scene(root);
       stage.setScene(scene);
@@ -45,7 +45,7 @@ public class MainMenuController {
    }
 
    public void switchToTutPage(ActionEvent event) throws IOException {
-      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("tutorialPage.fxml")));
+      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/tutorialPage.fxml")));
       stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
       scene = new Scene(root);
       stage.setScene(scene);
@@ -53,7 +53,7 @@ public class MainMenuController {
    }
 
    public void switchToPLogin(ActionEvent event) throws IOException {
-      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("playerLogin.fxml")));
+      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/playerLogin.fxml")));
       stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
       scene = new Scene(root);
       stage.setScene(scene);
@@ -61,7 +61,7 @@ public class MainMenuController {
    }
 
    public void switchToDLogin (ActionEvent event) throws IOException {
-      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("developerLogin.fxml")));
+      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/developerLogin.fxml")));
       stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
       scene = new Scene(root);
       stage.setScene(scene);
@@ -69,7 +69,7 @@ public class MainMenuController {
    }
 
    public void switchToILogin (ActionEvent event) throws IOException {
-      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("instructorLogin.fxml")));
+      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/instructorLogin.fxml")));
       stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
       scene = new Scene(root);
       stage.setScene(scene);
@@ -81,7 +81,7 @@ public class MainMenuController {
    }
 
    public void loadPlayerAnalytics (ActionEvent event) throws IOException {
-      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("instructorLogin.fxml")));
+      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/instructorLogin.fxml")));
       stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
       scene = new Scene(root);
       stage.setScene(scene);

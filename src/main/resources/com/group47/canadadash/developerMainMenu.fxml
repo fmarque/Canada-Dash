@@ -13,7 +13,7 @@
             <children>
                 <ImageView fitHeight="720.0" fitWidth="977.0" layoutX="306.0" layoutY="3.0" opacity="0.93" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@menuBg.jpg" />
+                        <Image url="@../../../images/menuBg.jpg" />
                     </image>
                     <effect>
                         <GaussianBlur radius="38.16" />
@@ -21,7 +21,7 @@
                 </ImageView>
                 <ImageView fitHeight="720.0" fitWidth="961.0" layoutX="-101.0" layoutY="4.0" opacity="0.88" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@menuBg.jpg" />
+                        <Image url="@../../../images/menuBg.jpg" />
                     </image>
                     <effect>
                         <GaussianBlur radius="38.16" />
@@ -29,7 +29,7 @@
                 </ImageView>
                 <ImageView fitHeight="720.0" fitWidth="961.0" layoutX="160.0" layoutY="-7.0" opacity="0.59" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@menuBg.jpg" />
+                        <Image url="@../../../images/menuBg.jpg" />
                     </image>
                     <effect>
                         <GaussianBlur radius="38.16" />

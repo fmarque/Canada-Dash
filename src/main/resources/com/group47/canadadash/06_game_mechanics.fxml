@@ -21,22 +21,22 @@
                <children>
                   <ImageView fitHeight="79.0" fitWidth="85.0" layoutX="60.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@star.png" />
+                        <Image url="@../../../images/star.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="79.0" fitWidth="85.0" layoutX="431.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@fence.png" />
+                        <Image url="@../../../images/fence.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="79.0" fitWidth="85.0" layoutX="61.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@leaf.png" />
+                        <Image url="@../../../images/leaf.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="79.0" fitWidth="85.0" layoutX="431.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@object.png" />
+                        <Image url="@../../../images/object.png" />
                      </image>
                   </ImageView>
                   <Label layoutX="172.0" layoutY="42.0" text="= save checkpoint">
