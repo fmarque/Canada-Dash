@@ -75,7 +75,7 @@ public class GameRender extends Application {
     private void update() throws IOException {
 
         Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
-
+        boolean collisionDetected = false;
         if (isColliding(playerRect, obstacle)) {
             System.out.println("Player has touched the obstacle!");
             updateScore(5);// Placeholder action
@@ -86,10 +86,19 @@ public class GameRender extends Application {
             showNotifcation();
         }
 
+        if (isColliding(playerRect, platform)) {
+            // If colliding, adjust player position and set onGround to true
+            playerVelocityY = 0; // Stop falling due to gravity
+            playerY = platform.getY() - playerHeight; // Position player on top of the platform
+            collisionDetected = true;
+        }
+
+        onGround = collisionDetected;
 
         if (playerY + playerHeight >= HEIGHT && !hasTakenFallDamage) {
             applyDamageToPlayer();
             hasTakenFallDamage = true; // Prevent further damage until reset
+            resetPlayerPosition();
         } else if (playerY + playerHeight < HEIGHT) {
             hasTakenFallDamage = false; // Reset the flag when the player is back in the safe zone
         }
@@ -112,7 +121,6 @@ public class GameRender extends Application {
         if (!onGround)
         {
             // Apply gravity
-
             playerVelocityY += GRAVITY; // Make sure you have a gravity variable defined, e.g., 0.5 or 1
             playerY += playerVelocityY;
 
@@ -126,12 +134,6 @@ public class GameRender extends Application {
                     playerY = platform.getY() - playerHeight; // Adjust player to stand on top of the platform
                 }
             }
-        }
-
-        if (playerY >= HEIGHT - playerHeight) {
-            playerY = HEIGHT - playerHeight;
-            onGround = true;
-            playerVelocityY = 0;
         }
 
     }
@@ -337,6 +339,15 @@ public class GameRender extends Application {
     }
 
 
+    /*
+    Resets the player's position in game
+     */
+    private void resetPlayerPosition() {
+        playerX =  (double) WIDTH / 2 - 20;; // Ensure startingX is defined and holds the correct initial X position
+        playerY = (double) HEIGHT / 2; // Ensure startingY is defined and holds the correct initial Y position
+        playerVelocityY = 0; // Reset any vertical movement
+        onGround = false; // Assuming the player is not on the ground when reset
+    }
 
     private void applyDamageToPlayer() {
         internalGameState.playerDamage();
