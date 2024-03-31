@@ -1,9 +1,7 @@
 package com.group47.canadadash.game;
 
-import com.group47.canadadash.GameState;
 import com.group47.canadadash.processing.Level;
 import javafx.animation.AnimationTimer;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,6 +21,7 @@ import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javafx.stage.Modality;
@@ -379,10 +378,10 @@ public class GameRender {
         updateLives(internalGameState.getCurrentLives());
     }
 
-    public void loadLevel(Level level) {
-        this.currentLevel = level;
+    public void loadLevel(List<Level> level) {
+        this.currentLevel = level.getFirst();
         platforms = new ArrayList<Rectangle>();
-        internalGameState = new GameController(level);
+        internalGameState = new GameController(this.currentLevel);
         platforms.add(platform);
     }
 
