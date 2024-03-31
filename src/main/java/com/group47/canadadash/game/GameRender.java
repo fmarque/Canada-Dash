@@ -1,5 +1,7 @@
 package com.group47.canadadash.game;
 
+import com.group47.canadadash.processing.Boulder;
+import com.group47.canadadash.processing.BoulderType;
 import com.group47.canadadash.processing.Level;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
@@ -63,7 +65,7 @@ public class GameRender {
     private Text scoreText;
 
     private ArrayList<Rectangle> platforms;
-
+    private ArrayList<Rectangle> boxes;
     //Heart Image handling
     private final Image fullHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/fullHeart.png")));
     private final Image emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/emptyHeartIcon.png")));
@@ -71,29 +73,24 @@ public class GameRender {
 
     private Level currentLevel;
 
-    private boolean isColliding(Rectangle player, Rectangle obstacle) {
-        return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
+    private boolean isColliding(Rectangle player, ArrayList<Rectangle> obstacle) {
+        for (Rectangle rectangle : obstacle) {
+            return player.getBoundsInParent().intersects(rectangle.getBoundsInParent());
+        }
+        return false;
     }
     private void update() throws IOException {
 
         Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
         boolean collisionDetected = false;
-        if (isColliding(playerRect, obstacle)) {
-            System.out.println("Player has touched the obstacle!");
-            updateScore(5);// Placeholder action
-        }
+//        if (isColliding(playerRect, obstacle)) {
+//            System.out.println("Player has touched the obstacle!");
+//            updateScore(5);// Placeholder action
+//        }
 
-        if (isColliding(playerRect, leaf)) {
-            System.out.println("Player has touched the leaf!");
-            showNotifcation();
-        }
-
-//        if (isColliding(playerRect, platform)) {
-//            // If colliding, adjust player position and set onGround to true
-//            System.out.println(playerVelocityY);
-//            playerVelocityY = 0; // Stop falling due to gravity
-//            playerY = platform.getY() - playerHeight; // Position player on top of the platform
-//            collisionDetected = true;
+//        if (isColliding(playerRect, leaf)) {
+//            System.out.println("Player has touched the leaf!");
+//            showNotifcation();
 //        }
 
         onGround = collisionDetected;
@@ -109,7 +106,7 @@ public class GameRender {
 
 
         scrollBackgroundLeft();//background scrolls to left
-
+        scrollBackgroundPlateForms();
 
         double leftBoundary = (double) WIDTH / 2 - 200;
         if (movingLeft && playerX > leftBoundary) {
@@ -130,7 +127,7 @@ public class GameRender {
             // Prevent player from falling through the platform due to high velocity
             if (playerVelocityY > 0)
             { // Only check when coming down
-                if (isColliding(playerRect, platform))
+                if (isColliding(playerRect, platforms))
                 {
                     onGround = true;
                     playerVelocityY = 0;
@@ -177,6 +174,18 @@ public class GameRender {
         }
     }
 
+    private void scrollBackgroundPlateForms() {
+
+        for (Rectangle rectangle : platforms) {
+            rectangle.setX(rectangle.getX() - 1);
+
+            if (rectangle.getX() + rectangle.getWidth() < 0) {
+                // If it moved off the left edge, loop it back to the right
+                rectangle.setX(WIDTH);
+            }
+        }
+    }
+
 
 
     private void render(GraphicsContext gc) {
@@ -193,15 +202,19 @@ public class GameRender {
         gc.setFill(Color.RED); // Set the obstacle color
         gc.fillRect(playerX, playerY, playerWidth, playerHeight);
 
-        gc.setFill(Color.GREEN); // Set the obstacle color
-        gc.fillRect(platform.getX(), platform.getY(), platform.getWidth(), platform.getHeight());
+        for (Rectangle box : boxes) {
+            gc.setFill(Color.GREEN); // Set the obstacle color
+            gc.fillRect(box.getX(), box.getY(), box.getWidth(), box.getHeight());
+        }
 
-        // Draw the obstacle
-        gc.setFill(Color.BLUE); // Set the obstacle color
-        gc.fillRect(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getHeight());
 
-        gc.setFill(Color.GOLD);
-        gc.fillRect(leaf.getX(), leaf.getY(), leaf.getWidth(), leaf.getHeight());
+        for (Rectangle platform : platforms) {
+            gc.setFill(Color.BLUE); // Set the obstacle color
+            gc.fillRect(platform.getX(), platform.getY(), platform.getWidth(), platform.getHeight());
+        }
+
+//        gc.setFill(Color.GOLD);
+//        gc.fillRect(leaf.getX(), leaf.getY(), leaf.getWidth(), leaf.getHeight());
 
     }
 
@@ -234,7 +247,7 @@ public class GameRender {
         scoreText.setFill(Color.BLACK); // Choose a color that fits your game's theme
 
         heartsContainer = new HBox(5); // Horizontal box with spacing of 5 pixels
-        for (int i = 0; i < internalGameState.getCurrentLives(); i++) {//todo link wiht heart state
+        for (int i = 0; i < internalGameState.getCurrentLives(); i++) {
             ImageView heartView = new ImageView(fullHeart);
             heartsContainer.getChildren().add(heartView);
         }
@@ -356,7 +369,7 @@ public class GameRender {
 
     private void jump() {
         if (onGround) {
-            playerVelocityY = -15; // Adjust this value to change jump height
+            playerVelocityY = -20; // Adjust this value to change jump height
             onGround = false;
             System.out.println(playerVelocityY);
         }
@@ -379,11 +392,27 @@ public class GameRender {
     }
 
     public void loadLevel(List<Level> level) {
-        this.currentLevel = level.getFirst();
+        this.currentLevel = level.getFirst();//first level only for now
         platforms = new ArrayList<Rectangle>();
+        boxes = new ArrayList<Rectangle>();
         internalGameState = new GameController(this.currentLevel);
-        platforms.add(platform);
+        List<Boulder> x = this.currentLevel.getBoulders();
+        for (Boulder boulder : x) {
+            if (boulder.type == BoulderType.FENCE) {
+                platforms.add(createPlatform(boulder.x, HEIGHT-boulder.y + 450, boulder.width, boulder.height));
+            }
+
+            if (boulder.type == BoulderType.BOX) {
+                platforms.add(createPlatform( boulder.x, HEIGHT-boulder.y + 450, boulder.width, boulder.height));
+            }
+        }
+
     }
+
+    private Rectangle createPlatform(int x, int y, int width, int height) {
+        return new Rectangle(x, y, width, height);
+    }
+
 
 
 }

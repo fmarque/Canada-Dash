@@ -12,7 +12,7 @@ public class GameLauncher extends Application {
         GameRender gameRender = new GameRender();
         App x = new App();
         x.loadData();
-        gameRender.loadLevel(x.levels);
+        gameRender.loadLevel(x.getLevels());
         Scene gameScene = gameRender.createGameScene(); // Adjust `createGameScene` method to accept a Stage if necessary
         primaryStage.setScene(gameScene);
         primaryStage.setTitle("Canada Dash"); // Set the window title here
