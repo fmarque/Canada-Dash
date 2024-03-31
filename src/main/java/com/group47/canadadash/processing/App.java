@@ -140,6 +140,21 @@ public class App{
         return instructorClassCodes.contains(classCode);
     }
 
+    public boolean[] getUnlockedLevelsStatus() {
+        if (user == null || levels.isEmpty()) {
+            return new boolean[0];
+        }
+
+        boolean[] unlockedStatus = new boolean[levels.size()];
+        int highestLevelReached = user.getHighestLevelReached();
+
+        for (int i = 0; i < levels.size(); i++) {
+            unlockedStatus[i] = i <= highestLevelReached;
+        }
+
+        return unlockedStatus;
+    }
+
 
     public static void main(String[] args) {
         //testing purposes for now, formal testing files will be developed later
