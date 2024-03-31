@@ -3,6 +3,7 @@ package com.group47.canadadash.game;
 import com.group47.canadadash.GameState;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -28,6 +29,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.scene.control.Button;
+
+//import javax.swing.*;
 
 public class GameRender extends Application {
 
@@ -57,6 +60,7 @@ public class GameRender extends Application {
     private Rectangle platform = new Rectangle(100, 450, 6000, 50); // x, y, width, height
     private Rectangle obstacle = new Rectangle(WIDTH / 2 - 20, HEIGHT / 2, 100, 100);
 
+    private Rectangle leaf = new Rectangle(WIDTH / 2 + 50, HEIGHT / 2 + 50, 100, 100);
 
     //UI elements
     private Text scoreText;
@@ -69,7 +73,7 @@ public class GameRender extends Application {
     private boolean isColliding(Rectangle player, Rectangle obstacle) {
         return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
     }
-    private void update() {
+    private void update() throws IOException {
 
         Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
 
@@ -77,6 +81,12 @@ public class GameRender extends Application {
             System.out.println("Player has touched the obstacle!");
             updateScore(5);// Placeholder action
         }
+
+        if (isColliding(playerRect, leaf)) {
+            System.out.println("Player has touched the leaf!");
+            showNotifcation();
+        }
+
 
         scrollBackgroundLeft();//background scrolls to left
 
@@ -163,6 +173,9 @@ public class GameRender extends Application {
         // Draw the obstacle
         gc.setFill(Color.BLUE); // Set the obstacle color
         gc.fillRect(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getHeight());
+
+        gc.setFill(Color.GOLD);
+        gc.fillRect(leaf.getX(), leaf.getY(), leaf.getWidth(), leaf.getHeight());
 
     }
 
@@ -265,7 +278,11 @@ public class GameRender extends Application {
         gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                update();
+                try {
+                    update();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 render(gc);
             }
         };
@@ -294,6 +311,30 @@ public class GameRender extends Application {
         // Optionally resume the game loop here if not handled by the FXML controller
         gameLoop.start();
     }
+
+
+    private void showNotifcation() throws IOException {
+        // Pause the game loop
+        //gameLoop.stop();
+
+        // Load the pause menu FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/01_settings.fxml"));
+        Parent pauseMenuRoot = loader.load();
+
+        // Setup the new stage for the pause menu
+        Stage pauseStage = new Stage();
+        pauseStage.initModality(Modality.APPLICATION_MODAL); // Block input events to other windows
+        pauseStage.setTitle("Pause Menu");
+        Scene scene = new Scene(pauseMenuRoot);
+        pauseStage.setScene(scene);
+        // Show and wait - returns when the pause stage is closed
+        // Your code to show the dialog
+        Platform.runLater(pauseStage::showAndWait);
+        gameLoop.stop();
+        // Optionally resume the game loop here if not handled by the FXML controller
+      //  gameLoop.start();
+    }
+
 
     private void jump() {
         if (onGround) {
