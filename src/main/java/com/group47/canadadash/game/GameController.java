@@ -1,13 +1,14 @@
 package com.group47.canadadash.game;
 
 import com.group47.canadadash.GameState;
+import com.group47.canadadash.processing.Level;
 
 public class GameController {
 
     private GameState internalState;
 
 
-    public GameController()
+    public GameController(Level level)
     {
         internalState = new GameState();
     }

@@ -29,7 +29,7 @@ import javafx.scene.control.Button;
 
 //import javax.swing.*;
 
-public class GameRender extends Application {
+public class GameRender {
 
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
@@ -197,13 +197,11 @@ public class GameRender extends Application {
     }
 
     /**
-     * @param stage
+     *
      * @throws Exception
      */
-    @Override
-    public void start(Stage stage) throws Exception {
+    public Scene createGameScene() {
 
-        internalGameState = new GameController();
         scoreText = new Text("Score: 0");
         scoreText.setFont(Font.font("Verdana", 20));
         scoreText.setFill(Color.BLACK); // Choose a color that fits your game's theme
@@ -235,11 +233,9 @@ public class GameRender extends Application {
 
         uiLayer.getChildren().add(pauseButton);
 
-        stage.setTitle("Canada Dash");
-
         Group root = new Group();
         Scene scene = new Scene(root);
-        stage.setScene(scene);
+
         playerY = platform.getY() - playerHeight;//puts player on the ground
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         root.getChildren().add(canvas);
@@ -283,7 +279,7 @@ public class GameRender extends Application {
         };
 
         gameLoop.start();
-        stage.show();
+        return scene;
     }
 
     private void showPauseMenu() throws IOException {
@@ -354,18 +350,11 @@ public class GameRender extends Application {
         updateLives(internalGameState.getCurrentLives());
     }
 
-    private void loadLevel(Level level) {
+    public void loadLevel(Level level) {
         this.currentLevel = level;
-        // Initialize game entities based on level data
-        // For example:
+
+        internalGameState = new GameController(level);
     }
-
-
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
 
 
 }
