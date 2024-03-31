@@ -14,7 +14,7 @@ public class App{
     final String rootPath = Util.getRootPath();
 
     private List<Level> levels;
-    User user;
+    public User user;
     private UserContainer userContainer;
     private Set<String> instructorClassCodes;
 

@@ -3,7 +3,6 @@ package com.group47.canadadash;
 import com.group47.canadadash.processing.App;
 import com.group47.canadadash.processing.User;
 import javafx.application.Application;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,9 +27,9 @@ public class ScreenController implements Initializable {
     private Scene scene;
     private Parent root;
     private User user;
-    private App app;
+    App app;
     @FXML
-    private TextField username, password, type;
+    private TextField username, password, type, classCode;
     @FXML
     private Text instruction;
     @FXML
@@ -93,6 +92,10 @@ public class ScreenController implements Initializable {
     public void clearField(MouseEvent event) {
         passHidden.clear();
     }
+    public void clearCode(MouseEvent event) {
+        classCode.clear();
+    }
+
 
     @FXML
     public void togglevisiblePassword(ActionEvent event) throws IOException {
@@ -121,7 +124,7 @@ public class ScreenController implements Initializable {
     }
 
     public void checkILoginInfo(ActionEvent event) throws IOException {
-        app = new App();
+        //app = new App();
         app.loadData();
         if (app.signIn(username.getText(), passHidden.getText(), "instructor")) {
             switchToIMenu(event);
@@ -142,6 +145,40 @@ public class ScreenController implements Initializable {
     }
 
     // sign up should check if sign in successful, if yes, then username taken, otherwise, create account
+    public void makePAccount(ActionEvent event) throws IOException {
+        app = new App();
+        user = new User();
+        app.loadData();
+
+        // if username is already taken, let user know
+        if (app.signIn(username.getText(), passHidden.getText(), "student")) {
+            instruction.setText("Username Already Taken. Try again");
+        } else {
+            // if valid username, then check class code validity
+            if (app.isValidClassCode(classCode.getText())) {
+                boolean accountCreated = app.createAccount(username.getText(), password.getText(), "student");
+                if (accountCreated) {
+                    app.user.setClassCode(classCode.getText());
+                    app.userSave();
+                    switchToPLogin(event);
+                }
+
+                // if valid class code and username, make an account and make them login
+            } else {
+                instruction.setText("Invalid Class Code. Try again");
+            }
+        }
+    }
+
+    public void makeIAccount(ActionEvent event) throws IOException {
+        app = new App();
+        app.loadData();
+        if (app.signIn("dev", passHidden.getText(), "developer")) {
+            switchToDMenu(event);
+        } else {
+            instruction.setText("Invalid Developer Code. Try again");
+        }
+    }
 
 
     public void switchToPMenu (ActionEvent event) throws IOException {
