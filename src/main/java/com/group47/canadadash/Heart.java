@@ -19,7 +19,7 @@ public class Heart extends GameUnit {
         super(givenX, givenY);
         height = 10;
         width = 10;
-        imageAdd = ""; //TODO: write the address which points to the heart image
+        imageAdd = "src/main/resources/images/fullHeart.png"; //TODO: write the address which points to the heart image
         heart = true;
     }
 
@@ -47,9 +47,9 @@ public class Heart extends GameUnit {
      */
     public void setImageAdd() {
         if (this.isFullHeart()){
-            imageAdd = "";  //TODO: pointing to the full heart image
+            imageAdd = "src/main/resources/images/fullHeart.png";  //TODO: pointing to the full heart image
         }else {
-            imageAdd = "";  //TODO: pointing to the empty heart image
+            imageAdd = "src/main/resources/images/emptyHeartIcon.png";  //TODO: pointing to the empty heart image
         }
     }
 }
