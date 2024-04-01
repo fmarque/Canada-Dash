@@ -16,7 +16,7 @@ public class Box extends GameUnit {
         super(givenX, givenY);
         height = 40;
         width = 40;
-        imageAdd = "src/main/resources/com/group47/canadadash/object.png";
+        imageAdd = "src/main/resources/images/object.png";
     }
 
 }
