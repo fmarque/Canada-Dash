@@ -86,7 +86,7 @@
             <Button layoutX="10.0" layoutY="24.0" mnemonicParsing="false" onAction="#handelCancelBtn" prefHeight="18.0" prefWidth="55.0" text="&lt;-Back">
                <font>
                   <Font size="10.0" />
-               </font></Button>
+      m,         </font></Button>
             <Label layoutX="21.0" layoutY="1061.0" prefHeight="168.0" prefWidth="347.0" style="-fx-border-width: 5; -fx-border-style: solid;" text="Lorem ipsum dolor sit amet,consectetur adipiscing elit,sed do eu">
                <font>
                   <Font name="Monaco" size="18.0" />
