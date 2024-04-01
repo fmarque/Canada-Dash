@@ -21,6 +21,6 @@ class LeafTest {
         System.out.println("getQues");
         Leaf leaf = new Leaf(50, 50);
         Question question = new Question("", "", "");
-//        assertEquals();
+        assertEquals(question, leaf.getQues());
     }
 }
