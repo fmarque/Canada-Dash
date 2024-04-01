@@ -63,6 +63,7 @@ public class MainMenuController {
 
       List<User> students = app.getStudentsForInstructor();
       controller.setStudents(students);
+      controller.setBackContext("instructorView");
 
 
       stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
@@ -103,6 +104,45 @@ public class MainMenuController {
       stage.show();
    }
 
-   public void viewSHighscores(ActionEvent actionEvent) throws IOException{
+   public void viewIHighscores(ActionEvent event) throws IOException{
+      if (this.app == null) {
+         this.app = App.getInstance();
+      }
+
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/instructorDashboard.fxml")); // Correct path
+      Parent root = loader.load();
+
+      InstructorDashboardController controller = loader.getController();
+      controller.setBackContext("instructorView");
+
+      List<User> students = app.getUserList();
+      controller.setStudents(students);
+
+
+      stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
+      scene = new Scene(root);
+      stage.setScene(scene);
+      stage.show();
+   }
+
+   public void viewHighscores(ActionEvent event) throws IOException{
+      if (this.app == null) {
+         this.app = App.getInstance();
+      }
+
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/instructorDashboard.fxml")); // Correct path
+      Parent root = loader.load();
+
+      InstructorDashboardController controller = loader.getController();
+      controller.setBackContext("playerView");
+
+      List<User> students = app.getUserList();
+      controller.setStudents(students);
+
+
+      stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
+      scene = new Scene(root);
+      stage.setScene(scene);
+      stage.show();
    }
 }

@@ -35,6 +35,9 @@ public class InstructorDashboardController {
     @FXML
     private Button backButton;
 
+    private String backContext = "default";
+
+
 
     @FXML
     private void initialize() {
@@ -52,13 +55,27 @@ public class InstructorDashboardController {
         studentTableView.setItems(studentData);
     }
 
+    public void setBackContext(String context) {
+        this.backContext = context;
+    }
+
 
     @FXML
     private void onBackButtonClicked(ActionEvent event) throws IOException {
+        switch (backContext) {
+            case "playerView":
+                loadFXML("/fxml/playerMainMenu.fxml", event);
+                break;
+            case "instructorView":
+            default:
+                loadFXML("/fxml/instructorMainMenu.fxml", event);
+                break;
+        }
+    }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/instructorMainMenu.fxml"));
+    private void loadFXML(String fxmlPath, ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Parent root = loader.load();
-
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

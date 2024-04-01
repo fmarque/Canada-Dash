@@ -187,6 +187,10 @@ public class App{
         return levels;
     }
 
+    public List<User> getUserList(){
+        return new ArrayList<>(userContainer.getUsers().values());
+    }
+
 
     public static void main(String[] args) {
         //testing purposes for now, formal testing files will be developed later
