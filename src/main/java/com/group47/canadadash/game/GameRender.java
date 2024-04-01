@@ -85,7 +85,7 @@ public class GameRender{
     private final int JUMP_DELAY_FRAMES = 5; // Number of frames to skip ground check after jumping
 
     private Timeline leafSpawner;
-
+    private boolean leafTouchable = true;
     private void setupLeafSpawning() {
         leafSpawner = new Timeline(new KeyFrame(Duration.seconds(10), e -> spawnLeafRandomly()));
         leafSpawner.setCycleCount(Timeline.INDEFINITE);
@@ -94,14 +94,21 @@ public class GameRender{
 
     private void spawnLeafRandomly() {
         Random rand = new Random();
+
+        double leftBoundary = (double) WIDTH / 2 - 200;
+        double rightBoundary = (double) WIDTH / 2 + 200;
+
         double minX = 0.0;
-        double maxX = WIDTH - leaf.getImage().getWidth();
+        double maxX = leftBoundary + (rightBoundary - leftBoundary) * rand.nextDouble();
         double minY = 0.0;
         double maxY = HEIGHT - leaf.getImage().getHeight();
 
-        leaf.setX(minX + (maxX - minX) * rand.nextDouble());
+
+
+        leaf.setX(maxX);
         leaf.setY(minY + (maxY - minY) * rand.nextDouble());
         leaf.setVisible(true);
+        leafTouchable = true; // Allow the leaf to be touched again
     }
 
     private void initializeLeaf() {
@@ -124,7 +131,11 @@ public class GameRender{
         Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
 
         if (checkCollisionWithLeaf(playerRect)) {
-            showQuizPopup();
+           if(leafTouchable)
+           {
+               showQuizPopup();
+           }
+            leafTouchable = false; // Prevent further touches until respawned
         }
         
         
