@@ -1,7 +1,6 @@
 package com.group47.canadadash.game;
 
 import com.group47.canadadash.GameState;
-import com.group47.canadadash.processing.Level;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -34,14 +33,14 @@ public class GameRender extends Application {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
 
-    private GameController internalGameState;
+    private GameState internalGameState;
     private GraphicsContext gc;
     private Image backgroundImage;
     private double scrollSpeed = 2;
     private double backgroundX = 0;
     private double backgroundX2;
 
-    private boolean hasTakenFallDamage = false;
+
 
     // Player properties
     private double playerX = WIDTH / 2 - 20; // Center the player horizontally
@@ -52,22 +51,21 @@ public class GameRender extends Application {
     private boolean movingRight = false;
     private final double GRAVITY = 1;
     private double playerVelocityY = 0;
-    private boolean onGround = true;
+    private boolean onGround = false;
     private AnimationTimer gameLoop;
-    private Rectangle platform = new Rectangle(300, 450, 6000, 50); // x, y, width, height
+    private Rectangle platform = new Rectangle(100, 450, 6000, 50); // x, y, width, height
     private Rectangle obstacle = new Rectangle(WIDTH / 2 - 20, HEIGHT / 2, 100, 100);
 
     private Rectangle leaf = new Rectangle(WIDTH / 2 + 50, HEIGHT / 2 + 50, 100, 100);
 
     //UI elements
     private Text scoreText;
+    public static Stage pauseStage;
 
     //Heart Image handling
     private final Image fullHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/fullHeart.png")));
     private final Image emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/emptyHeartIcon.png")));
     private HBox heartsContainer;
-
-    private Level currentLevel;
 
     private boolean isColliding(Rectangle player, Rectangle obstacle) {
         return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
@@ -83,17 +81,8 @@ public class GameRender extends Application {
 
         if (isColliding(playerRect, leaf)) {
             System.out.println("Player has touched the leaf!");
-            showNotifcation();
+            showNotification();
         }
-
-
-        if (playerY + playerHeight >= HEIGHT && !hasTakenFallDamage) {
-            applyDamageToPlayer();
-            hasTakenFallDamage = true; // Prevent further damage until reset
-        } else if (playerY + playerHeight < HEIGHT) {
-            hasTakenFallDamage = false; // Reset the flag when the player is back in the safe zone
-        }
-
 
 
         scrollBackgroundLeft();//background scrolls to left
@@ -148,6 +137,17 @@ public class GameRender extends Application {
         }
     }
 
+    private void scrollBackgroundRight() {
+        backgroundX += scrollSpeed;
+        backgroundX2 += scrollSpeed;
+
+        if (backgroundX >= backgroundImage.getWidth()) {
+            backgroundX = -backgroundImage.getWidth();
+        }
+        if (backgroundX2 >= backgroundImage.getWidth()) {
+            backgroundX2 = -backgroundImage.getWidth();
+        }
+    }
 
 
     private void render(GraphicsContext gc) {
@@ -186,12 +186,13 @@ public class GameRender extends Application {
             } else {
                 heartView.setImage(emptyHeart);
             }
+            // todo half heart
         }
     }
 
     private void updateScore(int score) {
-        internalGameState.IncreasePoints();
-        scoreText.setText("Score: " + internalGameState.getPoints());
+        internalGameState.increasePoints(score);
+        scoreText.setText("Score: " + internalGameState.getTotalPoints());
     }
 
     /**
@@ -201,13 +202,12 @@ public class GameRender extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        internalGameState = new GameController();
         scoreText = new Text("Score: 0");
         scoreText.setFont(Font.font("Verdana", 20));
         scoreText.setFill(Color.BLACK); // Choose a color that fits your game's theme
 
         heartsContainer = new HBox(5); // Horizontal box with spacing of 5 pixels
-        for (int i = 0; i < internalGameState.getCurrentLives(); i++) {//todo link wiht heart state
+        for (int i = 0; i < 3; i++) {//todo link wiht heart state
             ImageView heartView = new ImageView(fullHeart);
             heartsContainer.getChildren().add(heartView);
         }
@@ -233,8 +233,12 @@ public class GameRender extends Application {
 
         uiLayer.getChildren().add(pauseButton);
 
+        //   AnchorPane.setBottomAnchor(pauseButton, 10.0);
+        //  AnchorPane.setRightAnchor(pauseButton, 10.0);
+
         stage.setTitle("Canada Dash");
 
+        internalGameState = new GameState();
         Group root = new Group();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -258,6 +262,13 @@ public class GameRender extends Application {
                 try {
                     showPauseMenu();
                 } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+            if (e.getCode() == KeyCode.M) {
+                try {
+                    showMap();
+                } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
             }
@@ -293,7 +304,7 @@ public class GameRender extends Application {
         Parent pauseMenuRoot = loader.load();
 
         // Setup the new stage for the pause menu
-        Stage pauseStage = new Stage();
+        pauseStage = new Stage();
         pauseStage.initModality(Modality.APPLICATION_MODAL); // Block input events to other windows
         pauseStage.setTitle("Pause Menu");
         Scene scene = new Scene(pauseMenuRoot);
@@ -306,7 +317,7 @@ public class GameRender extends Application {
     }
 
 
-    private void showNotifcation() throws IOException {
+    private void showNotification() throws IOException {
         // Pause the game loop
         //gameLoop.stop();
 
@@ -325,7 +336,7 @@ public class GameRender extends Application {
         Platform.runLater(pauseStage::showAndWait);
         gameLoop.stop();
         // Optionally resume the game loop here if not handled by the FXML controller
-      //  gameLoop.start();
+        //  gameLoop.start();
     }
 
 
@@ -336,20 +347,25 @@ public class GameRender extends Application {
         }
     }
 
+    private void showMap() throws IOException {
+        gameLoop.stop();
 
+        // Load the pause menu FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/game_map.fxml"));
+        Parent pauseMenuRoot = loader.load();
 
-    private void applyDamageToPlayer() {
-        internalGameState.playerDamage();
-        updateLives(internalGameState.getCurrentLives());
+        // Setup the new stage for the pause menu
+        pauseStage = new Stage();
+        pauseStage.initModality(Modality.APPLICATION_MODAL); // Block input events to other windows
+        pauseStage.setTitle("Map Menu");
+        Scene scene = new Scene(pauseMenuRoot);
+        pauseStage.setScene(scene);
+        // Show and wait - returns when the pause stage is closed
+        pauseStage.showAndWait();
+
+        // Optionally resume the game loop here if not handled by the FXML controller
+        gameLoop.start();
     }
-
-    private void loadLevel(Level level) {
-        this.currentLevel = level;
-        // Initialize game entities based on level data
-        // For example:
-    }
-
-
 
     public static void main(String[] args) {
         launch(args);

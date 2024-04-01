@@ -155,6 +155,10 @@ public class App{
         return unlockedStatus;
     }
 
+    public List<Level> getLevels() {
+        return levels;
+    }
+
 
     public static void main(String[] args) {
         //testing purposes for now, formal testing files will be developed later

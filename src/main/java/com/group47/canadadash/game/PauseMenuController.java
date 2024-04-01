@@ -16,7 +16,7 @@ import java.io.IOException;
 public class PauseMenuController {
 
     @FXML
-    private void initialize(){
+    public void initialize(){
         System.out.println(1);
     }
     @FXML
@@ -25,7 +25,7 @@ public class PauseMenuController {
         Parent pauseMenuRoot = loader.load();
         // Setup the new stage for the pause menu
 
-       // Block input events to other windows
+        // Block input events to other windows
         GameRender.pauseStage.setTitle("Pause Menu");
         Scene scene = new Scene(pauseMenuRoot);
         GameRender.pauseStage.setScene(scene);
@@ -55,7 +55,7 @@ public class PauseMenuController {
 
     @FXML
     private void handelGameMechanics(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/05_game_control.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/06_game_mechanics.fxml"));
         Parent pauseMenuRoot = loader.load();
         // Setup the new stage for the pause menu
 
@@ -85,7 +85,21 @@ public class PauseMenuController {
 
     @FXML
     private void handelExitGameBtn() throws IOException {
-       System.exit(0);
+        System.exit(0);
+    }
+
+    @FXML
+    private void handelDeveloperLogin() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/developerLogin.fxml"));
+        Parent pauseMenuRoot = loader.load();
+        // Setup the new stage for the pause menu
+
+        // Block input events to other windows
+        GameRender.pauseStage.setTitle("Pause Menu");
+        Scene scene = new Scene(pauseMenuRoot);
+        GameRender.pauseStage.setScene(scene);
+        // Show and wait - returns when the pause stage is closed
+        GameRender.pauseStage.showAndWait();
     }
 
 }
