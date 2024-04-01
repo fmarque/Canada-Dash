@@ -30,7 +30,11 @@
                             <TextField fx:id="password" onMousePressed="#clearPassword" text="Enter Password" />
                         </children></StackPane>                    <Hyperlink layoutX="19.0" layoutY="290.0" onAction="#switchToPSignup" text="Switch to Player Sign-up" />
                     <Hyperlink layoutX="19.0" layoutY="308.0" onAction="#switchToDLogin" text="Switch to Developer Login" />
-                    <Button layoutX="19.0" layoutY="213.0" mnemonicParsing="false" onAction="#makeIAccount" prefHeight="26.0" prefWidth="27.0" text="-&gt;">
+                    <Button layoutX="19.0" layoutY="213.0" mnemonicParsing="false" onAction="#makeIAccount" prefHeight="24.0" prefWidth="87.0" text="Get Class Code">
+                        <font>
+                            <Font size="11.0" />
+                        </font></Button>
+                    <Button layoutX="19.0" layoutY="241.0" mnemonicParsing="false" onAction="#switchToILogin" prefHeight="26.0" prefWidth="27.0" text="-&gt;">
                         <font>
                             <Font name="System Bold" size="11.0" />
                         </font></Button>

@@ -12,6 +12,7 @@ public class App{
     final String relativePathContentFile = "/data/metaData/content.json";
     final String relativePathUserFIle = "/data/userData/user.json";
     final String rootPath = Util.getRootPath();
+
     private List<Level> levels;
 
     public User user;
