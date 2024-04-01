@@ -9,13 +9,12 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
@@ -32,7 +31,6 @@ import java.net.URL;
 import java.util.*;
 
 import javafx.stage.Modality;
-import javafx.scene.control.Button;
 import javafx.util.Duration;
 
 //import javax.swing.*;
@@ -86,6 +84,8 @@ public class GameRender{
 
     private Timeline leafSpawner;
     private boolean leafTouchable = true;
+    private Level level;
+
     private void setupLeafSpawning() {
         leafSpawner = new Timeline(new KeyFrame(Duration.seconds(10), e -> spawnLeafRandomly()));
         leafSpawner.setCycleCount(Timeline.INDEFINITE);
@@ -268,13 +268,13 @@ public class GameRender{
 
         Platform.runLater(() -> {
             try {
-                Alert quizAlert = new Alert(Alert.AlertType.CONFIRMATION);
-                quizAlert.setTitle("Quiz Time");
-                // Setup and show the alert as before
-                updateScore(500);
+                showMultipleChoiceTest();
+//                Alert quizAlert = new Alert(Alert.AlertType.CONFIRMATION);
+//                quizAlert.setTitle("Quiz Time");
+//                // Setup and show the alert as before
                 movingLeft = false;
                 movingRight = false;
-                quizAlert.showAndWait();
+//                quizAlert.showAndWait();
             } finally {
                 gameLoop.start(); // Restart the animation
             }
@@ -375,7 +375,7 @@ public class GameRender{
 
         if(currentLives == 0)
         {
-            Platform.runLater(() -> showGameOverDialog());;
+            Platform.runLater(this::showGameOverDialog);;
         }
     }
 
@@ -633,6 +633,7 @@ public class GameRender{
 
 
     public void loadLevel(Level levels, int currentStage) {
+        this.level = levels;
         List<Boulder> x = levels.getBoulders();
         platforms = new ArrayList<>();
         platformTypes = new ArrayList<>();
@@ -697,6 +698,76 @@ public class GameRender{
         }
     }
 
-    public void loadLevel(List<Level> levels) {
+    private void showMultipleChoiceTest() {
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL); // Block input to other windows
+        popupStage.setTitle("Multiple Choice Test");
+
+        VBox layout = new VBox(10);
+        layout.setAlignment(Pos.CENTER);
+        var questionList = this.level.getQuestions();
+        Random random = new Random();
+        int min = 0; // Define minimum value, inclusive
+        int max = 10; // Define maximum value, exclusive
+        int randomNumber = random.nextInt(max - min) + min;
+
+        var question = questionList.get(randomNumber);
+
+        // Question
+        RadioButton optionA = new RadioButton(question.getOptions().get(0));
+        RadioButton optionB = new RadioButton(question.getOptions().get(1));
+        RadioButton optionC = new RadioButton(question.getOptions().get(2));
+        RadioButton optionD = new RadioButton(question.getOptions().get(3));
+
+        optionA.setUserData("A");
+        optionB.setUserData("B");
+        optionC.setUserData("C");
+        optionD.setUserData("D");
+        // Group the radio buttons
+        Label questionPrompt = new Label(question.getQuestion());
+        questionPrompt.setFont(new Font("Arial", 16));
+        questionPrompt.setStyle("-fx-font-weight: bold; -fx-padding: 10;");
+        questionPrompt.setWrapText(true);
+
+
+        ToggleGroup optionsGroup = new ToggleGroup();
+        optionA.setToggleGroup(optionsGroup);
+        optionB.setToggleGroup(optionsGroup);
+        optionC.setToggleGroup(optionsGroup);
+        optionD.setToggleGroup(optionsGroup);
+
+        Button submitButton = new Button("Submit");
+        submitButton.setOnAction(e -> {
+            RadioButton selectedRadioButton = (RadioButton) optionsGroup.getSelectedToggle();
+            if (selectedRadioButton != null) {
+                String answer = question.getAnswer();
+                // Check the answer
+                if (answer.equals(selectedRadioButton.getUserData())) {
+                    showResult("Correct!");
+                    updateScore(500);
+                } else {
+                    showResult("Wrong answer.");
+                }
+
+                popupStage.close(); // Close the popup
+            }
+        });
+
+        layout.getChildren().addAll(questionPrompt, optionA, optionB, optionC, optionD, submitButton);
+
+        Scene scene = new Scene(layout, 500, 500);
+        popupStage.setScene(scene);
+        popupStage.showAndWait(); // Show and wait for it to be closed
     }
+
+    private void showResult(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Result");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+
+
 }
