@@ -196,6 +196,13 @@
           "height": 100,
           "width": 100,
           "type": "FENCE"
+        },
+        {
+          "x": 950,
+          "y": 600,
+          "height": 100,
+          "width": 100,
+          "type": "FENCE"
         }
       ]
     },
