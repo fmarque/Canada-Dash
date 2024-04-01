@@ -17,7 +17,7 @@ public class Fence extends GameUnit {
         super(givenX, givenY);
         height = 30;
         width = 40;
-        imageAdd = "src/main/resources/com/group47/canadadash/fence.png";
+        imageAdd = "src/main/resources/images/fence.png";
     }
 
 

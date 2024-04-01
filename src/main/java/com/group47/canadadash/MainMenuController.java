@@ -1,5 +1,6 @@
 package com.group47.canadadash;
 
+import com.group47.canadadash.processing.App;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,13 @@ public class MainMenuController {
    private Stage stage;
    private Scene scene;
    private Parent root;
+   private App app;
+
+
+   public void setApp(App app) {
+      this.app = app;
+   }
+
 
    //TODO: load player's last saved progress (must be dynamic, NOT just fxml)
    public void loadSavedGame(ActionEvent event) throws IOException {
