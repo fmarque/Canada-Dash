@@ -7,6 +7,19 @@ import java.util.Set;
 import java.util.Random;
 import java.util.Scanner;
 
+
+/**
+ * Central application class managing user accounts, level data, and application state.
+ * <p>
+ * This class is responsible for loading and saving user data and level content, managing user sessions,
+ * and providing access to application-wide resources such as levels and user information. It follows
+ * a singleton pattern to ensure a single instance manages the state and functionality throughout the application lifecycle.
+ * </p>
+ *
+ * @author Muhammad Affan Yasir
+ * @version: 1.0
+ * @since: 1.0
+ */
 public class App{
 
     final String relativePathContentFile = "/data/metaData/content.json";
@@ -22,12 +35,20 @@ public class App{
     private static App instance;
 
 
+    /**
+     * Initializes a new instance of the App class, setting up containers for levels, users,
+     * and instructor class codes.
+     */
     public App() {
         this.levels = new ArrayList<>();
         this.user = null;
         this.instructorClassCodes = new HashSet<>();
     }
 
+    /**
+     * Loads application data including levels and user information from external JSON files.
+     * Populates application state with these data.
+     */
     public void loadData() {
 
         LevelsContainer levelsContainer = Util.readJsonFromFile(rootPath + relativePathContentFile, LevelsContainer.class);
@@ -61,6 +82,14 @@ public class App{
         }
     }
 
+    /**
+     * Creates a new account with the specified credentials and user type.
+     *
+     * @param username The username for the new account.
+     * @param password The password for the new account.
+     * @param type     The type of the account (instructor or student).
+     * @return True if the account was successfully created, false otherwise.
+     */
     public Boolean createAccount(String username, String password, String type) {
 
         if (this.userContainer.getUsers().containsKey(username)) {
@@ -85,6 +114,11 @@ public class App{
         }
     }
 
+    /**
+     * Generates a unique class code for instructor accounts.
+     *
+     * @return A randomly generated class code.
+     */
     private String generateClassCode() {
 
         Random random = new Random();
@@ -104,6 +138,14 @@ public class App{
         return classCode.length() > 6 ? classCode.substring(0, 6) : classCode.toString();
     }
 
+    /**
+     * Attempts to sign in a user with the provided credentials.
+     *
+     * @param username The username of the account.
+     * @param password The password of the account.
+     * @param type     The expected type of the account.
+     * @return True if the sign-in was successful, false otherwise.
+     */
     public Boolean signIn(String username, String password, String type){
 
         User existingUser = this.userContainer.getUser(username);
@@ -116,6 +158,9 @@ public class App{
 
     }
 
+    /**
+     * Saves the current state of the user data to an external JSON file.
+     */
    public void userSave() {
 
         if (user == null){
@@ -127,6 +172,11 @@ public class App{
 
    }
 
+    /**
+     * Updates the user's total points based on the current game session.
+     *
+     * @param currentPoints The points earned in the current session.
+     */
     public void updatePoints(int currentPoints) {
         if (user == null) {
             return;
@@ -140,10 +190,21 @@ public class App{
         }
     }
 
+    /**
+     * Validates if a provided class code is valid and exists within the application.
+     *
+     * @param classCode The class code to validate.
+     * @return True if the class code is valid, false otherwise.
+     */
     public boolean isValidClassCode(String classCode) {
         return instructorClassCodes.contains(classCode);
     }
 
+    /**
+     * Retrieves the unlock status for all levels based on the user's progress.
+     *
+     * @return An array of booleans representing the unlock status of each level.
+     */
     public boolean[] getUnlockedLevelsStatus() {
         if (user == null || levels.isEmpty()) {
             return new boolean[0];
@@ -159,6 +220,11 @@ public class App{
         return unlockedStatus;
     }
 
+    /**
+     * Gets a list of students registered under the currently signed-in instructor.
+     *
+     * @return A list of User objects representing the instructor's students.
+     */
     public List<User> getStudentsForInstructor() {
         List<User> studentsForInstructor = new ArrayList<>();
 
@@ -175,6 +241,12 @@ public class App{
         return studentsForInstructor;
     }
 
+
+    /**
+     * Retrieves the singleton instance of the App class, loading data if necessary.
+     *
+     * @return The singleton instance of the App class.
+     */
     public static App getInstance() {
         if (instance == null) {
             instance = new App();
@@ -183,8 +255,22 @@ public class App{
         return instance;
     }
 
+    /**
+     * Gets the list of levels loaded into the application.
+     *
+     * @return A list of Level objects representing the levels in the application.
+     */
     public List<Level> getLevels() {
         return levels;
+    }
+
+    /**
+     * Gets a list of all users registered in the application.
+     *
+     * @return A list of User objects representing all registered users.
+     */
+    public List<User> getUserList(){
+        return new ArrayList<>(userContainer.getUsers().values());
     }
 
 

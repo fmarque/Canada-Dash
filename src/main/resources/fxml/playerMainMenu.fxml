@@ -58,7 +58,7 @@
                   <Font name="Comic Sans MS Bold" size="26.0" />
                </font>
             </Button>
-            <Button layoutX="494.0" layoutY="407.0" mnemonicParsing="false" onAction="#playerViewScores" prefHeight="40.0" prefWidth="293.0" text="View Highscores" textFill="#a40b0b">
+            <Button layoutX="494.0" layoutY="407.0" mnemonicParsing="false" onAction="#viewHighscores" prefHeight="40.0" prefWidth="293.0" text="View Highscores" textFill="#a40b0b">
                <font>
                   <Font name="Comic Sans MS Bold" size="26.0" />
                </font>
