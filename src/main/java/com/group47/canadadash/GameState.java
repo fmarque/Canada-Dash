@@ -1,6 +1,7 @@
 package com.group47.canadadash;
 
 import java.util.ArrayList;
+import java.util.ArrayList.*;
 
 /**
  * This class represents the state of the game
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 public class GameState {
 
     private int maxLives = 5;
+    private boolean lost;
     private ArrayList<Heart> lives;
     private ArrayList<Star> checkpoints;
     private ArrayList<Leaf> leaves;
@@ -41,6 +43,7 @@ public class GameState {
 
         totalPoints = 0;
         province = "";
+        lost = false;
     }
 
     /**
@@ -79,10 +82,14 @@ public class GameState {
      * decrease a life by one,
      */
     public void loseLife(){
-        if(!lives.isEmpty())
-        {
-            lives.removeFirst();
+        for (int i = 0; i < 5; i++) {
+            if (lives.get(i).isFullHeart()){
+                lives.get(i).setHeart(false);
+                return;
+            }
         }
+        lost = true;
+
     }
 
     /**
@@ -259,5 +266,21 @@ public class GameState {
      */
     public void setPause(boolean pause) {
         this.pause = pause;
+    }
+
+    /**
+     * check whether the player is still eligible to play
+     * @return true, if the user lost the game
+     */
+    public boolean isLost() {
+        return lost;
+    }
+
+    /**
+     *
+     * @param lost set if the user can play or not
+     */
+    public void setLost(boolean lost){
+        this.lost = lost;
     }
 }
