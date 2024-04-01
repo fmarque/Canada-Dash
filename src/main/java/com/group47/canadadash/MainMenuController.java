@@ -100,15 +100,6 @@ public class MainMenuController {
       stage.show();
    }
 
-   public void viewSHighscores(ActionEvent event) throws IOException {
-
-   }
-
-   public void loadPlayerAnalytics (ActionEvent event) throws IOException {
-      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/instructorLogin.fxml")));
-      stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
-      scene = new Scene(root);
-      stage.setScene(scene);
-      stage.show();
+   public void viewSHighscores(ActionEvent actionEvent) throws IOException{
    }
 }
