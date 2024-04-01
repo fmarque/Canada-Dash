@@ -33,7 +33,7 @@
             <Blend />
          </effect>
       </Button>
-      <Button blendMode="SRC_ATOP" depthTest="ENABLE" layoutX="205.0" layoutY="254.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="190.0" style="-fx-background-color: transparent; -fx-background-radius: 20; -fx-text-fill: black; -fx-font-size: 30;" text="YES" textFill="#0d0d0d">
+      <Button onAction="#handelSaveBtn" blendMode="SRC_ATOP" depthTest="ENABLE" layoutX="205.0" layoutY="254.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="190.0" style="-fx-background-color: transparent; -fx-background-radius: 20; -fx-text-fill: black; -fx-font-size: 30;" text="YES" textFill="#0d0d0d">
          <font>
             <Font name="Comic Sans MS" size="32.0" />
          </font>
