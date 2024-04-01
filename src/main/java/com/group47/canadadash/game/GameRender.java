@@ -1,15 +1,19 @@
 package com.group47.canadadash.game;
 
 import com.group47.canadadash.GameState;
+import com.group47.canadadash.processing.Boulder;
+import com.group47.canadadash.processing.BoulderType;
 import com.group47.canadadash.processing.Level;
 import javafx.animation.AnimationTimer;
-import javafx.application.Application;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
@@ -22,11 +26,12 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
+import java.net.URL;
+import java.util.*;
 
 import javafx.stage.Modality;
 import javafx.scene.control.Button;
+import javafx.util.Duration;
 
 //import javax.swing.*;
 
@@ -55,10 +60,12 @@ public class GameRender{
     private double playerVelocityY = 0;
     private boolean onGround = false;
     private AnimationTimer gameLoop;
-    private Rectangle platform = new Rectangle(100, 450, 6000, 50); // x, y, width, height
+    private Rectangle platform = new Rectangle(0, 450, 1000, 250); // x, y, width, height
     private Rectangle obstacle = new Rectangle(WIDTH / 2 - 20, HEIGHT / 2, 100, 100);
 
-    private Rectangle leaf = new Rectangle(WIDTH / 2 + 50, HEIGHT / 2 + 50, 100, 100);
+    private List<ImageView> platforms;
+    private List<Integer> platformTypes;
+    private ImageView leaf;
 
     //UI elements
     private Text scoreText;
@@ -69,6 +76,45 @@ public class GameRender{
     private final Image emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/emptyHeartIcon.png")));
     private HBox heartsContainer;
 
+    private int jumpDelayCounter = 0;
+    private final int JUMP_DELAY_FRAMES = 5; // Number of frames to skip ground check after jumping
+
+    private Timeline leafSpawner;
+    private boolean leafTouchable = true;
+    private void setupLeafSpawning() {
+        leafSpawner = new Timeline(new KeyFrame(Duration.seconds(10), e -> spawnLeafRandomly()));
+        leafSpawner.setCycleCount(Timeline.INDEFINITE);
+        leafSpawner.play();
+    }
+
+    private void spawnLeafRandomly() {
+        Random rand = new Random();
+
+        double leftBoundary = (double) WIDTH / 2 - 200;
+        double rightBoundary = (double) WIDTH / 2 + 200;
+
+        double maxX = leftBoundary + (rightBoundary - leftBoundary) * rand.nextDouble();
+        double minY = 0.0;
+        double maxY = HEIGHT - leaf.getImage().getHeight();
+
+        leaf.setX(maxX);
+        leaf.setY(minY + (maxY - minY) * rand.nextDouble());
+        leaf.setVisible(true);
+        leafTouchable = true; // Allow the leaf to be touched again
+    }
+
+    private void initializeLeaf() {
+        Image leafImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/leaf.png")));
+        leaf = new ImageView(leafImage);
+        leaf.setVisible(false); // Initially hidden
+    }
+
+    private boolean checkCollisionWithLeaf(Rectangle playerRect) {
+        return playerRect.intersects(leaf.getBoundsInParent());
+    }
+
+
+
     private boolean isColliding(Rectangle player, Rectangle obstacle) {
         return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
     }
@@ -76,56 +122,129 @@ public class GameRender{
 
         Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
 
-        if (isColliding(playerRect, obstacle)) {
-            System.out.println("Player has touched the obstacle!");
-            updateScore(5);// Placeholder action
+        if (checkCollisionWithLeaf(playerRect)) {
+           if(leafTouchable)
+           {
+               showQuizPopup();
+           }
+            leafTouchable = false; // Prevent further touches until respawned
+        }
+        
+        if (jumpDelayCounter > 0) {
+            jumpDelayCounter--;
+        } else {
+            onGround = isPlayerOnGround(playerRect, platforms);
         }
 
-        if (isColliding(playerRect, leaf)) {
-            System.out.println("Player has touched the leaf!");
-            showNotification();
-        }
-
-
+        updateObstaclesPosition();
+        //onGround = isPlayerOnGround(playerRect, platforms);
         scrollBackgroundLeft();//background scrolls to left
+        handleHorizontalMovement(playerRect);
 
+//        double leftBoundary = (double) WIDTH / 2 - 200;
+//        if (movingLeft && playerX > leftBoundary) {
+//            playerX -= 5;
+//        }
+//        double rightBoundary = (double) WIDTH / 2 + 200;
+//        if (movingRight && playerX < rightBoundary) {
+//            playerX += 5;
+//        }
 
-        double leftBoundary = (double) WIDTH / 2 - 200;
-        if (movingLeft && playerX > leftBoundary) {
-            playerX -= 5;
+        for(int i =0; i < platforms.size(); i++)
+        {
+            if(isCollidingObstacle(playerRect, platforms.get(i)))
+            {
+                handlePlayerCollisionWithObstacle(i);
+            }
         }
-        double rightBoundary = (double) WIDTH / 2 + 200;
-        if (movingRight && playerX < rightBoundary) {
-            playerX += 5;
+
+
+        if (!onGround) {
+            playerVelocityY += GRAVITY;
+            playerY += playerVelocityY;
+        } else if (jumpDelayCounter == 0) {
+            playerVelocityY = 0; // Prevent further falling
         }
 
         // Update player's vertical position and velocity
-        if (!onGround)
-        {
-            // Apply gravity
+//        if (!onGround)
+//        {
+//            // Apply gravity
+//            playerVelocityY += GRAVITY; // Make sure you have a gravity variable defined, e.g., 0.5 or 1
+//            playerY += playerVelocityY;
+//
+//            // Prevent player from falling through the platform due to high velocity
+//            if (playerVelocityY > 0)
+//            { // Only check when coming down
+//                if (isColliding(playerRect, platform))
+//                {
+//                    onGround = true;
+//                    playerVelocityY = 0;
+//                    playerY = platform.getY() - playerHeight; // Adjust player to stand on top of the platform
+//                }
+//            }
+//        }
 
-            playerVelocityY += GRAVITY; // Make sure you have a gravity variable defined, e.g., 0.5 or 1
-            playerY += playerVelocityY;
 
-            // Prevent player from falling through the platform due to high velocity
-            if (playerVelocityY > 0)
-            { // Only check when coming down
-                if (isColliding(playerRect, platform))
-                {
-                    onGround = true;
-                    playerVelocityY = 0;
-                    playerY = platform.getY() - playerHeight; // Adjust player to stand on top of the platform
-                }
+
+
+//        // Update player's vertical position and velocity
+//        if (!onGround)
+//        {
+//            // Apply gravity
+//            playerVelocityY += GRAVITY; // Make sure you have a gravity variable defined, e.g., 0.5 or 1
+//            playerY += playerVelocityY;
+//
+//            // Prevent player from falling through the platform due to high velocity
+//            if (playerVelocityY > 0)
+//            { // Only check when coming down
+//                for (ImageView imageView : platforms) {
+//                    if (isCollidingObstacle(playerRect, imageView)) {
+//                        onGround = true;
+//                        playerVelocityY = 0;
+//                        playerY = imageView.getY() - playerHeight; // Adjust player to stand on top of the platform
+//                    }
+//                }
+//
+//            }
+//        }
+//        else {
+//            playerVelocityY = 0;
+//        }
+
+
+
+
+            if (isCollidingFromBelow(playerRect)) {
+                playerVelocityY = 10; // Example knockdown velocity
+                onGround = false;
             }
-        }
+
 
         if (playerY >= HEIGHT - playerHeight) {
             playerY = HEIGHT - playerHeight;
             onGround = true;
             playerVelocityY = 0;
         }
-
     }
+
+    private void showQuizPopup() {
+        // Assuming you have an AnimationTimer named 'animationTimer'
+        gameLoop.stop(); // Stop the animation
+
+        Platform.runLater(() -> {
+            try {
+                Alert quizAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                quizAlert.setTitle("Quiz Time");
+                // Setup and show the alert as before
+                updateScore(500);
+                quizAlert.showAndWait();
+            } finally {
+                gameLoop.start(); // Restart the animation
+            }
+        });
+    }
+
 
     private void scrollBackgroundLeft() {
         backgroundX -= scrollSpeed;
@@ -169,12 +288,10 @@ public class GameRender{
         gc.setFill(Color.GREEN); // Set the obstacle color
         gc.fillRect(platform.getX(), platform.getY(), platform.getWidth(), platform.getHeight());
 
-        // Draw the obstacle
-        gc.setFill(Color.BLUE); // Set the obstacle color
-        gc.fillRect(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getHeight());
+        for (ImageView imageView : platforms) {
+            gc.drawImage(imageView.getImage(), imageView.getX(), imageView.getY());
+        }
 
-        gc.setFill(Color.GOLD);
-        gc.fillRect(leaf.getX(), leaf.getY(), leaf.getWidth(), leaf.getHeight());
 
     }
 
@@ -188,7 +305,6 @@ public class GameRender{
             } else {
                 heartView.setImage(emptyHeart);
             }
-            // todo half heart
         }
     }
 
@@ -225,11 +341,23 @@ public class GameRender{
 
 
         //UI elements INI
-        StackPane uiLayer = new StackPane();
-        uiLayer.getChildren().add(heartsContainer);
-        uiLayer.getChildren().add(scoreText);
+        AnchorPane uiLayer = new AnchorPane();
 
-        uiLayer.getChildren().add(pauseButton);
+// Place heartsContainer in the top-left corner
+        AnchorPane.setTopAnchor(heartsContainer, 10.0);
+        AnchorPane.setLeftAnchor(heartsContainer, 10.0);
+
+// Place scoreText in the top-right corner
+        AnchorPane.setTopAnchor(scoreText, 10.0);
+        AnchorPane.setRightAnchor(scoreText, 10.0);
+
+// Place pauseButton in the bottom-right corner
+        AnchorPane.setBottomAnchor(pauseButton, 10.0);
+        AnchorPane.setRightAnchor(pauseButton, 10.0);
+        uiLayer.setPrefSize(WIDTH, HEIGHT);
+        uiLayer.getChildren().addAll(heartsContainer, scoreText, pauseButton);
+
+
 
         internalGameState = new GameState();
         Group root = new Group();
@@ -237,9 +365,10 @@ public class GameRender{
         playerY = platform.getY() - playerHeight;//puts player on the ground
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         root.getChildren().add(canvas);
-
         root.getChildren().add(uiLayer);
-
+        initializeLeaf();
+        setupLeafSpawning();
+        root.getChildren().add(leaf);
         gc = canvas.getGraphicsContext2D();
         backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/background.png")));
         backgroundX2 = backgroundImage.getWidth();
@@ -337,8 +466,85 @@ public class GameRender{
         if (onGround) {
             playerVelocityY = -20; // Adjust this value to change jump height
             onGround = false;
+            System.out.println(playerVelocityY);
         }
     }
+
+    private boolean isPlayerOnGround(Rectangle player, List<ImageView> obstacles) {
+        double playerBottomY = player.getY() + player.getHeight();
+        double nextFrameBottomY = playerBottomY + playerVelocityY; // Predict next position
+        double tolerance = 5; // Tolerance for fast movements
+
+      //  System.out.println("Player Bottom Y: " + playerBottomY + ", Velocity: " + playerVelocityY);
+
+        double nextFrameY = player.getY() + playerVelocityY;
+        for (ImageView platform : platforms) {
+            if (nextFrameY + player.getHeight() > platform.getY() &&
+                    nextFrameY < platform.getY() + platform.getFitHeight() &&
+                    player.getX() < platform.getX() + platform.getFitWidth() &&
+                    player.getX() + player.getWidth() > platform.getX()) {
+                return true;
+            }
+        }
+
+        double platformTopY = platform.getY();
+        if (nextFrameBottomY > platformTopY && playerBottomY <= platformTopY + tolerance) {
+            System.out.println("Collision with Main Platform at Y: " + platformTopY);
+            playerVelocityY = 0;
+            player.setY(platformTopY - player.getHeight()); // Adjust position to top of platform
+            return true;
+        }
+
+        return false; // In the air
+    }
+
+
+    private boolean isCollidingFromBelow(Rectangle player) {
+        for (ImageView platform : platforms) {
+            if (player.getY() < platform.getY() + platform.getFitHeight() &&
+                    player.getY() + playerVelocityY > platform.getY() + platform.getFitHeight() &&
+                    player.getX() < platform.getX() + platform.getFitWidth() &&
+                    player.getX() + player.getWidth() > platform.getX()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void handleHorizontalMovement(Rectangle playerRect) {
+        double leftBoundary = (double) WIDTH / 2 - 400;
+        double rightBoundary = (double) WIDTH / 2 + 400;
+
+        if (movingLeft && playerX > leftBoundary) {
+            // Predictive check for left movement
+            if (!isCollidingHorizontally(new Rectangle(playerX - 5, playerY, playerWidth, playerHeight))) {
+                playerX -= 5;
+            }
+        }
+        if (movingRight && playerX < rightBoundary) {
+            // Predictive check for right movement
+            if (!isCollidingHorizontally(new Rectangle(playerX + 5, playerY, playerWidth, playerHeight))) {
+                playerX += 5;
+            }
+        }
+    }
+
+    private boolean isCollidingHorizontally(Rectangle predictedPosition) {
+        for (ImageView platform : platforms) {
+            if (predictedPosition.intersects(platform.getBoundsInParent())) {
+                return true; // Collision predicted with this movement
+            }
+        }
+        return false;
+    }
+
+    private void handleCollisionFromBelow() {
+        // Example of applying a knockdown effect
+        // Set the player's velocity to simulate being knocked downwards
+        playerVelocityY = 10; // Adjust the value based on the desired knockdown effect
+        onGround = false; // Ensure gravity takes over after the initial knockdown impulse
+    }
+
 
     private void showMap() throws IOException {
         gameLoop.stop();
@@ -360,6 +566,72 @@ public class GameRender{
         gameLoop.start();
     }
 
+
+    public void loadLevel(Level levels, int currentStage) {
+        List<Boulder> x = levels.getBoulders();
+        platforms = new ArrayList<>();
+        platformTypes = new ArrayList<>();
+        for (Boulder boulder : x) {
+            if (boulder.type == BoulderType.FENCE) {
+                URL resourceUrl = getClass().getResource("/images/fence.png");
+                assert resourceUrl != null;
+                platforms.add(createPlatform(boulder.x, HEIGHT - boulder.y + 450, boulder.width, boulder.height, resourceUrl));
+                platformTypes.add(0);
+            }
+
+            if (boulder.type == BoulderType.BOX) {
+                URL resourceUrl = getClass().getResource("/images/object.png");
+                assert resourceUrl != null;
+                platforms.add(createPlatform(boulder.x, HEIGHT - boulder.y + 450, boulder.width, boulder.height, resourceUrl));
+                platformTypes.add(1);
+            }
+        }
+    }
+
+    private ImageView createPlatform(int x, int y, int width, int height, URL imagePath) {
+        Image image = new Image(imagePath.toExternalForm());
+        ImageView imageView = new ImageView(image);
+        imageView.setX(x);
+        imageView.setY(y);
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
+        imageView.setPreserveRatio(true);
+        return imageView;
+    }
+
+    private void updateObstaclesPosition() {
+        for (ImageView obstacle : platforms) {
+            obstacle.setX(obstacle.getX() - scrollSpeed);
+            // Reset position if it goes off-screen, or apply other logic
+
+            // Check if the obstacle has moved off the left side of the screen
+            if (obstacle.getX() + obstacle.getFitWidth() < 0) {
+                // Reset its position to the right side of the screen
+                obstacle.setX(WIDTH + obstacle.getFitWidth());
+                // Optionally, randomize the Y position to vary the appearance
+                obstacle.setY(Math.random() * (HEIGHT - obstacle.getFitHeight()));
+            }
+        }
+    }
+
+    private boolean isCollidingObstacle(Rectangle player, ImageView obstacle) {
+        return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
+    }
+
+    private void applyDamageToPlayer() {
+        internalGameState.loseLife();
+        updateLives(internalGameState.getLives());
+    }
+
+    private void handlePlayerCollisionWithObstacle(int index) {
+        switch (index) {
+            case 0:
+                applyDamageToPlayer();
+                break;
+            case 1:
+                break;
+        }
+    }
 
     public void loadLevel(List<Level> levels) {
     }
