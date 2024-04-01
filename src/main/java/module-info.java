@@ -12,9 +12,10 @@ module com.group47.canadadash {
 
     opens com.group47.canadadash to javafx.fxml, com.google.gson; // Correct this line
     exports com.group47.canadadash;
-    opens com.group47.canadadash.processing to com.google.gson;
+    opens com.group47.canadadash.processing to com.google.gson, javafx.base;
     exports com.group47.canadadash.game to javafx.fxml, javafx.graphics;
     opens com.group47.canadadash.game to javafx.fxml, javafx.graphics;
+
 
     //Allows game to be rendered
 
