@@ -613,4 +613,6 @@ public class GameRender{
         }
     }
 
+    public void loadLevel(List<Level> levels) {
+    }
 }

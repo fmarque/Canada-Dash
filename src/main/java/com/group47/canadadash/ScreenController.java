@@ -36,6 +36,12 @@ public class ScreenController implements Initializable {
     private PasswordField passHidden;
 
 
+    public void setApp(App app) {
+        this.app = app;
+        System.out.println("App instance set in MainMenuController: " + app);
+    }
+
+
     public void switchToPLogin (ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/playerLogin.fxml")));
         stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
@@ -230,6 +236,8 @@ public class ScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        app = App.getInstance();
         try {
             this.togglevisiblePassword(null);
         } catch (IOException e) {

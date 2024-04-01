@@ -12,12 +12,13 @@ public class App{
     final String relativePathContentFile = "/data/metaData/content.json";
     final String relativePathUserFIle = "/data/userData/user.json";
     final String rootPath = Util.getRootPath();
-
     private List<Level> levels;
 
     public User user;
     private UserContainer userContainer;
     private Set<String> instructorClassCodes;
+
+    private static App instance;
 
 
     public App() {
@@ -157,7 +158,7 @@ public class App{
         return unlockedStatus;
     }
 
-    public List<User> getStudentsForLoggedInInstructor() {
+    public List<User> getStudentsForInstructor() {
         List<User> studentsForInstructor = new ArrayList<>();
 
         if (this.user != null && "instructor".equalsIgnoreCase(this.user.getType()) && this.user.getClassCode() != null) {
@@ -171,6 +172,14 @@ public class App{
         }
 
         return studentsForInstructor;
+    }
+
+    public static App getInstance() {
+        if (instance == null) {
+            instance = new App();
+            instance.loadData();
+        }
+        return instance;
     }
 
     public List<Level> getLevels() {
