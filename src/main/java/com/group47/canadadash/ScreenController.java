@@ -31,7 +31,7 @@ public class ScreenController implements Initializable {
     @FXML
     private TextField username, password, type, classCode;
     @FXML
-    private Text instruction;
+    private Text instruction, iCode;
     @FXML
     private PasswordField passHidden;
 
@@ -109,10 +109,7 @@ public class ScreenController implements Initializable {
         passHidden.setVisible(true);
         password.setVisible(false);
     }
-    private String passwordValue() {
-        return togglePassword.isSelected()?
-                password.getText(): passHidden.getText();
-    }
+
     public void checkPLoginInfo(ActionEvent event) throws IOException {
         app = new App();
         app.loadData();
@@ -177,19 +174,31 @@ public class ScreenController implements Initializable {
         // if username is already taken, let user know
         if (app.signIn(username.getText(), passHidden.getText(), "instructor")) {
             instruction.setText("Username Already Taken. Try again");
-            System.out.println("hello i reach here");
         } else {
             // if valid username, then generate class code and create user
             boolean accountCreated = app.createAccount(username.getText(), password.getText(), "instructor");
             if (accountCreated) {
             app.userSave();
-            switchToILogin(event);
+            switchToCodePopup(event);
+            // show popup of generated access code
+                // switch to login when proceed is clicked
+            //switchToILogin(event);
             }
         }
         instruction.setText("Username Already Taken. Try again");
     }
 
+    public void switchToCodePopup (ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/instCodePopup.fxml")));
+        stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
+        scene = new Scene(root);
+        stage.setScene(scene);
 
+        iCode.setText("hewwo");
+
+        stage.show();
+
+    }
     public void switchToPMenu (ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/playerMainMenu.fxml")));
         stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
