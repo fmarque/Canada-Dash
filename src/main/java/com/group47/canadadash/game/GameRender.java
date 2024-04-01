@@ -7,24 +7,19 @@ import com.group47.canadadash.processing.Level;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.Group;
@@ -65,7 +60,7 @@ public class GameRender{
     private double playerVelocityY = 0;
     private boolean onGround = false;
     private AnimationTimer gameLoop;
-    private Rectangle platform = new Rectangle(100, 450, 6000, 50); // x, y, width, height
+    private Rectangle platform = new Rectangle(0, 450, 1000, 250); // x, y, width, height
     private Rectangle obstacle = new Rectangle(WIDTH / 2 - 20, HEIGHT / 2, 100, 100);
 
     private List<ImageView> platforms;
@@ -98,12 +93,9 @@ public class GameRender{
         double leftBoundary = (double) WIDTH / 2 - 200;
         double rightBoundary = (double) WIDTH / 2 + 200;
 
-        double minX = 0.0;
         double maxX = leftBoundary + (rightBoundary - leftBoundary) * rand.nextDouble();
         double minY = 0.0;
         double maxY = HEIGHT - leaf.getImage().getHeight();
-
-
 
         leaf.setX(maxX);
         leaf.setY(minY + (maxY - minY) * rand.nextDouble());
@@ -138,33 +130,25 @@ public class GameRender{
             leafTouchable = false; // Prevent further touches until respawned
         }
         
-        
-        
         if (jumpDelayCounter > 0) {
             jumpDelayCounter--;
         } else {
-            onGround = isPlayerOnGround(new Rectangle(playerX, playerY, playerWidth, playerHeight), platforms);
+            onGround = isPlayerOnGround(playerRect, platforms);
         }
 
         updateObstaclesPosition();
-        if (isColliding(playerRect, obstacle)) {
-            System.out.println("Player has touched the obstacle!");
-            updateScore(5);// Placeholder action
-        }
-
-
         //onGround = isPlayerOnGround(playerRect, platforms);
         scrollBackgroundLeft();//background scrolls to left
+        handleHorizontalMovement(playerRect);
 
-
-        double leftBoundary = (double) WIDTH / 2 - 200;
-        if (movingLeft && playerX > leftBoundary) {
-            playerX -= 5;
-        }
-        double rightBoundary = (double) WIDTH / 2 + 200;
-        if (movingRight && playerX < rightBoundary) {
-            playerX += 5;
-        }
+//        double leftBoundary = (double) WIDTH / 2 - 200;
+//        if (movingLeft && playerX > leftBoundary) {
+//            playerX -= 5;
+//        }
+//        double rightBoundary = (double) WIDTH / 2 + 200;
+//        if (movingRight && playerX < rightBoundary) {
+//            playerX += 5;
+//        }
 
         for(int i =0; i < platforms.size(); i++)
         {
@@ -230,12 +214,12 @@ public class GameRender{
 
 
 
-        for (ImageView obstacle : platforms) {
-            if (isCollidingFromBelow(playerRect, obstacle)) {
-                handleCollisionFromBelow();
-                break; // Assuming only one collision is handled per frame
+
+            if (isCollidingFromBelow(playerRect)) {
+                playerVelocityY = 10; // Example knockdown velocity
+                onGround = false;
             }
-        }
+
 
         if (playerY >= HEIGHT - playerHeight) {
             playerY = HEIGHT - playerHeight;
@@ -253,6 +237,7 @@ public class GameRender{
                 Alert quizAlert = new Alert(Alert.AlertType.CONFIRMATION);
                 quizAlert.setTitle("Quiz Time");
                 // Setup and show the alert as before
+                updateScore(500);
                 quizAlert.showAndWait();
             } finally {
                 gameLoop.start(); // Restart the animation
@@ -303,10 +288,6 @@ public class GameRender{
         gc.setFill(Color.GREEN); // Set the obstacle color
         gc.fillRect(platform.getX(), platform.getY(), platform.getWidth(), platform.getHeight());
 
-        // Draw the obstacle
-        gc.setFill(Color.BLUE); // Set the obstacle color
-        gc.fillRect(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getHeight());
-        
         for (ImageView imageView : platforms) {
             gc.drawImage(imageView.getImage(), imageView.getX(), imageView.getY());
         }
@@ -494,14 +475,14 @@ public class GameRender{
         double nextFrameBottomY = playerBottomY + playerVelocityY; // Predict next position
         double tolerance = 5; // Tolerance for fast movements
 
-        System.out.println("Player Bottom Y: " + playerBottomY + ", Velocity: " + playerVelocityY);
+      //  System.out.println("Player Bottom Y: " + playerBottomY + ", Velocity: " + playerVelocityY);
 
-        for (ImageView obstacle : obstacles) {
-            double obstacleTopY = obstacle.getY();
-            if (nextFrameBottomY > obstacleTopY && playerBottomY <= obstacleTopY) {
-                System.out.println("Collision with Obstacle at Y: " + obstacleTopY);
-                playerVelocityY = 0;
-                player.setY(obstacleTopY - player.getHeight()); // Adjust position to top of obstacle
+        double nextFrameY = player.getY() + playerVelocityY;
+        for (ImageView platform : platforms) {
+            if (nextFrameY + player.getHeight() > platform.getY() &&
+                    nextFrameY < platform.getY() + platform.getFitHeight() &&
+                    player.getX() < platform.getX() + platform.getFitWidth() &&
+                    player.getX() + player.getWidth() > platform.getX()) {
                 return true;
             }
         }
@@ -518,13 +499,41 @@ public class GameRender{
     }
 
 
-    private boolean isCollidingFromBelow(Rectangle player, ImageView obstacle) {
-        double playerTopY = player.getY();
-        double obstacleBottomY = obstacle.getY() + obstacle.getFitHeight();
+    private boolean isCollidingFromBelow(Rectangle player) {
+        for (ImageView platform : platforms) {
+            if (player.getY() < platform.getY() + platform.getFitHeight() &&
+                    player.getY() + playerVelocityY > platform.getY() + platform.getFitHeight() &&
+                    player.getX() < platform.getX() + platform.getFitWidth() &&
+                    player.getX() + player.getWidth() > platform.getX()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-        // Check if the player is moving up and collides with the bottom edge of the obstacle
-        if (playerVelocityY < 0 && playerTopY <= obstacleBottomY && playerTopY + playerVelocityY > obstacleBottomY) {
-            return true;
+    private void handleHorizontalMovement(Rectangle playerRect) {
+        double leftBoundary = (double) WIDTH / 2 - 400;
+        double rightBoundary = (double) WIDTH / 2 + 400;
+
+        if (movingLeft && playerX > leftBoundary) {
+            // Predictive check for left movement
+            if (!isCollidingHorizontally(new Rectangle(playerX - 5, playerY, playerWidth, playerHeight))) {
+                playerX -= 5;
+            }
+        }
+        if (movingRight && playerX < rightBoundary) {
+            // Predictive check for right movement
+            if (!isCollidingHorizontally(new Rectangle(playerX + 5, playerY, playerWidth, playerHeight))) {
+                playerX += 5;
+            }
+        }
+    }
+
+    private boolean isCollidingHorizontally(Rectangle predictedPosition) {
+        for (ImageView platform : platforms) {
+            if (predictedPosition.intersects(platform.getBoundsInParent())) {
+                return true; // Collision predicted with this movement
+            }
         }
         return false;
     }
