@@ -48,8 +48,17 @@ public class MainMenuController {
    }
 
    // load the highscores amongst all students
-   public void instViewScores() {
+   public void instViewScores(ActionEvent event) throws IOException {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/instructorDashboard.fxml"));
+      Parent root = loader.load();
 
+      InstructorDashboardController dashboardController = loader.getController();
+      dashboardController.setStudents(app.getStudentsForLoggedInInstructor());
+
+      Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.show();
    }
 
    public void switchToTutPage(ActionEvent event) throws IOException {

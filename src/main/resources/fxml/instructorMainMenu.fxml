@@ -48,7 +48,7 @@
                         <Font name="Comic Sans MS Bold Italic" size="71.0" />
                     </font>
                 </Label>
-                <Button layoutX="483.0" layoutY="230.0" mnemonicParsing="false" onAction="#loadPlayerAnalytics" prefHeight="40.0" prefWidth="311.0" text="Load Player Analytics" textFill="#a40b0b">
+                <Button layoutX="483.0" layoutY="230.0" mnemonicParsing="false" onAction="#instViewScores" prefHeight="40.0" prefWidth="311.0" text="Instructor Dashboard" textFill="#a40b0b">
                     <font>
                         <Font name="Comic Sans MS Bold" size="26.0" />
                     </font></Button>

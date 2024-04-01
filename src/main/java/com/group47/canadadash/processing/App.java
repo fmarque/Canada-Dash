@@ -18,7 +18,6 @@ public class App{
     public User user;
     private UserContainer userContainer;
     private Set<String> instructorClassCodes;
-    private List<User> studentsForInstructor;
 
 
     public App() {
@@ -167,18 +166,20 @@ public class App{
         return unlockedStatus;
     }
 
-    public void updateStudentsForLoggedInInstructor() {
-        this.studentsForInstructor = new ArrayList<>();
+    public List<User> getStudentsForLoggedInInstructor() {
+        List<User> studentsForInstructor = new ArrayList<>();
 
         if (this.user != null && "instructor".equalsIgnoreCase(this.user.getType()) && this.user.getClassCode() != null) {
             String instructorClassCode = this.user.getClassCode();
 
             for (User potentialStudent : this.userContainer.getUsers().values()) {
                 if ("student".equalsIgnoreCase(potentialStudent.getType()) && instructorClassCode.equals(potentialStudent.getClassCode())) {
-                    this.studentsForInstructor.add(potentialStudent);
+                    studentsForInstructor.add(potentialStudent);
                 }
             }
         }
+
+        return studentsForInstructor;
     }
 
     public List<Level> getLevels() {

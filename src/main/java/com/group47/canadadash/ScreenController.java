@@ -201,7 +201,12 @@ public class ScreenController implements Initializable {
     }
 
     public void switchToIMenu (ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/instructorMainMenu.fxml")));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/instructorMainMenu.fxml"));
+        Parent root = loader.load();
+        MainMenuController mainMenuController = loader.getController();
+        mainMenuController.setApp(this.app);
+
         stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
         scene = new Scene(root);
         stage.setScene(scene);
