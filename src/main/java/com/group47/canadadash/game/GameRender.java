@@ -9,11 +9,12 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
@@ -30,7 +31,6 @@ import java.net.URL;
 import java.util.*;
 
 import javafx.stage.Modality;
-import javafx.scene.control.Button;
 import javafx.util.Duration;
 
 //import javax.swing.*;
@@ -39,7 +39,8 @@ public class GameRender{
 
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
-
+    private static final double SAFE_POS_X = 50;// X-coordinate of the safe position
+    private final double SAFE_POS_Y = 100; // Y-coordinate of the safe position
     private GameState internalGameState;
     private GraphicsContext gc;
     private Image backgroundImage;
@@ -47,7 +48,7 @@ public class GameRender{
     private double backgroundX = 0;
     private double backgroundX2;
 
-
+    private int currentPlayerLifeCounter = 5;
 
     // Player properties
     private double playerX = WIDTH / 2 - 20; // Center the player horizontally
@@ -61,11 +62,13 @@ public class GameRender{
     private boolean onGround = false;
     private AnimationTimer gameLoop;
     private Rectangle platform = new Rectangle(0, 450, 1000, 250); // x, y, width, height
+    private List<Rectangle> platformSegments = new ArrayList<>();
     private Rectangle obstacle = new Rectangle(WIDTH / 2 - 20, HEIGHT / 2, 100, 100);
 
     private List<ImageView> platforms;
     private List<Integer> platformTypes;
     private ImageView leaf;
+    private int lastCollisionIndex = -1;
 
     //UI elements
     private Text scoreText;
@@ -81,10 +84,23 @@ public class GameRender{
 
     private Timeline leafSpawner;
     private boolean leafTouchable = true;
+    private Level level;
+
     private void setupLeafSpawning() {
         leafSpawner = new Timeline(new KeyFrame(Duration.seconds(10), e -> spawnLeafRandomly()));
         leafSpawner.setCycleCount(Timeline.INDEFINITE);
         leafSpawner.play();
+    }
+
+    private void initializePlatformsWithPit() {
+        // Clear existing platform segments
+        platformSegments.clear();
+        // First platform segment before the pit
+        platformSegments.add(new Rectangle(0, 450, 300, 450)); // Adjust size as needed
+        // Second platform segment after the pit
+        platformSegments.add(new Rectangle(400, 450, 600, 450)); // Adjust position and size as needed
+
+        platformSegments.add(new Rectangle(800, 450, 600, 450)); // Adjust position and size as needed
     }
 
     private void spawnLeafRandomly() {
@@ -121,7 +137,7 @@ public class GameRender{
     private void update() throws IOException {
 
         Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
-
+        checkPlayerPosition();
         if (checkCollisionWithLeaf(playerRect)) {
            if(leafTouchable)
            {
@@ -136,10 +152,12 @@ public class GameRender{
             onGround = isPlayerOnGround(playerRect, platforms);
         }
 
+       // updateMovingGroundSegments();
+
         updateObstaclesPosition();
         //onGround = isPlayerOnGround(playerRect, platforms);
         scrollBackgroundLeft();//background scrolls to left
-        handleHorizontalMovement(playerRect);
+      //  handleHorizontalMovement(playerRect);
 
 //        double leftBoundary = (double) WIDTH / 2 - 200;
 //        if (movingLeft && playerX > leftBoundary) {
@@ -149,13 +167,29 @@ public class GameRender{
 //        if (movingRight && playerX < rightBoundary) {
 //            playerX += 5;
 //        }
+        double leftBoundary = (double) WIDTH / 2 - 400;
+        double rightBoundary = (double) WIDTH / 2 + 400;
+        double moveAmount = 5; // How much the player moves per update
+        double potentialNewX = playerX + (movingRight ? moveAmount : 0) - (movingLeft ? moveAmount : 0);
 
-        for(int i =0; i < platforms.size(); i++)
-        {
-            if(isCollidingObstacle(playerRect, platforms.get(i)))
-            {
-                handlePlayerCollisionWithObstacle(i);
+        // Check if the new position is within the allowed boundaries
+        if (potentialNewX > leftBoundary && potentialNewX < rightBoundary - playerWidth) {
+            playerX = potentialNewX;
+        }
+
+
+        boolean isCurrentlyColliding = false;
+        for (int i = 0; i < platforms.size(); i++) {
+            if (isCollidingObstacle(playerRect, platforms.get(i))) {
+                isCurrentlyColliding = true;
+                if (lastCollisionIndex != i) {
+                    handlePlayerCollisionWithObstacle(i);
+                    lastCollisionIndex = i;
+                }
             }
+        }
+        if (!isCurrentlyColliding) {
+            lastCollisionIndex = -1; // Reset if not colliding with any obstacle
         }
 
 
@@ -221,11 +255,11 @@ public class GameRender{
             }
 
 
-        if (playerY >= HEIGHT - playerHeight) {
-            playerY = HEIGHT - playerHeight;
-            onGround = true;
-            playerVelocityY = 0;
-        }
+//        if (playerY >= HEIGHT - playerHeight) {
+//            playerY = HEIGHT - playerHeight;
+//            onGround = true;
+//            playerVelocityY = 0;
+//        }
     }
 
     private void showQuizPopup() {
@@ -234,17 +268,44 @@ public class GameRender{
 
         Platform.runLater(() -> {
             try {
-                Alert quizAlert = new Alert(Alert.AlertType.CONFIRMATION);
-                quizAlert.setTitle("Quiz Time");
-                // Setup and show the alert as before
-                updateScore(500);
-                quizAlert.showAndWait();
+                showMultipleChoiceTest();
+//                Alert quizAlert = new Alert(Alert.AlertType.CONFIRMATION);
+//                quizAlert.setTitle("Quiz Time");
+//                // Setup and show the alert as before
+                movingLeft = false;
+                movingRight = false;
+//                quizAlert.showAndWait();
             } finally {
                 gameLoop.start(); // Restart the animation
             }
         });
     }
+    private void showGameOverDialog() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Game Over");
+        alert.setHeaderText("You've run out of lives!");
+        alert.setContentText("Would you like to restart?");
 
+        ButtonType buttonTypeRestart = new ButtonType("Restart");
+        ButtonType buttonTypeExit = new ButtonType("Exit", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeRestart, buttonTypeExit);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeRestart) {
+            // Restart the game
+         //   restartGame();
+        } else {
+            // Exit
+            Platform.exit();
+        }
+    }
+    private void restartGame() {
+        // Reset game state
+        // Setup initial game scene again
+        currentPlayerLifeCounter = 5;
+        createGameScene(); // Assume you have a method that creates the initial game scene
+    }
 
     private void scrollBackgroundLeft() {
         backgroundX -= scrollSpeed;
@@ -285,8 +346,13 @@ public class GameRender{
         gc.setFill(Color.RED); // Set the obstacle color
         gc.fillRect(playerX, playerY, playerWidth, playerHeight);
 
-        gc.setFill(Color.GREEN); // Set the obstacle color
-        gc.fillRect(platform.getX(), platform.getY(), platform.getWidth(), platform.getHeight());
+        gc.setFill(Color.GREEN); // Set the platform color
+        for (Rectangle segment : platformSegments) {
+            gc.fillRect(segment.getX(), segment.getY(), segment.getWidth(), segment.getHeight());
+        }
+
+//        gc.setFill(Color.GREEN); // Set the obstacle color
+//        gc.fillRect(platform.getX(), platform.getY(), platform.getWidth(), platform.getHeight());
 
         for (ImageView imageView : platforms) {
             gc.drawImage(imageView.getImage(), imageView.getX(), imageView.getY());
@@ -306,6 +372,11 @@ public class GameRender{
                 heartView.setImage(emptyHeart);
             }
         }
+
+        if(currentLives == 0)
+        {
+            Platform.runLater(this::showGameOverDialog);;
+        }
     }
 
     private void updateScore(int score) {
@@ -321,11 +392,16 @@ public class GameRender{
         scoreText.setFill(Color.BLACK); // Choose a color that fits your game's theme
 
         heartsContainer = new HBox(5); // Horizontal box with spacing of 5 pixels
-        for (int i = 0; i < 3; i++) {//todo link wiht heart state
+        for (int i = 0; i < currentPlayerLifeCounter; i++) {//todo link wiht heart state
             ImageView heartView = new ImageView(fullHeart);
+            heartView.setFitWidth(40); // Example width in pixels
+            heartView.setFitHeight(40); // Example height in pixels
+
+            // Preserve the aspect ratio (optional)
+            heartView.setPreserveRatio(true);
             heartsContainer.getChildren().add(heartView);
         }
-
+        currentPlayerLifeCounter--;
 
         Button pauseButton = new Button("Pause");
         pauseButton.setLayoutX(10); // Position the button; adjust as needed
@@ -368,6 +444,7 @@ public class GameRender{
         root.getChildren().add(uiLayer);
         initializeLeaf();
         setupLeafSpawning();
+        initializePlatformsWithPit();
         root.getChildren().add(leaf);
         gc = canvas.getGraphicsContext2D();
         backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/background.png")));
@@ -487,12 +564,23 @@ public class GameRender{
             }
         }
 
-        double platformTopY = platform.getY();
-        if (nextFrameBottomY > platformTopY && playerBottomY <= platformTopY + tolerance) {
-            System.out.println("Collision with Main Platform at Y: " + platformTopY);
-            playerVelocityY = 0;
-            player.setY(platformTopY - player.getHeight()); // Adjust position to top of platform
-            return true;
+//        double platformTopY = platform.getY();
+//        if (nextFrameBottomY > platformTopY && playerBottomY <= platformTopY + 5) {
+//            System.out.println("Collision with Main Platform at Y: " + platformTopY);
+//            playerVelocityY = 0;
+//            player.setY(platformTopY - player.getHeight()); // Adjust position to top of platform
+//            return true;
+//        }
+
+        for (Rectangle platform : platformSegments) {
+            if (nextFrameY + player.getHeight() > platform.getY() &&
+                    nextFrameY < platform.getY() + platform.getWidth() &&
+                    player.getX() < platform.getX() + platform.getWidth() &&
+                    player.getX() + player.getWidth() > platform.getX())
+            {
+                playerVelocityY = 0;
+                return true;
+            }
         }
 
         return false; // In the air
@@ -511,40 +599,17 @@ public class GameRender{
         return false;
     }
 
-    private void handleHorizontalMovement(Rectangle playerRect) {
-        double leftBoundary = (double) WIDTH / 2 - 400;
-        double rightBoundary = (double) WIDTH / 2 + 400;
-
-        if (movingLeft && playerX > leftBoundary) {
-            // Predictive check for left movement
-            if (!isCollidingHorizontally(new Rectangle(playerX - 5, playerY, playerWidth, playerHeight))) {
-                playerX -= 5;
-            }
-        }
-        if (movingRight && playerX < rightBoundary) {
-            // Predictive check for right movement
-            if (!isCollidingHorizontally(new Rectangle(playerX + 5, playerY, playerWidth, playerHeight))) {
-                playerX += 5;
-            }
+    private void checkPlayerPosition() {
+        // Assuming 'HEIGHT' is the height of your game screen or level
+        if (playerY > HEIGHT) {
+            // Player has fallen off the screen, reset position to safe location
+            playerX = SAFE_POS_X;
+            playerY = SAFE_POS_Y;
+            // Reset velocity if your game uses physics or velocity for movement
+            playerVelocityY = 0;
+            applyDamageToPlayer();
         }
     }
-
-    private boolean isCollidingHorizontally(Rectangle predictedPosition) {
-        for (ImageView platform : platforms) {
-            if (predictedPosition.intersects(platform.getBoundsInParent())) {
-                return true; // Collision predicted with this movement
-            }
-        }
-        return false;
-    }
-
-    private void handleCollisionFromBelow() {
-        // Example of applying a knockdown effect
-        // Set the player's velocity to simulate being knocked downwards
-        playerVelocityY = 10; // Adjust the value based on the desired knockdown effect
-        onGround = false; // Ensure gravity takes over after the initial knockdown impulse
-    }
-
 
     private void showMap() throws IOException {
         gameLoop.stop();
@@ -568,6 +633,7 @@ public class GameRender{
 
 
     public void loadLevel(Level levels, int currentStage) {
+        this.level = levels;
         List<Boulder> x = levels.getBoulders();
         platforms = new ArrayList<>();
         platformTypes = new ArrayList<>();
@@ -619,8 +685,7 @@ public class GameRender{
     }
 
     private void applyDamageToPlayer() {
-        internalGameState.loseLife();
-        updateLives(internalGameState.getLives());
+        updateLives(currentPlayerLifeCounter--);
     }
 
     private void handlePlayerCollisionWithObstacle(int index) {
@@ -633,6 +698,76 @@ public class GameRender{
         }
     }
 
-    public void loadLevel(List<Level> levels) {
+    private void showMultipleChoiceTest() {
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL); // Block input to other windows
+        popupStage.setTitle("Multiple Choice Test");
+
+        VBox layout = new VBox(10);
+        layout.setAlignment(Pos.CENTER);
+        var questionList = this.level.getQuestions();
+        Random random = new Random();
+        int min = 0; // Define minimum value, inclusive
+        int max = 10; // Define maximum value, exclusive
+        int randomNumber = random.nextInt(max - min) + min;
+
+        var question = questionList.get(randomNumber);
+
+        // Question
+        RadioButton optionA = new RadioButton(question.getOptions().get(0));
+        RadioButton optionB = new RadioButton(question.getOptions().get(1));
+        RadioButton optionC = new RadioButton(question.getOptions().get(2));
+        RadioButton optionD = new RadioButton(question.getOptions().get(3));
+
+        optionA.setUserData("A");
+        optionB.setUserData("B");
+        optionC.setUserData("C");
+        optionD.setUserData("D");
+        // Group the radio buttons
+        Label questionPrompt = new Label(question.getQuestion());
+        questionPrompt.setFont(new Font("Arial", 16));
+        questionPrompt.setStyle("-fx-font-weight: bold; -fx-padding: 10;");
+        questionPrompt.setWrapText(true);
+
+
+        ToggleGroup optionsGroup = new ToggleGroup();
+        optionA.setToggleGroup(optionsGroup);
+        optionB.setToggleGroup(optionsGroup);
+        optionC.setToggleGroup(optionsGroup);
+        optionD.setToggleGroup(optionsGroup);
+
+        Button submitButton = new Button("Submit");
+        submitButton.setOnAction(e -> {
+            RadioButton selectedRadioButton = (RadioButton) optionsGroup.getSelectedToggle();
+            if (selectedRadioButton != null) {
+                String answer = question.getAnswer();
+                // Check the answer
+                if (answer.equals(selectedRadioButton.getUserData())) {
+                    showResult("Correct!");
+                    updateScore(500);
+                } else {
+                    showResult("Wrong answer.");
+                }
+
+                popupStage.close(); // Close the popup
+            }
+        });
+
+        layout.getChildren().addAll(questionPrompt, optionA, optionB, optionC, optionD, submitButton);
+
+        Scene scene = new Scene(layout, 500, 500);
+        popupStage.setScene(scene);
+        popupStage.showAndWait(); // Show and wait for it to be closed
     }
+
+    private void showResult(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Result");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+
+
 }
