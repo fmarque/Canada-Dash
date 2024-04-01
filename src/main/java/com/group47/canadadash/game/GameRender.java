@@ -374,7 +374,7 @@ public class GameRender{
         initializePlatformsWithPit();
         root.getChildren().add(leaf);
         GraphicsContext gc1 = canvas.getGraphicsContext2D();
-        backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/background.png")));
+
         backgroundX2 = backgroundImage.getWidth();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -584,6 +584,41 @@ public class GameRender{
                 platforms.add(createPlatform(boulder.x, HEIGHT - boulder.y + 450, boulder.width, boulder.height, resourceUrl));
                 platformTypes.add(1);
             }
+        }
+
+        backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/background.png")));
+        if(currentStage == 0)
+        {
+            backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/bcBg.png")));
+        }
+
+        if(currentStage == 1)
+        {
+            backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/albBg.png")));
+        }
+
+        if(currentStage == 2)
+        {
+            backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/saskBg.png")));
+        }
+
+        if(currentStage == 3)
+        {
+            backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/mbbBg.png")));
+        }
+
+        if(currentStage == 4)
+        {
+            backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/albBg.png")));
+        }
+
+        if(currentStage == 5)
+        {
+            backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/albBg.png")));
+        }
+        if(currentStage == 9)
+        {
+            backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/peiBg.png")));
         }
     }
 
