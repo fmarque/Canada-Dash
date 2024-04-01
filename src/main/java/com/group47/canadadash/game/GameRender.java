@@ -5,6 +5,8 @@ import com.group47.canadadash.processing.Boulder;
 import com.group47.canadadash.processing.BoulderType;
 import com.group47.canadadash.processing.Level;
 import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
@@ -27,12 +32,11 @@ import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import javafx.stage.Modality;
 import javafx.scene.control.Button;
+import javafx.util.Duration;
 
 //import javax.swing.*;
 
@@ -66,7 +70,7 @@ public class GameRender{
 
     private List<ImageView> platforms;
     private List<Integer> platformTypes;
-    private Rectangle leaf = new Rectangle(WIDTH / 2 + 50, HEIGHT / 2 + 50, 100, 100);
+    private ImageView leaf;
 
     //UI elements
     private Text scoreText;
@@ -80,6 +84,38 @@ public class GameRender{
     private int jumpDelayCounter = 0;
     private final int JUMP_DELAY_FRAMES = 5; // Number of frames to skip ground check after jumping
 
+    private Timeline leafSpawner;
+
+    private void setupLeafSpawning() {
+        leafSpawner = new Timeline(new KeyFrame(Duration.seconds(10), e -> spawnLeafRandomly()));
+        leafSpawner.setCycleCount(Timeline.INDEFINITE);
+        leafSpawner.play();
+    }
+
+    private void spawnLeafRandomly() {
+        Random rand = new Random();
+        double minX = 0.0;
+        double maxX = WIDTH - leaf.getImage().getWidth();
+        double minY = 0.0;
+        double maxY = HEIGHT - leaf.getImage().getHeight();
+
+        leaf.setX(minX + (maxX - minX) * rand.nextDouble());
+        leaf.setY(minY + (maxY - minY) * rand.nextDouble());
+        leaf.setVisible(true);
+    }
+
+    private void initializeLeaf() {
+        Image leafImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/leaf.png")));
+        leaf = new ImageView(leafImage);
+        leaf.setVisible(false); // Initially hidden
+    }
+
+    private boolean checkCollisionWithLeaf(Rectangle playerRect) {
+        return playerRect.intersects(leaf.getBoundsInParent());
+    }
+
+
+
     private boolean isColliding(Rectangle player, Rectangle obstacle) {
         return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
     }
@@ -87,6 +123,12 @@ public class GameRender{
 
         Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
 
+        if (checkCollisionWithLeaf(playerRect)) {
+            showQuizPopup();
+        }
+        
+        
+        
         if (jumpDelayCounter > 0) {
             jumpDelayCounter--;
         } else {
@@ -99,10 +141,6 @@ public class GameRender{
             updateScore(5);// Placeholder action
         }
 
-        if (isColliding(playerRect, leaf)) {
-            System.out.println("Player has touched the leaf!");
-            showNotification();
-        }
 
         //onGround = isPlayerOnGround(playerRect, platforms);
         scrollBackgroundLeft();//background scrolls to left
@@ -195,6 +233,22 @@ public class GameRender{
         }
     }
 
+    private void showQuizPopup() {
+        // Assuming you have an AnimationTimer named 'animationTimer'
+        gameLoop.stop(); // Stop the animation
+
+        Platform.runLater(() -> {
+            try {
+                Alert quizAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                quizAlert.setTitle("Quiz Time");
+                // Setup and show the alert as before
+                quizAlert.showAndWait();
+            } finally {
+                gameLoop.start(); // Restart the animation
+            }
+        });
+    }
+
 
     private void scrollBackgroundLeft() {
         backgroundX -= scrollSpeed;
@@ -241,10 +295,7 @@ public class GameRender{
         // Draw the obstacle
         gc.setFill(Color.BLUE); // Set the obstacle color
         gc.fillRect(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getHeight());
-
-        gc.setFill(Color.GOLD);
-        gc.fillRect(leaf.getX(), leaf.getY(), leaf.getWidth(), leaf.getHeight());
-
+        
         for (ImageView imageView : platforms) {
             gc.drawImage(imageView.getImage(), imageView.getX(), imageView.getY());
         }
@@ -323,7 +374,9 @@ public class GameRender{
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         root.getChildren().add(canvas);
         root.getChildren().add(uiLayer);
-
+        initializeLeaf();
+        setupLeafSpawning();
+        root.getChildren().add(leaf);
         gc = canvas.getGraphicsContext2D();
         backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/background.png")));
         backgroundX2 = backgroundImage.getWidth();
