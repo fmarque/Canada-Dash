@@ -35,7 +35,7 @@
       </Button>
       <ImageView fx:id="legend1Img" fitHeight="39.0" fitWidth="39.0" layoutX="995.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/Not_yet_completed.png" />
+            <Image url="@../images/finished.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -140,7 +140,7 @@
          <graphic>
             <ImageView fx:id="abImg" fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Not_yet_completed.png" />
+                  <Image url="@../images/finished.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -162,7 +162,7 @@
          <graphic>
             <ImageView fx:id="skImg" fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Not_yet_completed.png" />
+                  <Image url="@../images/finished.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -184,7 +184,7 @@
          <graphic>
             <ImageView fx:id="mbImg" fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Not_yet_completed.png" />
+                  <Image url="@../images/finished.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -209,7 +209,7 @@
          <graphic>
             <ImageView fx:id="ontImg" fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Not_yet_completed.png" />
+                  <Image url="@../images/finished.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -232,7 +232,7 @@
          <graphic>
             <ImageView fx:id="qbcImg" fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Not_yet_completed.png" />
+                  <Image url="@../images/finished.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -257,7 +257,7 @@
          <graphic>
             <ImageView fx:id="nflImg" fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Not_yet_completed.png" />
+                  <Image url="@../images/finished.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -280,7 +280,7 @@
          <graphic>
             <ImageView fx:id="nbImg" fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Not_yet_completed.png" />
+                  <Image url="@../images/finished.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -302,7 +302,7 @@
          <graphic>
             <ImageView fx:id="nsImg" fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Not_yet_completed.png" />
+                  <Image url="@../images/finished.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -324,7 +324,7 @@
          <graphic>
             <ImageView fx:id="peiImg" fitHeight="49.0" fitWidth="49.0" layoutX="923.0" layoutY="506.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Not_yet_completed.png" />
+                  <Image url="@../images/finished.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -387,7 +387,7 @@
          <graphic>
             <ImageView fx:id="nbImg1" fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Not_yet_completed.png" />
+                  <Image url="@../images/finished.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />

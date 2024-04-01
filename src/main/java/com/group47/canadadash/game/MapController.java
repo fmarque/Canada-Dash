@@ -153,7 +153,7 @@ public class MapController {
         GameRender gameRender = new GameRender();
         App x = new App();
         x.loadData();
-        gameRender.loadLevel(x.getLevels().get(1), 1); // Assuming you want to load the first level
+        gameRender.loadLevel(x.getLevels().get(level), level); // Assuming you want to load the first level
         Scene gameScene = gameRender.createGameScene();
         stage.setScene(gameScene);
         stage.setTitle("Canada Dash");
