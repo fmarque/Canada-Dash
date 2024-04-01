@@ -100,4 +100,6 @@ public class MainMenuController {
       stage.show();
    }
 
+   public void viewSHighscores(ActionEvent actionEvent) throws IOException{
+   }
 }
