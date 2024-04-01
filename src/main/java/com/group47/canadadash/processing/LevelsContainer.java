@@ -2,6 +2,7 @@ package com.group47.canadadash.processing;
 
 import com.group47.canadadash.processing.Level;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -40,6 +41,6 @@ public class LevelsContainer {
      *               that will replace the current map.
      */
     public void setLevels(Map<String, Level> levels) {
-        this.levels = levels;
+        this.levels = new HashMap<>(levels);
     }
 }
