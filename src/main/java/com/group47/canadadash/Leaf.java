@@ -23,7 +23,7 @@ public class Leaf extends GameUnit {
         points = 100;
         height = 20;
         width = 20;
-        imageAdd = "src/main/resources/images/leaf.png";
+        imageAdd = "src/main/resources/com/group47/canadadash/leaf.png";
     }
 
     /**

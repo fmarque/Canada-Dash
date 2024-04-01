@@ -9,10 +9,10 @@ import java.util.Scanner;
 
 public class App{
 
-    private static App instance;
     final String relativePathContentFile = "/data/metaData/content.json";
     final String relativePathUserFIle = "/data/userData/user.json";
     final String rootPath = Util.getRootPath();
+
     private List<Level> levels;
 
     public User user;
@@ -59,15 +59,6 @@ public class App{
             });
         }
     }
-
-    public static App getInstance() {
-        if (instance == null) {
-            instance = new App();
-            instance.loadData();
-        }
-        return instance;
-    }
-
 
     public Boolean createAccount(String username, String password, String type) {
 

@@ -18,7 +18,7 @@ public class Star extends GameUnit {
         super(givenX, givenY);
         height = 20;
         width = 20;
-        imageAdd = "src/main/resources/images/star.png";
+        imageAdd = "src/main/resources/com/group47/canadadash/star.png";
     }
 
 }
