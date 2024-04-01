@@ -184,9 +184,9 @@ public class ScreenController implements Initializable {
             if (accountCreated) {
             app.userSave();
             switchToILogin(event);
-
             }
         }
+        instruction.setText("Username Already Taken. Try again");
     }
 
 
