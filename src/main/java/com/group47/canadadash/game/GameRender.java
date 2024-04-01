@@ -77,6 +77,8 @@ public class GameRender{
     private final Image emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/emptyHeartIcon.png")));
     private HBox heartsContainer;
 
+    private int jumpDelayCounter = 0;
+    private final int JUMP_DELAY_FRAMES = 5; // Number of frames to skip ground check after jumping
 
     private boolean isColliding(Rectangle player, Rectangle obstacle) {
         return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
@@ -84,6 +86,13 @@ public class GameRender{
     private void update() throws IOException {
 
         Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
+
+        if (jumpDelayCounter > 0) {
+            jumpDelayCounter--;
+        } else {
+            onGround = isPlayerOnGround(new Rectangle(playerX, playerY, playerWidth, playerHeight), platforms);
+        }
+
         updateObstaclesPosition();
         if (isColliding(playerRect, obstacle)) {
             System.out.println("Player has touched the obstacle!");
@@ -95,7 +104,7 @@ public class GameRender{
             showNotification();
         }
 
-
+        //onGround = isPlayerOnGround(playerRect, platforms);
         scrollBackgroundLeft();//background scrolls to left
 
 
@@ -116,22 +125,66 @@ public class GameRender{
             }
         }
 
-        // Update player's vertical position and velocity
-        if (!onGround)
-        {
-            // Apply gravity
-            playerVelocityY += GRAVITY; // Make sure you have a gravity variable defined, e.g., 0.5 or 1
-            playerY += playerVelocityY;
 
-            // Prevent player from falling through the platform due to high velocity
-            if (playerVelocityY > 0)
-            { // Only check when coming down
-                if (isColliding(playerRect, platform))
-                {
-                    onGround = true;
-                    playerVelocityY = 0;
-                    playerY = platform.getY() - playerHeight; // Adjust player to stand on top of the platform
-                }
+        if (!onGround) {
+            playerVelocityY += GRAVITY;
+            playerY += playerVelocityY;
+        } else if (jumpDelayCounter == 0) {
+            playerVelocityY = 0; // Prevent further falling
+        }
+
+        // Update player's vertical position and velocity
+//        if (!onGround)
+//        {
+//            // Apply gravity
+//            playerVelocityY += GRAVITY; // Make sure you have a gravity variable defined, e.g., 0.5 or 1
+//            playerY += playerVelocityY;
+//
+//            // Prevent player from falling through the platform due to high velocity
+//            if (playerVelocityY > 0)
+//            { // Only check when coming down
+//                if (isColliding(playerRect, platform))
+//                {
+//                    onGround = true;
+//                    playerVelocityY = 0;
+//                    playerY = platform.getY() - playerHeight; // Adjust player to stand on top of the platform
+//                }
+//            }
+//        }
+
+
+
+
+//        // Update player's vertical position and velocity
+//        if (!onGround)
+//        {
+//            // Apply gravity
+//            playerVelocityY += GRAVITY; // Make sure you have a gravity variable defined, e.g., 0.5 or 1
+//            playerY += playerVelocityY;
+//
+//            // Prevent player from falling through the platform due to high velocity
+//            if (playerVelocityY > 0)
+//            { // Only check when coming down
+//                for (ImageView imageView : platforms) {
+//                    if (isCollidingObstacle(playerRect, imageView)) {
+//                        onGround = true;
+//                        playerVelocityY = 0;
+//                        playerY = imageView.getY() - playerHeight; // Adjust player to stand on top of the platform
+//                    }
+//                }
+//
+//            }
+//        }
+//        else {
+//            playerVelocityY = 0;
+//        }
+
+
+
+        for (ImageView obstacle : platforms) {
+            if (isCollidingFromBelow(playerRect, obstacle)) {
+                handleCollisionFromBelow();
+                break; // Assuming only one collision is handled per frame
             }
         }
 
@@ -140,7 +193,6 @@ public class GameRender{
             onGround = true;
             playerVelocityY = 0;
         }
-
     }
 
 
@@ -369,8 +421,57 @@ public class GameRender{
         if (onGround) {
             playerVelocityY = -20; // Adjust this value to change jump height
             onGround = false;
+            System.out.println(playerVelocityY);
         }
     }
+
+    private boolean isPlayerOnGround(Rectangle player, List<ImageView> obstacles) {
+        double playerBottomY = player.getY() + player.getHeight();
+        double nextFrameBottomY = playerBottomY + playerVelocityY; // Predict next position
+        double tolerance = 5; // Tolerance for fast movements
+
+        System.out.println("Player Bottom Y: " + playerBottomY + ", Velocity: " + playerVelocityY);
+
+        for (ImageView obstacle : obstacles) {
+            double obstacleTopY = obstacle.getY();
+            if (nextFrameBottomY > obstacleTopY && playerBottomY <= obstacleTopY) {
+                System.out.println("Collision with Obstacle at Y: " + obstacleTopY);
+                playerVelocityY = 0;
+                player.setY(obstacleTopY - player.getHeight()); // Adjust position to top of obstacle
+                return true;
+            }
+        }
+
+        double platformTopY = platform.getY();
+        if (nextFrameBottomY > platformTopY && playerBottomY <= platformTopY + tolerance) {
+            System.out.println("Collision with Main Platform at Y: " + platformTopY);
+            playerVelocityY = 0;
+            player.setY(platformTopY - player.getHeight()); // Adjust position to top of platform
+            return true;
+        }
+
+        return false; // In the air
+    }
+
+
+    private boolean isCollidingFromBelow(Rectangle player, ImageView obstacle) {
+        double playerTopY = player.getY();
+        double obstacleBottomY = obstacle.getY() + obstacle.getFitHeight();
+
+        // Check if the player is moving up and collides with the bottom edge of the obstacle
+        if (playerVelocityY < 0 && playerTopY <= obstacleBottomY && playerTopY + playerVelocityY > obstacleBottomY) {
+            return true;
+        }
+        return false;
+    }
+
+    private void handleCollisionFromBelow() {
+        // Example of applying a knockdown effect
+        // Set the player's velocity to simulate being knocked downwards
+        playerVelocityY = 10; // Adjust the value based on the desired knockdown effect
+        onGround = false; // Ensure gravity takes over after the initial knockdown impulse
+    }
+
 
     private void showMap() throws IOException {
         gameLoop.stop();
