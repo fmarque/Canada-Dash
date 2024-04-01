@@ -28,7 +28,7 @@ public class MainMenuController {
 
    //TODO: load player's last saved progress (must be dynamic, NOT just fxml)
    public void loadSavedGame(ActionEvent event) throws IOException {
-      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("game_map.fxml")));
+      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/game_map.fxml")));
       stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
       scene = new Scene(root);
       stage.setScene(scene);
@@ -36,7 +36,7 @@ public class MainMenuController {
    }
 
    public void startNewGame(ActionEvent event) throws IOException {
-      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("game_map.fxml")));
+      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/game_map.fxml")));
       stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
       scene = new Scene(root);
       stage.setScene(scene);
