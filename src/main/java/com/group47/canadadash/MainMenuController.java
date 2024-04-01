@@ -18,7 +18,7 @@ public class MainMenuController {
    private Stage stage;
    private Scene scene;
    private Parent root;
-   App app;
+   private App app;
 
 
    public void setApp(App app) {
@@ -51,17 +51,20 @@ public class MainMenuController {
 
    // load the highscores amongst all students
    public void instViewScores(ActionEvent event) throws IOException {
+
+      if (this.app == null) {
+         this.app = App.getInstance();
+      }
+
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/instructorDashboard.fxml")); // Correct path
       Parent root = loader.load();
 
       InstructorDashboardController controller = loader.getController();
 
-      List<User> students = app.getStudentsForInstructor(); // Adjust method name as necessary
-
-      // Pass the students list to the dashboard controller
+      List<User> students = app.getStudentsForInstructor();
       controller.setStudents(students);
 
-      // Now, display the scene
+
       stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
       scene = new Scene(root);
       stage.setScene(scene);

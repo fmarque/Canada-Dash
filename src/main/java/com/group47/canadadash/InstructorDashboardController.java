@@ -44,6 +44,10 @@ public class InstructorDashboardController {
     }
 
     public void setStudents(List<User> students) {
+
+        if (students.isEmpty()) {
+            System.out.println("No students registered under this instructor.");
+        }
         ObservableList<User> studentData = FXCollections.observableArrayList(students);
         studentTableView.setItems(studentData);
     }
