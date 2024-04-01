@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 public class MapController {
     private HashMap mapping;
-
+    private  App app;
     @FXML
     private Button bcBox;
 
@@ -93,7 +93,7 @@ public class MapController {
 
     @FXML
     private void initialize() {
-        App app = new App();
+        app = new App();
         String uncompleted = "/images/Not_yet_completed.png";
         String completed = "/images/finished.png";
         Image uncompleted_img = new Image(String.valueOf(getClass().getResource(uncompleted)));
@@ -103,9 +103,27 @@ public class MapController {
         buttons = new Button[]{bcBox, abBox, skBox, mbBox, ontBox, qbcBox, nflBox, nbBox, nsBox, peiBox};
         icons = new ImageView[]{bcImg, abImg, skImg, mbImg, ontImg, qbcImg, nflImg, nbImg, nsImg, peiImg};
         for (int i = 0; i < level_status.length; i++) {
+            // Set the image based on completion status
             icons[i].setImage(level_status[i] ? completed_img : uncompleted_img);
+
+            // Enable the button if the level is completed, otherwise disable it
+            buttons[i].setDisable(!level_status[i]);
         }
+
+
+        bcBox.setOnAction(e -> openGameRenderScene(0));
+        abBox.setOnAction(e -> openGameRenderScene(1));
+        skBox.setOnAction(e -> openGameRenderScene(2));
+        mbBox.setOnAction(e -> openGameRenderScene(3));
+        ontBox.setOnAction(e -> openGameRenderScene(4));
+        qbcBox.setOnAction(e -> openGameRenderScene(5));
+        nflBox.setOnAction(e -> openGameRenderScene(6));
+        nbBox.setOnAction(e -> openGameRenderScene(7));
+        nsBox.setOnAction(e -> openGameRenderScene(8));
+        peiBox.setOnAction(e -> openGameRenderScene(9));
     }
+
+
 
 
     public void handleBackToMainMenu(ActionEvent event) {
@@ -121,5 +139,26 @@ public class MapController {
             // Handle the exception, maybe show an error message
         }
     }
+
+    @FXML
+    private void handleLevelSelection(ActionEvent event) {
+        Button clickedButton = (Button) event.getSource();
+        String buttonId = clickedButton.getId();
+        //    openGameRenderScene(clickedButton);
+    }
+
+
+    private void openGameRenderScene(int level) {
+        Stage stage = (Stage) bcBox.getScene().getWindow(); // Assuming 'startGameButton' is your button's fx:id
+        GameRender gameRender = new GameRender();
+        App x = new App();
+        x.loadData();
+        gameRender.loadLevel(x.getLevels().get(1), 1); // Assuming you want to load the first level
+        Scene gameScene = gameRender.createGameScene();
+        stage.setScene(gameScene);
+        stage.setTitle("Canada Dash");
+        stage.show();
+    }
+
 
 }
