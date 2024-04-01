@@ -140,6 +140,7 @@ public class GameRender{
 
         Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
         checkPlayerPosition();
+        checkWinCondition();
         if (checkCollisionWithLeaf(playerRect)) {
            if(leafTouchable)
            {
@@ -699,6 +700,41 @@ public class GameRender{
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    private void showWinDialog() {
+        gameLoop.stop(); // Stop the game loop
+
+        Alert winAlert = new Alert(Alert.AlertType.INFORMATION);
+        winAlert.setTitle("Congratulations!");
+        winAlert.setHeaderText("You Win!");
+        winAlert.setContentText("You've reached 1500 points. Heading back to the map.");
+        winAlert.setOnHidden(evt -> showMapScene());
+        winAlert.show();
+    }
+
+    private void showMapScene() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/game_map.fxml")); // Adjust the path to your FXML file
+            Parent mapRoot = loader.load();
+            Scene mapScene = new Scene(mapRoot);
+
+            Stage stage = (Stage) pauseStage.getScene().getWindow(); // Assumes `pauseStage` is your current stage, adjust as needed
+            stage.setScene(mapScene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the exception
+        }
+    }
+
+    private void checkWinCondition() {
+        if (internalGameState.getTotalPoints() >= 1500) {
+            Platform.runLater(() -> {
+                showWinDialog();
+            });
+        }
+    }
+
 
 
 
