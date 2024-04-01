@@ -33,11 +33,9 @@ public class TutorialController extends Application implements EventHandler<Acti
      * @throws Exception
      */
     public void start(Stage primaryStage) throws Exception {
-        // dev login page as placeholder for now, but will change once tut files are uploaded
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("tutorialPage.fxml")));
         primaryStage.setTitle("How to Play");
         primaryStage.setScene(new Scene(root, 800, 500));
-        //backToLogin.setOnKeyPressed(this);
 
         primaryStage.show();
     }
@@ -50,11 +48,5 @@ public class TutorialController extends Application implements EventHandler<Acti
     public void backToPMainMenu(ActionEvent event) throws IOException {
         ScreenController backMenu = new ScreenController();
         backMenu.switchToPMenu(event);
-
-        /*Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("playerMainMenu.fxml")));
-        stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();*/
     }
 }
