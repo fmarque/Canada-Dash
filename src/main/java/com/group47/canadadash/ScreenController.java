@@ -27,13 +27,20 @@ public class ScreenController implements Initializable {
     private Scene scene;
     private Parent root;
     private User user;
-    App app;
+    private App app;
     @FXML
     private TextField username, password, type, classCode;
     @FXML
     private Text instruction;
     @FXML
     private PasswordField passHidden;
+
+
+    public void setApp(App app) {
+        this.app = app;
+        System.out.println("setApp called with App instance: " + app);
+
+    }
 
 
     public void switchToPLogin (ActionEvent event) throws IOException {
@@ -114,8 +121,6 @@ public class ScreenController implements Initializable {
                 password.getText(): passHidden.getText();
     }
     public void checkPLoginInfo(ActionEvent event) throws IOException {
-        app = new App();
-        app.loadData();
         if (app.signIn(username.getText(), passHidden.getText(), "student")) {
             switchToPMenu(event);
         } else {
@@ -124,8 +129,10 @@ public class ScreenController implements Initializable {
     }
 
     public void checkILoginInfo(ActionEvent event) throws IOException {
-        app = new App();
-        app.loadData();
+        if (this.app == null) {
+            System.out.println("App instance is null in checkILoginInfo. This shouldn't happen.");
+            return;
+        }
         if (app.signIn(username.getText(), passHidden.getText(), "instructor")) {
             switchToIMenu(event);
         } else {
@@ -135,8 +142,6 @@ public class ScreenController implements Initializable {
 
     //this method can be removed if player and instructor and dev info are the same
     public void checkDLoginInfo(ActionEvent event) throws IOException {
-        app = new App();
-        app.loadData();
         if (app.signIn("dev", passHidden.getText(), "developer")) {
             switchToDMenu(event);
         } else {
@@ -146,9 +151,9 @@ public class ScreenController implements Initializable {
 
     // sign up should check if sign in successful, if yes, then username taken, otherwise, create account
     public void makePAccount(ActionEvent event) throws IOException {
-        app = new App();
+
         user = new User();
-        app.loadData();
+
 
         // if username is already taken, let user know
         if (app.signIn(username.getText(), passHidden.getText(), "student")) {
@@ -170,9 +175,6 @@ public class ScreenController implements Initializable {
     }
 
     public void makeIAccount(ActionEvent event) throws IOException {
-        app = new App();
-        user = new User();
-        app.loadData();
 
         // if username is already taken, let user know
         if (app.signIn(username.getText(), passHidden.getText(), "instructor")) {
@@ -216,6 +218,9 @@ public class ScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        app = App.getInstance();
+
         try {
             this.togglevisiblePassword(null);
         } catch (IOException e) {
