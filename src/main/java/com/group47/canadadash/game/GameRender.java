@@ -8,6 +8,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -18,6 +19,7 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.Group;
@@ -63,6 +65,7 @@ public class GameRender{
     private Rectangle obstacle = new Rectangle(WIDTH / 2 - 20, HEIGHT / 2, 100, 100);
 
     private List<ImageView> platforms;
+    private List<Integer> platformTypes;
     private Rectangle leaf = new Rectangle(WIDTH / 2 + 50, HEIGHT / 2 + 50, 100, 100);
 
     //UI elements
@@ -74,8 +77,6 @@ public class GameRender{
     private final Image emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/emptyHeartIcon.png")));
     private HBox heartsContainer;
 
-    public GameRender() {
-    }
 
     private boolean isColliding(Rectangle player, Rectangle obstacle) {
         return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
@@ -83,7 +84,7 @@ public class GameRender{
     private void update() throws IOException {
 
         Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
-
+        updateObstaclesPosition();
         if (isColliding(playerRect, obstacle)) {
             System.out.println("Player has touched the obstacle!");
             updateScore(5);// Placeholder action
@@ -107,11 +108,18 @@ public class GameRender{
             playerX += 5;
         }
 
+        for(int i =0; i < platforms.size(); i++)
+        {
+            if(isCollidingObstacle(playerRect, platforms.get(i)))
+            {
+                handlePlayerCollisionWithObstacle(i);
+            }
+        }
+
         // Update player's vertical position and velocity
         if (!onGround)
         {
             // Apply gravity
-
             playerVelocityY += GRAVITY; // Make sure you have a gravity variable defined, e.g., 0.5 or 1
             playerY += playerVelocityY;
 
@@ -134,6 +142,7 @@ public class GameRender{
         }
 
     }
+
 
     private void scrollBackgroundLeft() {
         backgroundX -= scrollSpeed;
@@ -201,7 +210,6 @@ public class GameRender{
             } else {
                 heartView.setImage(emptyHeart);
             }
-            // todo half heart
         }
     }
 
@@ -238,11 +246,23 @@ public class GameRender{
 
 
         //UI elements INI
-        StackPane uiLayer = new StackPane();
-        uiLayer.getChildren().add(heartsContainer);
-        uiLayer.getChildren().add(scoreText);
+        AnchorPane uiLayer = new AnchorPane();
 
-        uiLayer.getChildren().add(pauseButton);
+// Place heartsContainer in the top-left corner
+        AnchorPane.setTopAnchor(heartsContainer, 10.0);
+        AnchorPane.setLeftAnchor(heartsContainer, 10.0);
+
+// Place scoreText in the top-right corner
+        AnchorPane.setTopAnchor(scoreText, 10.0);
+        AnchorPane.setRightAnchor(scoreText, 10.0);
+
+// Place pauseButton in the bottom-right corner
+        AnchorPane.setBottomAnchor(pauseButton, 10.0);
+        AnchorPane.setRightAnchor(pauseButton, 10.0);
+        uiLayer.setPrefSize(WIDTH, HEIGHT);
+        uiLayer.getChildren().addAll(heartsContainer, scoreText, pauseButton);
+
+
 
         internalGameState = new GameState();
         Group root = new Group();
@@ -376,18 +396,20 @@ public class GameRender{
     public void loadLevel(Level levels, int currentStage) {
         List<Boulder> x = levels.getBoulders();
         platforms = new ArrayList<>();
-
+        platformTypes = new ArrayList<>();
         for (Boulder boulder : x) {
             if (boulder.type == BoulderType.FENCE) {
                 URL resourceUrl = getClass().getResource("/images/fence.png");
                 assert resourceUrl != null;
                 platforms.add(createPlatform(boulder.x, HEIGHT - boulder.y + 450, boulder.width, boulder.height, resourceUrl));
+                platformTypes.add(0);
             }
 
             if (boulder.type == BoulderType.BOX) {
                 URL resourceUrl = getClass().getResource("/images/object.png");
                 assert resourceUrl != null;
                 platforms.add(createPlatform(boulder.x, HEIGHT - boulder.y + 450, boulder.width, boulder.height, resourceUrl));
+                platformTypes.add(1);
             }
         }
     }
@@ -403,6 +425,38 @@ public class GameRender{
         return imageView;
     }
 
+    private void updateObstaclesPosition() {
+        for (ImageView obstacle : platforms) {
+            obstacle.setX(obstacle.getX() - scrollSpeed);
+            // Reset position if it goes off-screen, or apply other logic
 
+            // Check if the obstacle has moved off the left side of the screen
+            if (obstacle.getX() + obstacle.getFitWidth() < 0) {
+                // Reset its position to the right side of the screen
+                obstacle.setX(WIDTH + obstacle.getFitWidth());
+                // Optionally, randomize the Y position to vary the appearance
+                obstacle.setY(Math.random() * (HEIGHT - obstacle.getFitHeight()));
+            }
+        }
+    }
+
+    private boolean isCollidingObstacle(Rectangle player, ImageView obstacle) {
+        return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
+    }
+
+    private void applyDamageToPlayer() {
+        internalGameState.loseLife();
+        updateLives(internalGameState.getLives());
+    }
+
+    private void handlePlayerCollisionWithObstacle(int index) {
+        switch (index) {
+            case 0:
+                applyDamageToPlayer();
+                break;
+            case 1:
+                break;
+        }
+    }
 
 }
