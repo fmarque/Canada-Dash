@@ -14,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
@@ -48,7 +50,7 @@ public class GameRender{
     private double backgroundX = 0;
     private double backgroundX2;
 
-
+    private int currentPlayerLifeCounter = 5;
 
     // Player properties
     private double playerX = WIDTH / 2 - 20; // Center the player horizontally
@@ -68,6 +70,7 @@ public class GameRender{
     private List<ImageView> platforms;
     private List<Integer> platformTypes;
     private ImageView leaf;
+    private int lastCollisionIndex = -1;
 
     //UI elements
     private Text scoreText;
@@ -175,13 +178,18 @@ public class GameRender{
         }
 
 
-
-        for(int i =0; i < platforms.size(); i++)
-        {
-            if(isCollidingObstacle(playerRect, platforms.get(i)))
-            {
-                handlePlayerCollisionWithObstacle(i);
+        boolean isCurrentlyColliding = false;
+        for (int i = 0; i < platforms.size(); i++) {
+            if (isCollidingObstacle(playerRect, platforms.get(i))) {
+                isCurrentlyColliding = true;
+                if (lastCollisionIndex != i) {
+                    handlePlayerCollisionWithObstacle(i);
+                    lastCollisionIndex = i;
+                }
             }
+        }
+        if (!isCurrentlyColliding) {
+            lastCollisionIndex = -1; // Reset if not colliding with any obstacle
         }
 
 
@@ -272,7 +280,32 @@ public class GameRender{
             }
         });
     }
+    private void showGameOverDialog() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Game Over");
+        alert.setHeaderText("You've run out of lives!");
+        alert.setContentText("Would you like to restart?");
 
+        ButtonType buttonTypeRestart = new ButtonType("Restart");
+        ButtonType buttonTypeExit = new ButtonType("Exit", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeRestart, buttonTypeExit);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeRestart) {
+            // Restart the game
+         //   restartGame();
+        } else {
+            // Exit
+            Platform.exit();
+        }
+    }
+    private void restartGame() {
+        // Reset game state
+        // Setup initial game scene again
+        currentPlayerLifeCounter = 5;
+        createGameScene(); // Assume you have a method that creates the initial game scene
+    }
 
     private void scrollBackgroundLeft() {
         backgroundX -= scrollSpeed;
@@ -339,6 +372,11 @@ public class GameRender{
                 heartView.setImage(emptyHeart);
             }
         }
+
+        if(currentLives == 0)
+        {
+            Platform.runLater(() -> showGameOverDialog());;
+        }
     }
 
     private void updateScore(int score) {
@@ -354,11 +392,16 @@ public class GameRender{
         scoreText.setFill(Color.BLACK); // Choose a color that fits your game's theme
 
         heartsContainer = new HBox(5); // Horizontal box with spacing of 5 pixels
-        for (int i = 0; i < 3; i++) {//todo link wiht heart state
+        for (int i = 0; i < currentPlayerLifeCounter; i++) {//todo link wiht heart state
             ImageView heartView = new ImageView(fullHeart);
+            heartView.setFitWidth(40); // Example width in pixels
+            heartView.setFitHeight(40); // Example height in pixels
+
+            // Preserve the aspect ratio (optional)
+            heartView.setPreserveRatio(true);
             heartsContainer.getChildren().add(heartView);
         }
-
+        currentPlayerLifeCounter--;
 
         Button pauseButton = new Button("Pause");
         pauseButton.setLayoutX(10); // Position the button; adjust as needed
@@ -564,6 +607,7 @@ public class GameRender{
             playerY = SAFE_POS_Y;
             // Reset velocity if your game uses physics or velocity for movement
             playerVelocityY = 0;
+            applyDamageToPlayer();
         }
     }
 
@@ -640,8 +684,7 @@ public class GameRender{
     }
 
     private void applyDamageToPlayer() {
-        internalGameState.loseLife();
-        updateLives(internalGameState.getLives());
+        updateLives(currentPlayerLifeCounter--);
     }
 
     private void handlePlayerCollisionWithObstacle(int index) {
