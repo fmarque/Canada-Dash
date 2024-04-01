@@ -1,6 +1,8 @@
 package com.group47.canadadash.game;
 
 import com.group47.canadadash.GameState;
+import com.group47.canadadash.processing.Boulder;
+import com.group47.canadadash.processing.BoulderType;
 import com.group47.canadadash.processing.Level;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -22,6 +24,8 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -58,6 +62,7 @@ public class GameRender{
     private Rectangle platform = new Rectangle(100, 450, 6000, 50); // x, y, width, height
     private Rectangle obstacle = new Rectangle(WIDTH / 2 - 20, HEIGHT / 2, 100, 100);
 
+    private List<ImageView> platforms;
     private Rectangle leaf = new Rectangle(WIDTH / 2 + 50, HEIGHT / 2 + 50, 100, 100);
 
     //UI elements
@@ -68,6 +73,9 @@ public class GameRender{
     private final Image fullHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/fullHeart.png")));
     private final Image emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/emptyHeartIcon.png")));
     private HBox heartsContainer;
+
+    public GameRender() {
+    }
 
     private boolean isColliding(Rectangle player, Rectangle obstacle) {
         return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
@@ -176,6 +184,11 @@ public class GameRender{
         gc.setFill(Color.GOLD);
         gc.fillRect(leaf.getX(), leaf.getY(), leaf.getWidth(), leaf.getHeight());
 
+        for (ImageView imageView : platforms) {
+            gc.drawImage(imageView.getImage(), imageView.getX(), imageView.getY());
+        }
+
+
     }
 
 
@@ -237,7 +250,6 @@ public class GameRender{
         playerY = platform.getY() - playerHeight;//puts player on the ground
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         root.getChildren().add(canvas);
-
         root.getChildren().add(uiLayer);
 
         gc = canvas.getGraphicsContext2D();
@@ -361,6 +373,36 @@ public class GameRender{
     }
 
 
-    public void loadLevel(List<Level> levels) {
+    public void loadLevel(Level levels, int currentStage) {
+        List<Boulder> x = levels.getBoulders();
+        platforms = new ArrayList<>();
+
+        for (Boulder boulder : x) {
+            if (boulder.type == BoulderType.FENCE) {
+                URL resourceUrl = getClass().getResource("/images/fence.png");
+                assert resourceUrl != null;
+                platforms.add(createPlatform(boulder.x, HEIGHT - boulder.y + 450, boulder.width, boulder.height, resourceUrl));
+            }
+
+            if (boulder.type == BoulderType.BOX) {
+                URL resourceUrl = getClass().getResource("/images/object.png");
+                assert resourceUrl != null;
+                platforms.add(createPlatform(boulder.x, HEIGHT - boulder.y + 450, boulder.width, boulder.height, resourceUrl));
+            }
+        }
     }
+
+    private ImageView createPlatform(int x, int y, int width, int height, URL imagePath) {
+        Image image = new Image(imagePath.toExternalForm());
+        ImageView imageView = new ImageView(image);
+        imageView.setX(x);
+        imageView.setY(y);
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
+        imageView.setPreserveRatio(true);
+        return imageView;
+    }
+
+
+
 }
