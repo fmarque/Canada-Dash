@@ -218,9 +218,9 @@ public class GameRender{
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Game Over");
         alert.setHeaderText("You've run out of lives!");
-        alert.setContentText("Would you like to restart?");
+        alert.setContentText("Would you like to go the map?");
 
-        ButtonType buttonTypeRestart = new ButtonType("Main Menu");
+        ButtonType buttonTypeRestart = new ButtonType("Map");
         ButtonType buttonTypeExit = new ButtonType("Exit", ButtonBar.ButtonData.CANCEL_CLOSE);
 
         alert.getButtonTypes().setAll(buttonTypeRestart, buttonTypeExit);

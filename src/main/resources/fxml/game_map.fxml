@@ -27,7 +27,7 @@
             <Glow level="0.1" />
          </effect>
       </ImageView>
-      <Button fx:id="peiBox" layoutX="933.0" layoutY="500.0" mnemonicParsing="false" onAction="#OnLevelBtn" prefHeight="56.0" prefWidth="39.0" style="-fx-background-color: transparent;" />
+      <Button layoutX="933.0" layoutY="500.0" mnemonicParsing="false" onAction="#OnLevelBtn" prefHeight="56.0" prefWidth="39.0" style="-fx-background-color: transparent;" />
       <Button layoutX="45.0" layoutY="44.0" mnemonicParsing="false" onAction="#handleBackToMainMenu" text="&lt;- BACK TO MAIN MENU">
          <font>
             <Font name="Comic Sans MS Bold" size="12.0" />
@@ -118,7 +118,7 @@
          <graphic>
             <ImageView fx:id="bcImg" fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Not_yet_completed.png" />
+                  <Image url="@../images/finished.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -320,25 +320,29 @@
                </effect>
             </ImageView>
          </graphic></Button>
-      <ImageView fx:id="peiImg" fitHeight="49.0" fitWidth="49.0" layoutX="923.0" layoutY="506.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Not_yet_completed.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <effect>
-            <Glow level="0.71">
-               <input>
-                  <DropShadow height="15.32" offsetX="-2.0" offsetY="6.0" radius="7.08" width="15.0">
-                     <color>
-                        <Color red="0.1323099434375763" green="0.13657407462596893" blue="0.15789473056793213" />
-                     </color>
-                  </DropShadow>
-               </input>
-            </Glow>
-         </effect>
-      </ImageView>
+      <Button fx:id="peiBox" layoutX="946.0" layoutY="561.0" mnemonicParsing="false" onAction="#OnLevelBtn" prefHeight="57.0" prefWidth="49.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="peiImg" fitHeight="49.0" fitWidth="49.0" layoutX="923.0" layoutY="506.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Not_yet_completed.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Glow level="0.71">
+                     <input>
+                        <DropShadow height="15.32" offsetX="-2.0" offsetY="6.0" radius="7.08" width="15.0">
+                           <color>
+                              <Color red="0.1323099434375763" green="0.13657407462596893" blue="0.15789473056793213" />
+                           </color>
+                        </DropShadow>
+                     </input>
+                  </Glow>
+               </effect>
+            </ImageView>
+         </graphic>
+      </Button>
       <Label layoutX="443.0" layoutY="517.0" text="SK">
          <font>
             <Font name="Comic Sans MS Bold Italic" size="17.0" />
@@ -379,6 +383,29 @@
             <Font name="Comic Sans MS Bold Italic" size="17.0" />
          </font>
       </Label>
+      <Button fx:id="nbBox1" layoutX="919.0" layoutY="499.0" mnemonicParsing="false" onAction="#OnLevelBtn" prefHeight="49.0" prefWidth="58.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="nbImg1" fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Not_yet_completed.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Glow level="0.71">
+                     <input>
+                        <DropShadow height="15.32" offsetX="-2.0" offsetY="6.0" radius="7.08" width="15.0">
+                           <color>
+                              <Color red="0.1323099434375763" green="0.13657407462596893" blue="0.15789473056793213" />
+                           </color>
+                        </DropShadow>
+                     </input>
+                  </Glow>
+               </effect>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
    <cursor>
       <Cursor fx:constant="HAND" />
