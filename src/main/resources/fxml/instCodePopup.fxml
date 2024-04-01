@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="450.0" prefWidth="700.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group47.canadadash.ScreenController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <SplitPane dividerPositions="0.39216281895504246" prefHeight="437.0" prefWidth="660.0">
+        <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="286.0" prefWidth="248.0">
+                <children>
+                    <Text fill="#c40c0c" layoutX="14.0" layoutY="100.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Canada Dash">
+                        <font>
+                            <Font name="Calibri Bold Italic" size="38.0" />
+                        </font>
+                    </Text>
+                    <Text fx:id="instruction" layoutX="19.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login as Instructor">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font></Text>
+                    <TextField fx:id="username" layoutX="18.0" layoutY="153.0" maxWidth="200.0" onMousePressed="#clearUsername" prefHeight="26.0" prefWidth="174.0" text="Enter Instructor Username" />
+                    <StackPane layoutX="18.0" layoutY="181.0" prefHeight="26.0" prefWidth="174.0">
+                        <children>
+                            <PasswordField fx:id="passHidden" onMousePressed="#clearField" prefHeight="25.0" prefWidth="174.0" text="Enter Password" />
+                            <TextField fx:id="password" onMousePressed="#clearPassword" text="Enter Password" />
+                        </children></StackPane>
+                    <Hyperlink layoutX="19.0" layoutY="255.0" onAction="#switchToISignup" text="Sign-up for a new account" />
+                    <Hyperlink layoutX="19.0" layoutY="290.0" onAction="#switchToPLogin" text="Switch to Player Login" />
+                    <Hyperlink layoutX="19.0" layoutY="308.0" onAction="#switchToDLogin" text="Switch to Developer Login" />
+                    <Button layoutX="19.0" layoutY="213.0" mnemonicParsing="false" onAction="#checkILoginInfo" prefHeight="26.0" prefWidth="27.0" text="-&gt;">
+                        <font>
+                            <Font name="System Bold" size="11.0" />
+                        </font></Button>
+                    <CheckBox fx:id="togglePassword" layoutX="199.0" layoutY="188.0" mnemonicParsing="false" onAction="#showPassword">
+                        <font>
+                            <Font size="9.0" />
+                        </font>
+                    </CheckBox>
+                    <Text fill="#a19a9a" layoutX="19.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Instructor">
+                        <font>
+                            <Font name="System Italic" size="12.0" />
+                        </font>
+                    </Text>
+                </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="239.0" prefWidth="482.0">
+                <children>
+                    <ImageView fitHeight="408.0" fitWidth="867.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../images/canLake.jpg" />
+                        </image>
+                    </ImageView>
+                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="200.0" layoutX="40.0" layoutY="115.0" stroke="BLACK" strokeType="INSIDE" width="323.0" />
+                    <Label layoutX="59.0" layoutY="133.0" text="Your Class Code:">
+                        <font>
+                            <Font name="System Bold Italic" size="12.0" />
+                        </font>
+                    </Label>
+               <Text fx:id="iCode" fill="#c90000" layoutX="125.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3H6J5K">
+                  <font>
+                     <Font size="45.0" />
+                  </font>
+               </Text>
+                </children></AnchorPane>
+        </items>
+    </SplitPane>
+</VBox>

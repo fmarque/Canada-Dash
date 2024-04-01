@@ -27,20 +27,13 @@ public class ScreenController implements Initializable {
     private Scene scene;
     private Parent root;
     private User user;
-    private App app;
+    App app;
     @FXML
     private TextField username, password, type, classCode;
     @FXML
-    private Text instruction;
+    private Text instruction, iCode;
     @FXML
     private PasswordField passHidden;
-
-
-    public void setApp(App app) {
-        this.app = app;
-        System.out.println("setApp called with App instance: " + app);
-
-    }
 
 
     public void switchToPLogin (ActionEvent event) throws IOException {
@@ -116,11 +109,10 @@ public class ScreenController implements Initializable {
         passHidden.setVisible(true);
         password.setVisible(false);
     }
-    private String passwordValue() {
-        return togglePassword.isSelected()?
-                password.getText(): passHidden.getText();
-    }
+
     public void checkPLoginInfo(ActionEvent event) throws IOException {
+        app = new App();
+        app.loadData();
         if (app.signIn(username.getText(), passHidden.getText(), "student")) {
             switchToPMenu(event);
         } else {
@@ -129,10 +121,8 @@ public class ScreenController implements Initializable {
     }
 
     public void checkILoginInfo(ActionEvent event) throws IOException {
-        if (this.app == null) {
-            System.out.println("App instance is null in checkILoginInfo. This shouldn't happen.");
-            return;
-        }
+        app = new App();
+        app.loadData();
         if (app.signIn(username.getText(), passHidden.getText(), "instructor")) {
             switchToIMenu(event);
         } else {
@@ -142,6 +132,8 @@ public class ScreenController implements Initializable {
 
     //this method can be removed if player and instructor and dev info are the same
     public void checkDLoginInfo(ActionEvent event) throws IOException {
+        app = new App();
+        app.loadData();
         if (app.signIn("dev", passHidden.getText(), "developer")) {
             switchToDMenu(event);
         } else {
@@ -151,9 +143,9 @@ public class ScreenController implements Initializable {
 
     // sign up should check if sign in successful, if yes, then username taken, otherwise, create account
     public void makePAccount(ActionEvent event) throws IOException {
-
+        app = new App();
         user = new User();
-
+        app.loadData();
 
         // if username is already taken, let user know
         if (app.signIn(username.getText(), passHidden.getText(), "student")) {
@@ -175,23 +167,38 @@ public class ScreenController implements Initializable {
     }
 
     public void makeIAccount(ActionEvent event) throws IOException {
+        app = new App();
+        user = new User();
+        app.loadData();
 
         // if username is already taken, let user know
         if (app.signIn(username.getText(), passHidden.getText(), "instructor")) {
             instruction.setText("Username Already Taken. Try again");
-            System.out.println("hello i reach here");
         } else {
             // if valid username, then generate class code and create user
             boolean accountCreated = app.createAccount(username.getText(), password.getText(), "instructor");
             if (accountCreated) {
             app.userSave();
-            switchToILogin(event);
-
+            switchToCodePopup(event);
+            // show popup of generated access code
+                // switch to login when proceed is clicked
+            //switchToILogin(event);
             }
         }
+        instruction.setText("Username Already Taken. Try again");
     }
 
+    public void switchToCodePopup (ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/instCodePopup.fxml")));
+        stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
+        scene = new Scene(root);
+        stage.setScene(scene);
 
+        iCode.setText("hewwo");
+
+        stage.show();
+
+    }
     public void switchToPMenu (ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/playerMainMenu.fxml")));
         stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
@@ -223,9 +230,6 @@ public class ScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        app = App.getInstance();
-
         try {
             this.togglevisiblePassword(null);
         } catch (IOException e) {

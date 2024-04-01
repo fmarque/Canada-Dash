@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
@@ -16,31 +17,20 @@
          </font>
       </Label>
       <Line endX="194.82730102539062" layoutX="202.0" layoutY="64.0" startX="-200.0" strokeWidth="3.0" />
-      <Button fx:id="saveGameBtn" alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="CENTER" depthTest="ENABLE" focusTraversable="false" layoutX="90.0" layoutY="89.0" mnemonicParsing="false" onAction="#handelSaveGame" prefHeight="20.0" prefWidth="200.0" style="-fx-font-size: 15;" text="Save Game" textOverrun="LEADING_ELLIPSIS">
+      <Button fx:id="saveGameBtn" alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="CENTER" depthTest="ENABLE" focusTraversable="false" layoutX="90.0" layoutY="75.0" mnemonicParsing="false" onAction="#handelSaveGame" prefHeight="20.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-font-family: Comic Sans MS; -fx-background-insets: 0; -fx-border-width: 3; -fx-border-style: solid; -fx-text-fill: black; -fx-font-size: 15;" text="Save Game" textOverrun="LEADING_ELLIPSIS">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <effect>
-            <DropShadow height="0.0" radius="0.0" width="0.0" />
+            <DropShadow height="18.07" offsetX="1.0" offsetY="1.0" radius="4.0175" spread="0.21" width="0.0" />
          </effect>
          <font>
-            <Font name="Comic Sans MS" size="15.0" />
+            <Font name="Comic Sans MS" size="13.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="CENTER" depthTest="ENABLE" focusTraversable="false" layoutX="90.0" layoutY="143.0" mnemonicParsing="false" onAction="#handelGameControl" prefHeight="20.0" prefWidth="200.0" text="Game Controls" textOverrun="LEADING_ELLIPSIS">
+      <Button onAction="#handelGameControl" alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="CENTER" depthTest="ENABLE" focusTraversable="false" layoutX="90.0" layoutY="125.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-background-insets: 0; -fx-border-width: 3; -fx-border-style: solid; -fx-text-fill: black; -fx-font-size: 15;" text="Game Controls" textOverrun="LEADING_ELLIPSIS">
          <font>
-            <Font size="15.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <effect>
-            <DropShadow height="0.0" radius="0.0" width="0.0" />
-         </effect>
-      </Button>
-      <Button alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="CENTER" depthTest="ENABLE" focusTraversable="false" layoutX="90.0" layoutY="200.0" mnemonicParsing="false" onAction="#handelGameMechanics" prefHeight="20.0" prefWidth="200.0" text="Game Mechanics" textOverrun="LEADING_ELLIPSIS">
-         <font>
-            <Font size="15.0" />
+            <Font name="Comic Sans MS Bold Italic" size="38.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -49,9 +39,9 @@
             <DropShadow height="18.07" offsetX="1.0" offsetY="1.0" radius="4.0175" spread="0.21" width="0.0" />
          </effect>
       </Button>
-      <Button alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="CENTER" depthTest="ENABLE" focusTraversable="false" layoutX="90.0" layoutY="259.0" mnemonicParsing="false" onAction="#handelDeveloperLogin" prefHeight="20.0" prefWidth="200.0" text="Enter Developer Mode" textOverrun="LEADING_ELLIPSIS">
+      <Button onAction="#handelGameMechanics" alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="CENTER" depthTest="ENABLE" focusTraversable="false" layoutX="90.0" layoutY="175.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-background-insets: 0; -fx-border-width: 3; -fx-border-style: solid; -fx-text-fill: black; -fx-font-size: 15;" text="Game Mechanics" textOverrun="LEADING_ELLIPSIS">
          <font>
-            <Font size="15.0" />
+            <Font name="Comic Sans MS Bold Italic" size="38.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -60,9 +50,36 @@
             <DropShadow height="18.07" offsetX="1.0" offsetY="1.0" radius="4.0175" spread="0.21" width="0.0" />
          </effect>
       </Button>
-      <Button alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="CENTER" depthTest="ENABLE" focusTraversable="false" layoutX="90.0" layoutY="316.0" mnemonicParsing="false" onAction="#handelExitGameBtn" prefHeight="20.0" prefWidth="200.0" text="Exit Game" textOverrun="LEADING_ELLIPSIS">
+      <Button onAction="#handelDeveloperLogin" alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="CENTER" depthTest="ENABLE" focusTraversable="false" layoutX="90.0" layoutY="225.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-background-insets: 0; -fx-border-width: 3; -fx-border-style: solid; -fx-text-fill: black; -fx-font-size: 15;" text="Enter Developer Mode" textOverrun="LEADING_ELLIPSIS">
          <font>
-            <Font size="15.0" />
+            <Font name="Comic Sans MS Bold Italic" size="38.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow height="18.07" offsetX="1.0" offsetY="1.0" radius="4.0175" spread="0.21" width="0.0" />
+         </effect>
+      </Button>
+      <Button onAction="#handelExitGameBtn" alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="CENTER" depthTest="ENABLE" focusTraversable="false" layoutX="90.0" layoutY="275.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-background-insets: 0; -fx-border-width: 3; -fx-border-style: solid; -fx-text-fill: black; -fx-font-size: 15;" text="Exit Game" textOverrun="LEADING_ELLIPSIS">
+         <font>
+            <Font name="Comic Sans MS Bold Italic" size="38.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow height="18.07" offsetX="1.0" offsetY="1.0" radius="4.0175" spread="0.21" width="0.0" />
+         </effect>
+      </Button>
+      <CheckBox layoutX="10.0" layoutY="350.0" mnemonicParsing="false" onAction="#handelSaveGame" prefHeight="23.0" prefWidth="149.0" text="Sounds On">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </CheckBox>
+      <Button alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="CENTER" depthTest="ENABLE" focusTraversable="false" layoutX="235.0" layoutY="350.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="147.0" style="-fx-background-color: transparent; -fx-background-insets: 0; -fx-border-width: 2; -fx-border-style: solid; -fx-text-fill: black; -fx-font-size: 15;" text="Apply Changes" textOverrun="LEADING_ELLIPSIS">
+         <font>
+            <Font name="Comic Sans MS Bold Italic" size="38.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />

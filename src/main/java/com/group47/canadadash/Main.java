@@ -1,6 +1,5 @@
 package com.group47.canadadash;
 
-import com.group47.canadadash.processing.App;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,13 +16,9 @@ import javafx.stage.Stage;
 import java.util.Objects;
 
 public class Main extends Application implements EventHandler<ActionEvent> {
-
-
     public static void main(String[] args) {
         launch(args);
     }
-
-
 
     /**
      * Sets the stage and initialized necessary objects and variables for the controller
@@ -32,13 +27,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
      * @throws Exception
      */
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/playerLogin.fxml"));
-        Parent root = loader.load();
-
-        ScreenController controller = loader.getController();
-        controller.setApp(App.getInstance());
-
-
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/playerLogin.fxml")));
         primaryStage.setTitle("Player Login");
         primaryStage.setScene(new Scene(root, 800, 500));
 
