@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class SaveGameController {
 
-//    @FXML
+    //    @FXML
 //    private void handelSaveBtn(){
 //
 //    }
@@ -22,11 +22,11 @@ public class SaveGameController {
         // Setup the new stage for the pause menu
 
         // Block input events to other windows
-//        GameRender.pauseStage.setTitle("Pause Menu");
-//        Scene scene = new Scene(pauseMenuRoot);
-//        GameRender.pauseStage.setScene(scene);
-//        // Show and wait - returns when the pause stage is closed
-//        GameRender.pauseStage.showAndWait();
+        GameRender.pauseStage.setTitle("Pause Menu");
+        Scene scene = new Scene(pauseMenuRoot);
+        GameRender.pauseStage.setScene(scene);
+        // Show and wait - returns when the pause stage is closed
+        GameRender.pauseStage.showAndWait();
     }
 
 
