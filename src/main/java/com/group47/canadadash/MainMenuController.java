@@ -44,11 +44,6 @@ public class MainMenuController {
    }
 
 
-   // load the highscores under same instructor, only score and ID, then rank
-   public void playerViewScores() {
-
-   }
-
    // load the highscores amongst all students
    public void instViewScores(ActionEvent event) throws IOException {
 
