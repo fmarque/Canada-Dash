@@ -38,6 +38,7 @@ Here's a step-by-step guide on how to set up JSON support in IntelliJ IDEA:
 The project can simply start working, by only running the Main.java class.
 From there the first page of the game, LogIn will be represented.
 ## Switch User Accounts
+ * User switches can be accessed through the blue text in the login page, allowing for ease of navigation.
 
 ## Username and Password
 For the first state of the game, the required Username and Password are stored as:
