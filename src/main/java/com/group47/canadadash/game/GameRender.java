@@ -37,44 +37,61 @@ import javafx.util.Duration;
 
 /**
  * The type Game render.
- * Renders the main Game state
+ * Renders the main Game state in JavaFX
  */
 public class GameRender{
 
-    private static final int WIDTH = 800;
-    private static final int HEIGHT = 600;
+
+    /**
+     Window constants
+     */
+    private static final int WIDTH = 800;//X
+    private static final int HEIGHT = 600;//Y
     private static final double SAFE_POS_X = 50;// X-coordinate of the safe position
     private static final double SAFE_POS_Y = 100; // Y-coordinate of the safe position
+
+
+    /**
+     *Background image variables
+     */
     private GameState internalGameState;
     private Image backgroundImage;
     private final double scrollSpeed = 2;
     private double backgroundX = 0;
     private double backgroundX2;
 
-    private int currentPlayerLifeCounter = 5;
-
-    // Player properties
+    /**
+     Player property variables
+     */
+    private int currentPlayerLifeCounter = 5; //
     private double playerX = (double) WIDTH / 2 - 20; // Center the player horizontally
     private double playerY = (double) HEIGHT / 2; // Position the player vertically
-    private final double playerWidth = 40;
-    private final double playerHeight = 60;
-    private boolean movingLeft = false;
-    private boolean movingRight = false;
-    private double playerVelocityY = 0;
-    private boolean onGround = false;
-    private AnimationTimer gameLoop;
+    private final double playerWidth = 40; //Player width in pixels
+    private final double playerHeight = 60;//Player Height in pixels
+
+    /**
+   PLayer Movement variables
+     */
+    private boolean movingLeft = false;//direction moving left
+    private boolean movingRight = false;//direction moving right
+    private double playerVelocityY = 0;//Player's jump momentum
+    private boolean onGround = false;//if touching the ground for jump calucations
+
+
+
+    private AnimationTimer gameLoop;//Game loop controller
     private final Rectangle platform = new Rectangle(0, 450, 1000, 250); // x, y, width, height
     private final List<Rectangle> platformSegments = new ArrayList<>();
 
     private List<ImageView> platforms;
-    private List<Integer> platformTypes;
     private ImageView leaf;
     private int lastCollisionIndex = -1;
 
     //UI elements
-    private Text scoreText;
+    private Text scoreText;//Ui Element
     /**
      * The constant pauseStage.
+     * Pauses the stage for context reason
      */
     public static Stage pauseStage;
 
@@ -83,6 +100,7 @@ public class GameRender{
     private final Image emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/emptyHeartIcon.png")));
     private HBox heartsContainer;
 
+    //Jump variables
     private int jumpDelayCounter = 0;
     private final int JUMP_DELAY_FRAMES = 5; // Number of frames to skip ground check after jumping
 
@@ -136,6 +154,12 @@ public class GameRender{
     private boolean isColliding(Rectangle player, Rectangle obstacle) {
         return player.getBoundsInParent().intersects(obstacle.getBoundsInParent());
     }
+
+    /*
+
+    Most important function in game state
+    Dictakes
+     */
     private void update() throws IOException {
 
         Rectangle playerRect = new Rectangle(playerX, playerY, playerWidth, playerHeight);
@@ -183,7 +207,7 @@ public class GameRender{
         }
 
 
-        if (!onGround) {
+        if (!onGround) {//checks on ground
             double GRAVITY = 1;
             playerVelocityY += GRAVITY;
             playerY += playerVelocityY;
@@ -192,13 +216,13 @@ public class GameRender{
         }
 
             if (isCollidingFromBelow(playerRect)) {
-                playerVelocityY = 10; // Example knockdown velocity
+                playerVelocityY = 10; // knockdown velocity
                 onGround = false;
             }
     }
-
+//contrlls popup for the quiz
     private void showQuizPopup() {
-        // Assuming you have an AnimationTimer named 'animationTimer'
+
         gameLoop.stop(); // Stop the animation
 
         Platform.runLater(() -> {
@@ -242,6 +266,9 @@ public class GameRender{
         createGameScene(); // Assume you have a method that creates the initial game scene
     }
 
+    /*
+    Scrolls background to left through game
+     */
     private void scrollBackgroundLeft() {
         backgroundX -= scrollSpeed;
         backgroundX2 -= scrollSpeed;
@@ -253,7 +280,10 @@ public class GameRender{
             backgroundX2 = backgroundImage.getWidth();
         }
     }
-
+/*
+Graphics context for javafx to run
+Renders the game too smart for my small brain
+ */
     private void render(GraphicsContext gc) {
         // Render game
 
@@ -284,7 +314,10 @@ public class GameRender{
     }
 
 
-
+/*
+@int currentLives
+Updates heart counter in game
+ */
     private void updateLives(int currentLives) {
         for (int i = 0; i < heartsContainer.getChildren().size(); i++) {
             ImageView heartView = (ImageView) heartsContainer.getChildren().get(i);
@@ -301,15 +334,19 @@ public class GameRender{
         }
     }
 
+    //Updates the score counter in game
+    /*
+    @int score the score to increase by
+     */
     private void updateScore(int score) {
-        internalGameState.increasePoints(score);
+        internalGameState.increasePoints(score);//updates internal state score
         scoreText.setText("Score: " + internalGameState.getTotalPoints());
     }
 
 
     /**
      * Create game scene scene.
-     *
+     * Initializes all states need for the game
      * @return the scene
      */
     public Scene createGameScene() {
@@ -421,6 +458,7 @@ public class GameRender{
 
     }
 
+    //Shows pause menu for popup
     private void showPauseMenu() throws IOException {
         // Pause the game loop
         gameLoop.stop();
@@ -442,38 +480,20 @@ public class GameRender{
         gameLoop.start();
     }
 
-
-    private void showNotification() throws IOException {
-        // Pause the game loop
-        //gameLoop.stop();
-
-        // Load the pause menu FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/01_settings.fxml"));
-        Parent pauseMenuRoot = loader.load();
-
-        // Setup the new stage for the pause menu
-        Stage pauseStage = new Stage();
-        pauseStage.initModality(Modality.APPLICATION_MODAL); // Block input events to other windows
-        pauseStage.setTitle("Pause Menu");
-        Scene scene = new Scene(pauseMenuRoot);
-        pauseStage.setScene(scene);
-        // Show and wait - returns when the pause stage is closed
-        // Your code to show the dialog
-        Platform.runLater(pauseStage::showAndWait);
-        gameLoop.stop();
-        // Optionally resume the game loop here if not handled by the FXML controller
-        //  gameLoop.start();
-    }
-
-
+/*
+Sets player velocity to make them jump
+ */
     private void jump() {
         if (onGround) {
             playerVelocityY = -20; // Adjust this value to change jump height
             onGround = false;
-            System.out.println(playerVelocityY);
+           // System.out.println(playerVelocityY);
         }
     }
 
+    /*
+    Checks if player is on the ground to apply gravity
+     */
     private boolean isPlayerOnGround(Rectangle player, List<ImageView> obstacles) {
         double playerBottomY = player.getY() + player.getHeight();
         double nextFrameBottomY = playerBottomY + playerVelocityY; // Predict next position
@@ -491,13 +511,6 @@ public class GameRender{
             }
         }
 
-//        double platformTopY = platform.getY();
-//        if (nextFrameBottomY > platformTopY && playerBottomY <= platformTopY + 5) {
-//            System.out.println("Collision with Main Platform at Y: " + platformTopY);
-//            playerVelocityY = 0;
-//            player.setY(platformTopY - player.getHeight()); // Adjust position to top of platform
-//            return true;
-//        }
 
         for (Rectangle platform : platformSegments) {
             if (nextFrameY + player.getHeight() > platform.getY() &&
@@ -513,7 +526,10 @@ public class GameRender{
         return false; // In the air
     }
 
-
+/*
+To check collisons wiht plateforms
+@Rectangle player -player collision box
+ */
     private boolean isCollidingFromBelow(Rectangle player) {
         for (ImageView platform : platforms) {
             if (player.getY() < platform.getY() + platform.getFitHeight() &&
@@ -560,7 +576,7 @@ public class GameRender{
 
 
     /**
-     * Load level.
+     * Load levels and init the game
      *
      * @param levels       the levels
      * @param currentStage the current stage
@@ -569,7 +585,7 @@ public class GameRender{
         this.level = levels;
         List<Boulder> x = levels.getBoulders();
         platforms = new ArrayList<>();
-        platformTypes = new ArrayList<>();
+        List<Integer> platformTypes = new ArrayList<>();
         for (Boulder boulder : x) {
             if (boulder.type == BoulderType.FENCE) {
                 URL resourceUrl = getClass().getResource("/images/fence.png");
@@ -585,7 +601,7 @@ public class GameRender{
                 platformTypes.add(1);
             }
         }
-
+        //sets background image based on level
         backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/background.png")));
         if(currentStage == 0)
         {

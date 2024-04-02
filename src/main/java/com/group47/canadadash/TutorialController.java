@@ -29,8 +29,8 @@ public class TutorialController extends Application implements EventHandler<Acti
     /**
      * Sets the stage and initialized necessary objects and variables for the controller
      *
-     * @param primaryStage
-     * @throws Exception
+     * @param primaryStage the Stage that shows the page
+     * @throws Exception to account for all possible exceptions
      */
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("tutorialPage.fxml")));
@@ -40,13 +40,20 @@ public class TutorialController extends Application implements EventHandler<Acti
         primaryStage.show();
     }
 
+    /**
+     * Brings user back to main menu
+     *
+     * @param event the click of back to main meny button
+     * @throws IOException to account for
+     */
+    public void backToPMainMenu(ActionEvent event) throws IOException {
+        ScreenController backMenu = new ScreenController();
+        backMenu.switchToPMenu(event);
+    }
     @Override
     public void handle(ActionEvent actionEvent) {
 
     }
 
-    public void backToPMainMenu(ActionEvent event) throws IOException {
-        ScreenController backMenu = new ScreenController();
-        backMenu.switchToPMenu(event);
-    }
+
 }
