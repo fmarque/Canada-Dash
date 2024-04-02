@@ -56,9 +56,17 @@ For the first state of the game, the required Username and Password are stored a
    - password : FAAJS   
 ## How it Works?
 
-* LogIn page: This would be the first page demonstrated on the screen.User based on their mode, can decide whether they can login to the game as instructure, developer or just as a normal player. By entering the right username and password, the user will lead to the next page.
+* LogIn page: 
+     - This would be the first page that is shown when running Main(). The user is able to choose between a player, instructor, or developer login and sign up. Players will have class codes associated with an instructor. The class code is generated when the instructor signs up. 
+There is no developer sign-up as there is only one access code.
 
 * MainMenu page includes: 
     - Load Saved Game button, which pushing it will lead the user to where they left the game.
     - Start New Game button, which leads the game into a new game page, where the user is at its very beginning.
-    - Exit button, will 
+    - How to Play button, a written and visualized tutorial for how to play the game, what the icons within the game mean, and the overall controls and mechanics.
+    - View Highscores button, displays the highscores of all players.
+    - Exit Game button, brings user back to the player login page as default.    
+    
+* Details about GUI:
+    - The GUI is implemented using JavaFx libraries. FXML files are utilized and made functional with Java controllers which contain methods to switch, update, and store necessary values and scenes.
+
