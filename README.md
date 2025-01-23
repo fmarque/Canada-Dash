@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # CanadaDash
 The software is considered a platformer game with an educational purpose, trying to teach the youngsters the Geography of Canada. This goal is fullfiled through letting the user play a game.
@@ -71,3 +72,6 @@ There is no developer sign-up as there is only one access code.
 * Details about GUI:
     - The GUI is implemented using JavaFx libraries. FXML files are utilized and made functional with Java controllers which contain methods to switch, update, and store necessary values and scenes.
 
+=======
+# Canada-Dash
+>>>>>>> a3177bb733cb429dda28747320049657106ab646
